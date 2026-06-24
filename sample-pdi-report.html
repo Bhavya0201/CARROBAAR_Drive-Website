@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARROBAAR_Drive - WagonR CNG 2025 PDI Sample Report</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ==========================================
+           Design System & Root Tokens
+           ========================================== */
+        :root {
+            --clr-bg-primary: #080612;      /* Obsidian Purple */
+            --clr-bg-secondary: #100C22;    /* Card Velvet */
+            --clr-bg-tertiary: #191435;     /* Highlight Velvet */
+            
+            --clr-accent-orange: #FF6B00;   /* Sunset Orange */
+            --clr-accent-orange-hover: #E05E00;
+            --clr-accent-orange-glow: rgba(255, 107, 0, 0.25);
+            
+            --clr-accent-purple: #A855F7;   /* Neon Purple */
+            --clr-accent-purple-hover: #9333EA;
+            --clr-accent-purple-glow: rgba(168, 85, 247, 0.25);
+            
+            --clr-text-white: #F8FAFC;
+            --clr-text-subdued: #A19BBF;
+            --clr-text-muted: #6B658A;
+            --clr-success: #10B981;
+            --clr-warning: #FBBF24;
+            --clr-error: #EF4444;
+            --clr-border: rgba(168, 85, 247, 0.15);
+            
+            --ff-heading: 'Outfit', sans-serif;
+            --ff-body: 'Inter', sans-serif;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        /* Base Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--clr-bg-primary);
+            color: var(--clr-text-subdued);
+            font-family: var(--ff-body);
+            line-height: 1.6;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Glassmorphism Common */
+        .glass-card {
+            background: rgba(16, 12, 34, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), var(--clr-accent-purple-glow);
+            margin-bottom: 2rem;
+        }
+
+        /* Header Logo Styling */
+        .report-header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+            margin-bottom: 3rem;
+            background-color: rgba(8, 6, 18, 0.75);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--ff-heading);
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+        }
+
+        .logo-text-purple { color: var(--clr-accent-purple); }
+        .logo-text-orange { color: var(--clr-accent-orange); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-download {
+            font-family: var(--ff-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            background-color: var(--clr-accent-orange);
+            border: none;
+            padding: 0.55rem 1.25rem;
+            border-radius: var(--radius-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--clr-accent-orange-glow);
+            transition: all 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background-color: var(--clr-accent-orange-hover);
+            box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .download-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .report-badge {
+            font-family: var(--ff-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--clr-accent-purple);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            background-color: rgba(168, 85, 247, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+        }
+
+        /* Summary Dashboard Grid */
+        .summary-dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+            align-items: stretch;
+        }
+
+        /* Score Meter Section */
+        .score-meter-card {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .radial-gauge-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            flex-shrink: 0;
+        }
+
+        .radial-svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .radial-bg {
+            fill: none;
+            stroke: rgba(25, 20, 53, 0.8);
+            stroke-width: 12px;
+        }
+
+        .radial-progress {
+            fill: none;
+            stroke: url(#scoreGrad);
+            stroke-width: 12px;
+            stroke-linecap: round;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 26.4; /* (100 - 94)% of 440 = 26.4 */
+            animation: progressAnim 1.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+        }
+
+        @keyframes progressAnim {
+            from { stroke-dashoffset: 440; }
+            to { stroke-dashoffset: 26.4; }
+        }
+
+        .radial-score-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--ff-heading);
+            line-height: 1;
+        }
+
+        .score-num {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--clr-text-white);
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .score-lbl {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--clr-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+
+        .verdict-info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .verdict-title {
+            font-family: var(--ff-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--clr-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .verdict-badge {
+            font-family: var(--ff-heading);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--clr-accent-orange);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border: 1px solid rgba(255, 107, 0, 0.25);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-sm);
+            width: fit-content;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
+        }
+
+        .verdict-desc {
+            font-size: 0.9rem;
+            color: var(--clr-text-subdued);
+            line-height: 1.5;
+        }
+
+        /* Dossier Details */
+        .dossier-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dossier-title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(168, 85, 247, 0.15);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dossier-title-bar h3 {
+            font-family: var(--ff-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-id {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--clr-accent-purple);
+        }
+
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 1.5rem;
+        }
+
+        .dossier-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .dossier-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--clr-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dossier-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--clr-text-white);
+        }
+
+        .dossier-value.verified-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--clr-success);
+        }
+
+        .verified-icon {
+            width: 14px;
+            height: 14px;
+            stroke-width: 3;
+        }
+
+        /* Alert highlights */
+        .alerts-section-title {
+            font-family: var(--ff-heading);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--clr-text-white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-heading-icon {
+            color: var(--clr-accent-orange);
+            width: 22px;
+            height: 22px;
+        }
+
+        .defects-highlights-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .defect-highlight-card {
+            background-color: var(--clr-bg-secondary);
+            border: 1px solid rgba(168, 85, 247, 0.1);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .defect-highlight-card:hover {
+            border-color: rgba(255, 107, 0, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .defect-card-img-wrapper {
+            height: 150px;
+            position: relative;
+            background-color: #0c0a1f;
+        }
+
+        .defect-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .defect-card-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            background-color: rgba(251, 191, 36, 0.15);
+            border: 1px solid var(--clr-warning);
+            color: var(--clr-warning);
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .defect-card-body {
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .defect-card-header h4 {
+            font-family: var(--ff-heading);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            margin-bottom: 0.4rem;
+        }
+
+        .defect-card-desc {
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: var(--clr-text-subdued);
+            margin-bottom: 1rem;
+        }
+
+        .defect-card-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed rgba(168, 85, 247, 0.1);
+            padding-top: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .action-label {
+            color: var(--clr-text-muted);
+        }
+
+        .action-val {
+            color: var(--clr-accent-orange);
+            text-transform: uppercase;
+        }
+
+        /* Sticky Navigation Bar */
+        .report-section-nav {
+            background-color: var(--clr-bg-secondary);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 0.6rem 1rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+            gap: 0.5rem;
+            white-space: nowrap;
+            position: sticky;
+            top: 0px;
+            z-index: 99;
+        }
+
+        .section-nav-link {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            color: var(--clr-text-subdued);
+            transition: all 0.2s ease;
+        }
+
+        .section-nav-link.active,
+        .section-nav-link:hover {
+            color: var(--clr-text-white);
+            background-color: var(--clr-bg-tertiary);
+            box-shadow: inset 0 0 5px rgba(168, 85, 247, 0.15);
+        }
+
+        .nav-link-orange {
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            color: var(--clr-accent-orange) !important;
+        }
+
+        .nav-link-orange:hover {
+            background-color: rgba(255, 107, 0, 0.08) !important;
+        }
+
+        /* ==========================================
+           Interactive Paint Map Section
+           ========================================== */
+        .paint-map-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .paint-map-visual {
+            background-color: var(--clr-bg-primary);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .svg-car-map {
+            width: 100%;
+            height: auto;
+        }
+
+        .svg-panel-trigger {
+            fill: rgba(168, 85, 247, 0.05);
+            stroke: rgba(168, 85, 247, 0.3);
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .svg-panel-trigger:hover,
+        .svg-panel-trigger.selected {
+            fill: rgba(168, 85, 247, 0.2);
+            stroke: var(--clr-accent-purple);
+        }
+
+        .svg-panel-trigger.alert-panel {
+            fill: rgba(255, 107, 0, 0.1);
+            stroke: rgba(255, 107, 0, 0.4);
+        }
+
+        .svg-panel-trigger.alert-panel:hover,
+        .svg-panel-trigger.alert-panel.selected {
+            fill: rgba(255, 107, 0, 0.25);
+            stroke: var(--clr-accent-orange);
+        }
+
+        .paint-map-hud {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .paint-hud-display {
+            background-color: var(--clr-bg-secondary);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .paint-hud-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--clr-success);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .paint-hud-value.alert-value {
+            color: var(--clr-accent-orange);
+            text-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .paint-hud-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--clr-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .paint-hud-panel-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            margin-top: 0.5rem;
+        }
+
+        .paint-hud-status-text {
+            font-size: 0.85rem;
+            color: var(--clr-text-subdued);
+            margin-top: 0.8rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
+            padding-top: 0.8rem;
+        }
+
+        /* ==========================================
+           Collapsible Checks & Tables
+           ========================================== */
+        .checklist-group {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            background-color: var(--clr-bg-secondary);
+            overflow: hidden;
+        }
+
+        .checklist-header {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--ff-heading);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--clr-text-white);
+        }
+
+        .checklist-header:hover {
+            background-color: rgba(168, 85, 247, 0.04);
+        }
+
+        .checklist-header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-header-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--clr-accent-purple);
+        }
+
+        .checklist-status-summary {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        .status-badge-inline {
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-green {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--clr-success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-yellow {
+            background-color: rgba(251, 191, 36, 0.15);
+            color: var(--clr-warning);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .chevron-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--clr-text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .checklist-group.active .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .checklist-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .checklist-group.active .checklist-content {
+            max-height: 1500px; /* Large enough default */
+        }
+
+        .checklist-table-wrapper {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .checklist-table th,
+        .checklist-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.08);
+        }
+
+        .checklist-table th {
+            font-family: var(--ff-heading);
+            font-weight: 700;
+            color: var(--clr-text-white);
+            background-color: rgba(8, 6, 18, 0.3);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .check-no {
+            width: 6%;
+            color: var(--clr-text-muted);
+            font-weight: 600;
+        }
+
+        .check-desc {
+            width: 44%;
+            color: var(--clr-text-white);
+            font-weight: 500;
+        }
+
+        .check-method {
+            width: 15%;
+            color: var(--clr-text-subdued);
+        }
+
+        .check-rating {
+            width: 12%;
+            font-weight: 700;
+        }
+
+        .rating-pass { color: var(--clr-success); }
+        .rating-minor { color: var(--clr-warning); }
+        .rating-na { color: var(--clr-text-muted); }
+
+        .check-remarks {
+            width: 23%;
+            color: var(--clr-text-subdued);
+        }
+
+        /* Diagnostic logs styling */
+        .obd-logs-terminal {
+            background-color: #030611;
+            border: 1px solid #1f2937;
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            color: #38BDF8; /* Terminal cyan */
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .obd-log-row {
+            margin-bottom: 0.4rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .log-lbl { color: #94A3B8; }
+        .log-val-green { color: var(--clr-success); }
+
+        /* Sign-Off block */
+        .signoff-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .sign-card {
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            padding-top: 1.5rem;
+        }
+
+        .signature-line {
+            height: 60px;
+            border-bottom: 1px dashed var(--clr-text-muted);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-end;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--clr-accent-purple);
+            font-weight: 700;
+            padding-bottom: 0.3rem;
+        }
+
+        .sign-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Inspected Vehicle Profile Gallery Styles */
+        .vehicle-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        /* Specs Card grid layout */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .gallery-category-header {
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+        
+        .gallery-category-header::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari */
+        }
+        
+        .gallery-tab-btn {
+            background: rgba(16, 12, 34, 0.6);
+            border: 1px solid var(--clr-border);
+            color: var(--clr-text-subdued);
+            padding: 0.55rem 1.25rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--ff-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .gallery-tab-btn:hover {
+            color: var(--clr-text-white);
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--clr-accent-purple);
+        }
+        
+        .gallery-tab-btn.active {
+            color: var(--clr-text-white);
+            background: var(--clr-accent-purple);
+            border-color: var(--clr-accent-purple);
+            box-shadow: 0 0 10px var(--clr-accent-purple-glow);
+        }
+
+        @media (max-width: 1024px) {
+            .specs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .gallery-item {
+            background-color: var(--clr-bg-secondary);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            border-color: var(--clr-accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--clr-accent-purple-glow);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent, rgba(8, 6, 18, 0.9));
+            padding: 0.5rem 0.25rem;
+            color: var(--clr-text-white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        
+        @media (max-width: 1024px) {
+            .vehicle-gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .vehicle-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .vehicle-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print-specific layout containers (Screen only) */
+        .print-only-cover {
+            display: none;
+        }
+        .print-page-header {
+            display: none;
+        }
+
+        /* ==========================================
+           Interactive Exploration Hub / Ribbon Showcase
+           ========================================== */
+        .exploration-ribbon-section {
+            background-color: var(--clr-bg-primary);
+            border-top: 1px solid rgba(168, 85, 247, 0.08);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.05);
+            padding: 2.5rem 0 3.5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ribbon-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.2rem;
+        }
+
+        .ribbon-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(16, 12, 34, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 1.8rem 1.4rem;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .ribbon-card-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 120%, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .ribbon-card.purple-glow-hover:hover .ribbon-card-bg {
+            background: radial-gradient(circle at 50% 120%, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+            opacity: 1;
+        }
+
+        .ribbon-card.orange-glow-hover:hover .ribbon-card-bg {
+            background: radial-gradient(circle at 50% 120%, rgba(255, 107, 0, 0.25) 0%, transparent 70%);
+            opacity: 1;
+        }
+
+        .ribbon-icon-container {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background-color: rgba(16, 12, 34, 0.7);
+            border: 1px solid var(--clr-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--clr-text-white);
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .ribbon-card:hover .ribbon-icon-container {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .ribbon-card.purple-glow-hover:hover .ribbon-icon-container {
+            border-color: var(--clr-accent-purple);
+            color: var(--clr-accent-purple);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+        }
+
+        .ribbon-card.orange-glow-hover:hover .ribbon-icon-container {
+            border-color: var(--clr-accent-orange);
+            color: var(--clr-accent-orange);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
+        }
+
+        .ribbon-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .ribbon-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .ribbon-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 0.2rem;
+        }
+
+        .tag-purple {
+            color: var(--clr-accent-purple);
+        }
+
+        .tag-orange {
+            color: var(--clr-accent-orange);
+        }
+
+        .ribbon-content h3 {
+            font-family: var(--ff-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            transition: all 0.2s ease;
+        }
+
+        .ribbon-content p {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: var(--clr-text-muted);
+        }
+
+        .ribbon-action {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--clr-text-white);
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+
+        .ribbon-action i {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .ribbon-card:hover .ribbon-action i {
+            transform: translateX(4px);
+        }
+
+        .ribbon-card.purple-glow-hover:hover {
+            border-color: rgba(168, 85, 247, 0.35);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 0 25px rgba(168, 85, 247, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .ribbon-card.orange-glow-hover:hover {
+            border-color: rgba(255, 107, 0, 0.35);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 0 25px rgba(255, 107, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .ribbon-card.purple-glow-hover:hover .ribbon-action {
+            color: var(--clr-accent-purple);
+        }
+
+        .ribbon-card.orange-glow-hover:hover .ribbon-action {
+            color: var(--clr-accent-orange);
+        }
+
+        @media (max-width: 1024px) {
+            .ribbon-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ribbon-grid {
+                display: flex;
+                overflow-x: auto;
+                gap: 1rem;
+                padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .ribbon-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .ribbon-grid::-webkit-scrollbar-thumb {
+                background: rgba(168, 85, 247, 0.2);
+                border-radius: 9999px;
+            }
+            
+            .ribbon-card {
+                flex: 0 0 250px;
+                scroll-snap-align: start;
+                padding: 1.5rem 1.2rem;
+            }
+        }
+
+        /* ==========================================
+           PRINT OVERRIDES (@media print)
+           ========================================== */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            @page {
+                size: A4;
+                margin: 10mm 15mm 15mm 15mm;
+            }
+            body {
+                background-color: #080612 !important;
+                background-image: none !important;
+                color: #a19bbf !important;
+                padding: 0 !important;
+                font-size: 9.5pt !important;
+            }
+            
+            /* Show cover page on print */
+            .print-only-cover {
+                display: block !important;
+                page-break-after: always;
+                break-after: page;
+                height: 98vh;
+                position: relative;
+                box-sizing: border-box;
+                padding-top: 10mm;
+            }
+            
+            /* Cover Page Design elements */
+            .cover-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 2px solid #a855f7;
+                padding-bottom: 1rem;
+                margin-bottom: 2.5rem;
+            }
+            .cover-body-logo {
+                font-size: 2.2rem;
+                font-weight: 800;
+                font-family: var(--ff-heading);
+            }
+            .cover-hero-container {
+                height: 360px;
+                border-radius: 12px;
+                overflow: hidden;
+                border: 1px solid rgba(168, 85, 247, 0.3);
+                margin-bottom: 2.5rem;
+                position: relative;
+                background-color: #100c22;
+            }
+            .cover-hero-img-print {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.9;
+            }
+            .cover-hero-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(180deg, transparent 20%, rgba(8, 6, 18, 0.95) 100%);
+                padding: 2rem;
+                color: #ffffff;
+            }
+            .cover-hero-overlay h1 {
+                font-family: var(--ff-heading);
+                font-size: 2.2rem;
+                font-weight: 800;
+                margin-bottom: 0.2rem;
+                color: #f8fafc !important;
+            }
+            .cover-hero-overlay p {
+                font-size: 1.1rem;
+                opacity: 0.9;
+                color: #a19bbf !important;
+            }
+            .cover-meta-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                background: rgba(16, 12, 34, 0.8);
+                border: 1px solid rgba(168, 85, 247, 0.2);
+                padding: 2rem;
+                border-radius: 12px;
+            }
+            
+            /* Hide on-screen items in print */
+            .report-header,
+            .report-section-nav,
+            #download-report-btn,
+            .whatsapp-floating-btn,
+            .quick-nav-trigger,
+            .quick-nav-overlay,
+            #full-checklist-alert,
+            .exploration-ribbon-section,
+            .checklist-status-summary .chevron-icon {
+                display: none !important;
+            }
+            
+            /* Print Page Structure */
+            .print-page {
+                page-break-after: always;
+                break-after: page;
+                padding-top: 10mm;
+            }
+            .print-page-header {
+                display: flex !important;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+                padding-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .print-page-header h2 {
+                font-family: var(--ff-heading);
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #f8fafc !important;
+            }
+            .print-page-header-id {
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: #a855f7 !important;
+            }
+            
+            /* Cards layout on print */
+            .glass-card {
+                background: rgba(16, 12, 34, 0.85) !important;
+                border: 1px solid rgba(168, 85, 247, 0.2) !important;
+                box-shadow: none !important;
+                color: #a19bbf !important;
+                padding: 1.5rem !important;
+                margin-bottom: 20px !important;
+                border-radius: 12px !important;
+                break-inside: avoid;
+            }
+            
+            .summary-dashboard-grid {
+                grid-template-columns: 1.15fr 0.85fr !important;
+                gap: 1.5rem !important;
+            }
+            .score-meter-card {
+                flex-direction: row !important;
+                gap: 1.5rem !important;
+            }
+            
+            .dossier-value, 
+            .score-num, 
+            .info-value, 
+            .defect-card-header h4, 
+            .dossier-title-bar h3, 
+            .alerts-section-title span,
+            .paint-hud-value,
+            .paint-hud-panel-name,
+            .checklist-header,
+            .checklist-table th,
+            .dossier-value.verified-badge {
+                color: #f8fafc !important;
+                text-shadow: none !important;
+            }
+            
+            .radial-bg {
+                stroke: rgba(25, 20, 53, 0.8) !important;
+            }
+            .radial-progress {
+                stroke: #FF6B00 !important;
+            }
+            
+            .verdict-badge {
+                background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%) !important;
+                border: 1px solid rgba(255, 107, 0, 0.35) !important;
+                color: #ff6b00 !important;
+                box-shadow: none !important;
+                font-size: 10.5pt !important;
+                font-weight: 800 !important;
+            }
+            
+            .defects-highlights-container {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1rem !important;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1rem !important;
+            }
+            
+            .gallery-category-header {
+                display: none !important;
+            }
+            
+            #main-gallery-grid .gallery-item {
+                display: block !important;
+            }
+
+            .vehicle-gallery-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 0.5rem !important;
+                margin-top: 1.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .gallery-item {
+                border: 1px solid rgba(168, 85, 247, 0.2) !important;
+                background: rgba(16, 12, 34, 0.6) !important;
+                border-radius: 8px !important;
+                break-inside: avoid;
+            }
+            
+            .gallery-item-label {
+                color: #ffffff !important;
+                font-size: 6.5pt !important;
+            }
+            
+            .defect-highlight-card {
+                border: 1px solid rgba(168, 85, 247, 0.15) !important;
+                background: rgba(16, 12, 34, 0.6) !important;
+                color: #a19bbf !important;
+                border-radius: 8px !important;
+                break-inside: avoid;
+            }
+            
+            .defect-card-desc, 
+            .verdict-desc, 
+            .dossier-label,
+            .paint-hud-label,
+            .paint-hud-status-text,
+            .check-remarks,
+            .check-method,
+            .log-lbl {
+                color: #a19bbf !important;
+            }
+            
+            /* Render SVG Paint Map nicely on print */
+            .paint-map-visual {
+                display: block !important;
+                background-color: #080612 !important;
+                border: 1px solid rgba(168, 85, 247, 0.2) !important;
+                border-radius: 8px !important;
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .paint-map-container {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            .paint-map-hud {
+                width: 100% !important;
+            }
+            
+            .paint-hud-display {
+                padding: 1rem !important;
+            }
+            
+            /* Force expand collapsible sections for printing */
+            .checklist-content {
+                max-height: none !important;
+                display: block !important;
+            }
+            
+            .checklist-group {
+                border: 1px solid rgba(168, 85, 247, 0.2) !important;
+                background-color: rgba(16, 12, 34, 0.75) !important;
+                break-inside: avoid;
+                margin-bottom: 20px !important;
+            }
+            
+            .checklist-header {
+                background-color: rgba(25, 20, 53, 0.6) !important;
+                border-bottom: 1px solid rgba(168, 85, 247, 0.15) !important;
+                padding: 0.8rem 1.2rem !important;
+            }
+            
+            .checklist-table th {
+                background-color: rgba(8, 6, 18, 0.6) !important;
+                border-bottom: 2px solid rgba(168, 85, 247, 0.25) !important;
+            }
+            
+            .checklist-table td {
+                border-bottom: 1px solid rgba(168, 85, 247, 0.1) !important;
+                color: #a19bbf !important;
+            }
+            
+            .checklist-table td.check-desc {
+                color: #f8fafc !important;
+            }
+            
+            .obd-logs-terminal {
+                background-color: #030611 !important;
+                border: 1px solid #1f2937 !important;
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.8) !important;
+                max-height: none !important;
+                color: #38BDF8 !important;
+            }
+            
+            .obd-log-row {
+                color: #38BDF8 !important;
+            }
+            
+            .log-val-green {
+                color: #10B981 !important;
+                font-weight: 700;
+            }
+            
+            .signoff-section {
+                break-inside: avoid;
+                margin-top: 30px !important;
+            }
+            
+            .signature-line {
+                border-bottom-color: rgba(168, 85, 247, 0.4) !important;
+                color: #a855f7 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+       PAGE 1: COVER PAGE (PRINT ONLY)
+       ========================================== -->
+    <div class="print-only-cover">
+        <div class="cover-header">
+            <div class="cover-body-logo">
+                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            </div>
+            <span class="report-badge">NEW VEHICLE PDI REPORT</span>
+        </div>
+        
+        <div class="cover-hero-container">
+            <img src="assets/wagonr_pdi_hero.png" alt="Maruti WagonR PDI" class="cover-hero-img-print">
+            <div class="cover-hero-overlay">
+                <h1>PRE-DELIVERY INSPECTION REPORT</h1>
+                <p>180+ Point Technical Quality Checksheet • Gujarat, India</p>
+            </div>
+        </div>
+        
+        <div class="cover-meta-grid">
+            <div class="dossier-item">
+                <span class="dossier-label">Car Brand & Model</span>
+                <span class="dossier-value" style="color: var(--clr-text-white); font-size: 1.1rem;">Maruti Suzuki WagonR CNG VXI</span>
+            </div>
+            <div class="dossier-item">
+                <span class="dossier-label">Year of Manufacture</span>
+                <span class="dossier-value" style="color: var(--clr-text-white); font-size: 1.1rem;">2025 Model Spec</span>
+            </div>
+            <div class="dossier-item">
+                <span class="dossier-label">VIN / Chassis Identification</span>
+                <span class="dossier-value" style="color: var(--clr-text-white); font-weight: 700;">MA3EFE51S002938XX</span>
+            </div>
+            <div class="dossier-item">
+                <span class="dossier-label">Lead Quality Inspector</span>
+                <span class="dossier-value" style="color: var(--clr-text-white); font-weight: 700;">Bhavya Rambhia</span>
+            </div>
+            <div class="dossier-item">
+                <span class="dossier-label">Inspection Date & Time</span>
+                <span class="dossier-value" style="color: var(--clr-text-subdued);">June 06, 2026 at 11:30 AM</span>
+            </div>
+            <div class="dossier-item">
+                <span class="dossier-label">Dealer Yard Location</span>
+                <span class="dossier-value" style="color: var(--clr-text-subdued);">Arena Dealership Yard, Anand</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation (Screen Only) -->
+    <header class="report-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            </a>
+            <div class="header-actions">
+                <button onclick="window.print()" class="btn-download" id="download-report-btn">
+                    <i data-lucide="download" class="download-icon"></i>
+                    <span>Download PDF Report</span>
+                </button>
+                <div class="report-badge">Sample PDI Report</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- ==========================================
+           PAGE 2: EXECUTIVE SUMMARY & AT-A-GLANCE
+           ========================================== -->
+        <div class="print-page" id="summary">
+            <div class="print-page-header">
+                <h2>Executive Summary & Verdict</h2>
+                <span class="print-page-header-id">CRD-2026-WGR-042</span>
+            </div>
+            
+            <!-- Inspected Vehicle Specifications Card -->
+            <div class="glass-card specs-card" style="margin-bottom: 2rem;">
+                <div class="dossier-title-bar">
+                    <h3>Inspected Vehicle Specifications</h3>
+                    <span class="report-id">CRD-2026-WGR-042</span>
+                </div>
+                <div class="specs-grid">
+                    <div class="dossier-item">
+                        <span class="dossier-label">Brand</span>
+                        <span class="dossier-value">Maruti Suzuki</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Car Name</span>
+                        <span class="dossier-value">WagonR CNG VXI (2025)</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">VIN / Chassis Number</span>
+                        <span class="dossier-value verified-badge">
+                            <i data-lucide="check" class="verified-icon"></i> MA3EFE51S002938XX
+                        </span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Engine Number</span>
+                        <span class="dossier-value verified-badge">
+                            <i data-lucide="check" class="verified-icon"></i> K10CN-829384X
+                        </span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Colour</span>
+                        <span class="dossier-value">Silky Silver Metallic</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Odometer (Mileage)</span>
+                        <span class="dossier-value">18 km</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Fuel Type</span>
+                        <span class="dossier-value">Petrol + CNG (Bi-Fuel)</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Transmission</span>
+                        <span class="dossier-value">5-Speed Manual (5MT)</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Date of Inspection</span>
+                        <span class="dossier-value">June 06, 2026</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Inspection Location</span>
+                        <span class="dossier-value">Arena Dealership Stockyard, Anand</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Dealership Name</span>
+                        <span class="dossier-value">Arena Maruti Suzuki Anand</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Customer Name</span>
+                        <span class="dossier-value">Bhavya Rambhia</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">Inspection Date</span>
+                        <span class="dossier-value">June 06, 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspection Summary Paragraph Card -->
+            <div class="glass-card summary-para-card" style="margin-bottom: 2rem; border-left: 4px solid var(--clr-accent-orange);">
+                <h4 style="font-family: var(--ff-heading); color: var(--clr-text-white); margin-bottom: 0.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Inspection Summary & Verdict
+                </h4>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--clr-text-subdued);">
+                    Following a comprehensive 180+ point Pre-Delivery Inspection of this Maruti Suzuki WagonR, the vehicle is overall in excellent mechanical and electrical condition, receiving a health score of 94/100. However, three minor defects were identified across different sections: <strong>Section 2 (Exterior & Paint)</strong> has a paint depth anomaly of 152 µm on the left rear door indicating a minor dealer touch-up repaint; <strong>Section 4 (Cabin Interior)</strong> has a small grease smudge on the front passenger seat side bolster; and <strong>Section 10 (Accessories & Handover)</strong> has a loose plastic fastener clip on the right rear mudguard. All other inspected areas, including the engine bay, chassis structure, OBD2 electronics, and the factory-fitted CNG fuel lines, passed in flawless factory-fresh condition with zero faults detected.
+                </p>
+            </div>
+
+            <!-- Health Score & Verdict Details Grid -->
+            <div class="glass-card score-meter-card" style="display: flex; align-items: center; gap: 2.5rem; margin-bottom: 2rem;">
+                <div class="radial-gauge-wrapper">
+                    <svg class="radial-svg" viewBox="0 0 160 160">
+                        <circle class="radial-bg" cx="80" cy="80" r="70"></circle>
+                        <circle class="radial-progress" cx="80" cy="80" r="70"></circle>
+                    </svg>
+                    <div class="radial-score-text">
+                        <span class="score-num">94</span>
+                        <span class="score-lbl">Health Score</span>
+                    </div>
+                </div>
+                
+                <div class="verdict-info-col">
+                    <span class="verdict-title">PDI Inspection Verdict</span>
+                    <div class="verdict-badge">RECOMMENDED (WITH MINOR ACTIONS)</div>
+                    <p class="verdict-desc">
+                        A detailed 180+ point pre-delivery check confirms the structural integrity, electrical modules, engine block, and CNG security lines are in excellent factory condition. 3 minor cosmetic defects have been logged.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+           PAGE 3: DEFECT DETAIL SNAPSHOTS
+           ========================================== -->
+        <div class="print-page">
+            <div class="print-page-header">
+                <h2>Summary of Defects & Action Items</h2>
+                <span class="print-page-header-id">CRD-2026-WGR-042</span>
+            </div>
+
+            <h3 class="alerts-section-title" style="color: #000000; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">
+                Defects Identified (3 Action Items)
+            </h3>
+
+            <div class="defects-highlights-container">
+                <!-- Defect 1: Paint depth touch-up -->
+                <div class="defect-highlight-card">
+                    <div class="defect-card-img-wrapper">
+                        <img src="assets/wagonr_paint_measure.png" alt="Maruti WagonR paint depth check 152 microns" class="defect-card-img">
+                        <span class="defect-card-tag">Minor Defect</span>
+                    </div>
+                    <div class="defect-card-body">
+                        <div class="defect-card-header">
+                            <h4>Left Rear Door Touch-up Repaint</h4>
+                            <p class="defect-card-desc">
+                                Paint thickness meter reads 152 µm on the left rear door panel, compared to 95–102 µm on other panels. Indicates cosmetic dealer touch-up repair.
+                            </p>
+                        </div>
+                        <div class="defect-card-action-bar">
+                            <span class="action-label">Dealer Action:</span>
+                            <span class="action-val">Acknowledge & Disclose</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Defect 2: Seat dust smudge -->
+                <div class="defect-highlight-card">
+                    <div class="defect-card-img-wrapper">
+                        <img src="assets/wagonr_seat_stain.png" alt="Maruti WagonR passenger seat fabric stain" class="defect-card-img">
+                        <span class="defect-card-tag">Minor Defect</span>
+                    </div>
+                    <div class="defect-card-body">
+                        <div class="defect-card-header">
+                            <h4>Passenger Seat Fabric Stain</h4>
+                            <p class="defect-card-desc">
+                                Small dust and grease smudge found on the front passenger seat seatback side bolster, likely from transporter yard loading.
+                            </p>
+                        </div>
+                        <div class="defect-card-action-bar">
+                            <span class="action-label">Dealer Action:</span>
+                            <span class="action-val">Dry Clean Seat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Defect 3: Loose Mudguard Fastener -->
+                <div class="defect-highlight-card">
+                    <div class="defect-card-img-wrapper">
+                        <img src="assets/wagonr_mudguard_clip.png" alt="Maruti WagonR loose rear mudguard clip" class="defect-card-img">
+                        <span class="defect-card-tag">Minor Defect</span>
+                    </div>
+                    <div class="defect-card-body">
+                        <div class="defect-card-header">
+                            <h4>Loose Right Rear Mudguard</h4>
+                            <p class="defect-card-desc">
+                                The plastic expanding fastener clip securing the right rear mudguard is loose, causing the guard to rattle when shaken.
+                            </p>
+                        </div>
+                        <div class="defect-card-action-bar">
+                            <span class="action-label">Dealer Action:</span>
+                            <span class="action-val">Replace Clip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inspected Vehicle Gallery -->
+            <h3 class="alerts-section-title" style="margin-top: 2.5rem; margin-bottom: 0.5rem; color: var(--clr-text-white); font-family: var(--ff-heading); font-weight: 700;">
+                <i data-lucide="camera" class="alert-heading-icon" style="color: var(--clr-accent-purple); width: 22px; height: 22px;"></i>
+                <span>Inspected Vehicle Gallery (26-View Sequence)</span>
+            </h3>
+            
+            <!-- Inspected Vehicle Gallery Sections -->
+            <div class="gallery-section-container">
+                <!-- Category Tabs for UI, but in print, they all show in sequence -->
+                <div class="gallery-category-header" style="margin-bottom: 1.5rem; display: flex; gap: 0.8rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                    <button class="gallery-tab-btn active" onclick="filterGallery('all')">All Views (27)</button>
+                    <button class="gallery-tab-btn" onclick="filterGallery('exterior')">Exterior Profile (9)</button>
+                    <button class="gallery-tab-btn" onclick="filterGallery('interior')">Interior & Cockpit (7)</button>
+                    <button class="gallery-tab-btn" onclick="filterGallery('engine-boot')">Engine & Utility (3)</button>
+                    <button class="gallery-tab-btn" onclick="filterGallery('door-trims')">Door Trims (4)</button>
+                    <button class="gallery-tab-btn" onclick="filterGallery('wheels')">Wheels & Tyres (4)</button>
+                </div>
+
+                <div class="vehicle-gallery-grid" id="main-gallery-grid">
+                    <!-- 1. Inspector Overview -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_inspecting.png" alt="Caya Inspecting Silver WagonR 2025">
+                        <div class="gallery-item-label">1. Inspector Overview (Caya)</div>
+                    </div>
+                    <!-- 2. Front Profile -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_front_profile.png" alt="Silky Silver WagonR 2025 Front Profile">
+                        <div class="gallery-item-label">2. Front Profile</div>
+                    </div>
+                    <!-- 3. Front 3/4 LH -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_front_34_lh.png" alt="Silky Silver WagonR 2025 Front 3/4 Left Hand side">
+                        <div class="gallery-item-label">3. Front 3/4 LH Side</div>
+                    </div>
+                    <!-- 4. Front 3/4 RH -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_front_34_rh.png" alt="Silky Silver WagonR 2025 Front 3/4 Right Hand side">
+                        <div class="gallery-item-label">4. Front 3/4 RH Side</div>
+                    </div>
+                    <!-- 5. LH Side -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_side_profile.png" alt="Silky Silver WagonR 2025 LH Side Profile">
+                        <div class="gallery-item-label">5. LH Side Profile</div>
+                    </div>
+                    <!-- 6. RH Side -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_side_rh.png" alt="Silky Silver WagonR 2025 RH Side Profile">
+                        <div class="gallery-item-label">6. RH Side Profile</div>
+                    </div>
+                    <!-- 7. Rear Side -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_rear_profile.png" alt="Silky Silver WagonR 2025 Rear Profile">
+                        <div class="gallery-item-label">7. Rear Profile</div>
+                    </div>
+                    <!-- 8. Rear 3/4 LH -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_rear_34_lh.png" alt="Silky Silver WagonR 2025 Rear 3/4 Left Hand side">
+                        <div class="gallery-item-label">8. Rear 3/4 LH Side</div>
+                    </div>
+                    <!-- 9. Rear 3/4 RH -->
+                    <div class="gallery-item" data-category="exterior">
+                        <img src="assets/wagonr_rear_34_rh.png" alt="Silky Silver WagonR 2025 Rear 3/4 Right Hand side">
+                        <div class="gallery-item-label">9. Rear 3/4 RH Side</div>
+                    </div>
+                    <!-- 10. Engine Bay -->
+                    <div class="gallery-item" data-category="engine-boot">
+                        <img src="assets/wagonr_engine_bay.png" alt="Maruti WagonR K10C Engine Bay PDI Check">
+                        <div class="gallery-item-label">10. Engine Bay</div>
+                    </div>
+                    <!-- 11. Front Seats Side View -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_front_seats.png" alt="Maruti WagonR 2025 Front Seats Side View">
+                        <div class="gallery-item-label">11. Front Seats Side View</div>
+                    </div>
+                    <!-- 12. Rear Seat Side View -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_rear_seats.png" alt="Maruti WagonR 2025 Rear Seats View">
+                        <div class="gallery-item-label">12. Rear Seat Side View</div>
+                    </div>
+                    <!-- 13. Dashboard -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_dashboard.png" alt="Maruti WagonR 2025 Smartplay Dashboard Console">
+                        <div class="gallery-item-label">13. Dashboard Console</div>
+                    </div>
+                    <!-- 14. Driver Cockpit -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_driver_cockpit.png" alt="Maruti WagonR 2025 Driver Cockpit Dial Check">
+                        <div class="gallery-item-label">14. Driver Cockpit</div>
+                    </div>
+                    <!-- 15. Instrument Cluster Closeup -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_cluster.png" alt="Maruti WagonR 2025 Instrument Cluster Closeup">
+                        <div class="gallery-item-label">15. Instrument Cluster Closeup</div>
+                    </div>
+                    <!-- 16. Centre Console Closeup -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_console.png" alt="Maruti WagonR 2025 Gear Lever Centre Console Closeup">
+                        <div class="gallery-item-label">16. Centre Console Closeup</div>
+                    </div>
+                    
+                    <!-- 17. Door Trims (all 4) -->
+                    <div class="gallery-item" data-category="door-trims">
+                        <img src="assets/wagonr_door_trim_fl.png" alt="Maruti WagonR 2025 Front LH Inner Door Trim">
+                        <div class="gallery-item-label">17. Front LH Door Trim</div>
+                    </div>
+                    <div class="gallery-item" data-category="door-trims">
+                        <img src="assets/wagonr_door_trim_fr.png" alt="Maruti WagonR 2025 Front RH Inner Door Trim">
+                        <div class="gallery-item-label">18. Front RH Door Trim</div>
+                    </div>
+                    <div class="gallery-item" data-category="door-trims">
+                        <img src="assets/wagonr_door_trim_rl.png" alt="Maruti WagonR 2025 Rear LH Inner Door Trim">
+                        <div class="gallery-item-label">19. Rear LH Door Trim</div>
+                    </div>
+                    <div class="gallery-item" data-category="door-trims">
+                        <img src="assets/wagonr_door_trim_rr.png" alt="Maruti WagonR 2025 Rear RH Inner Door Trim">
+                        <div class="gallery-item-label">20. Rear RH Door Trim</div>
+                    </div>
+
+                    <!-- 21. Boot Space -->
+                    <div class="gallery-item" data-category="engine-boot">
+                        <img src="assets/wagonr_boot_space.png" alt="Maruti WagonR 2025 Boot Space and CNG Cylinder">
+                        <div class="gallery-item-label">21. Boot Space (CNG Area)</div>
+                    </div>
+                    <!-- 22. Roof -->
+                    <div class="gallery-item" data-category="engine-boot">
+                        <img src="assets/wagonr_roof.png" alt="Maruti WagonR 2025 Roof Panel View">
+                        <div class="gallery-item-label">22. Roof Panel</div>
+                    </div>
+                    <!-- 23. Headliner -->
+                    <div class="gallery-item" data-category="interior">
+                        <img src="assets/wagonr_headliner.png" alt="Maruti WagonR 2025 Inner Cabin Roof Headliner View">
+                        <div class="gallery-item-label">23. Cabin Headliner</div>
+                    </div>
+
+                    <!-- 24. Wheels (all 4) -->
+                    <div class="gallery-item" data-category="wheels">
+                        <img src="assets/wagonr_wheel_fl.png" alt="Maruti WagonR 2025 Front LH Wheel tyre sidewall check">
+                        <div class="gallery-item-label">24. Wheel Front LH</div>
+                    </div>
+                    <div class="gallery-item" data-category="wheels">
+                        <img src="assets/wagonr_wheel_fr.png" alt="Maruti WagonR 2025 Front RH Wheel tyre sidewall check">
+                        <div class="gallery-item-label">25. Wheel Front RH</div>
+                    </div>
+                    <div class="gallery-item" data-category="wheels">
+                        <img src="assets/wagonr_wheel_rl.png" alt="Maruti WagonR 2025 Rear LH Wheel tyre sidewall check">
+                        <div class="gallery-item-label">26. Wheel Rear LH</div>
+                    </div>
+                    <div class="gallery-item" data-category="wheels">
+                        <img src="assets/wagonr_wheel_rr.png" alt="Maruti WagonR 2025 Rear RH Wheel tyre sidewall check">
+                        <div class="gallery-item-label">27. Wheel Rear RH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Navigation Bar (Screen Only) -->
+        <nav class="report-section-nav">
+            <a href="#summary" class="section-nav-link active">Summary HUD</a>
+            <a href="#docs" class="section-nav-link">1. Documents Check</a>
+            <a href="#exterior" class="section-nav-link">2. Exterior & Paint Depth</a>
+            <a href="#tyres" class="section-nav-link">3. Tyres & Wheels</a>
+            <a href="#interior" class="section-nav-link">4. Cabin Interior</a>
+            <a href="#electrical" class="section-nav-link">5. OBD2 & Electricals</a>
+            <a href="#advanced" class="section-nav-link">6. Advanced Safety</a>
+            <a href="#engine" class="section-nav-link">7. Engine & Mech</a>
+            <a href="#cng" class="section-nav-link nav-link-orange">8. CNG System Spec</a>
+            <a href="#testdrive" class="section-nav-link">9. Test Drive</a>
+            <a href="#handover" class="section-nav-link">10. Handover Checks</a>
+        </nav>
+
+        <!-- ==========================================
+           PAGE 4: DETAILED EVALUATION CHECKLISTS (PART 1)
+           ========================================== -->
+        <div class="print-page">
+            <div class="print-page-header">
+                <h2>Detailed Evaluation Checklist (1/2)</h2>
+                <span class="print-page-header-id">CRD-2026-WGR-042</span>
+            </div>
+
+            <!-- Section 1: Documentation Verification -->
+            <div class="checklist-group" id="docs">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="file-text" class="checklist-header-icon"></i>
+                        <span>Section 1: Documentation Verification</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">16/16 Checks Passed</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">1.1</td>
+                                    <td class="check-desc">Sales Invoice details (Name, vehicle variant, price details)</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Name matches booking details</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">1.2</td>
+                                    <td class="check-desc">Engine Number matches physical block engraving & invoice</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">K10CN-829384X matches block</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">1.3</td>
+                                    <td class="check-desc">Chassis/VIN matches invoice & structural stamping</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">MA3EFE51S002938XX matches</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">1.4</td>
+                                    <td class="check-desc">Registration Certificate (RC) form details matches VIN</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Ready for registration</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">1.5</td>
+                                    <td class="check-desc">Insurance Policy details, validity dates, zero-dep add-ons</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Zero depreciation included</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">1.6</td>
+                                    <td class="check-desc">Pollution Under Control (PUC) certificate validity (1 Year)</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Valid till June 2027</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Exterior Body & Paint Check & Paint depth map -->
+            <div class="checklist-group" id="exterior">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="paint-bucket" class="checklist-header-icon"></i>
+                        <span>Section 2: Paint, Body Panels & Glass Map</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-yellow">Minor Touch-Up Detected</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        
+                        <!-- SVG Interactive Paint Map inside Report -->
+                        <div style="margin-top: 1.5rem; margin-bottom: 2rem;" class="paint-map-visual-wrapper">
+                            <h4 style="font-family: var(--ff-heading); color: var(--clr-text-white); margin-bottom: 1rem; font-size: 0.95rem; text-transform: uppercase;">
+                                WagonR Silky Silver Coating Thickness Map (Click Panels)
+                            </h4>
+                            
+                            <div class="paint-map-container">
+                                <div class="paint-map-visual">
+                                    <div class="grid-overlay"></div>
+                                    <svg class="svg-car-map" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Car Side Profile Sketch -->
+                                        <path class="svg-panel-trigger" id="panel-hood" d="M 100 120 L 160 120 L 180 90 L 120 90 Z" data-name="Bonnet / Hood" data-val="98" data-status="Uniform factory finish. No repair." data-alert="false"/>
+                                        <path class="svg-panel-trigger" id="panel-fender" d="M 60 120 L 110 120 L 100 160 L 60 150 Z" data-name="Front Left Fender" data-val="96" data-status="Uniform factory finish. No repair." data-alert="false"/>
+                                        <path class="svg-panel-trigger" id="panel-driver" d="M 180 90 L 280 90 L 270 180 L 170 170 Z" data-name="Driver Side Front Door" data-val="104" data-status="Uniform factory finish. Healthy panel." data-alert="false"/>
+                                        <path class="svg-panel-trigger alert-panel" id="panel-rear-door" d="M 280 90 L 370 90 L 360 180 L 270 180 Z" data-name="Left Rear Door" data-val="152" data-status="Repaint detected. Thickness indicates dealer cosmetic panel touch-up." data-alert="true"/>
+                                        <path class="svg-panel-trigger" id="panel-roof" d="M 200 60 L 400 60 L 390 90 L 190 90 Z" data-name="Roof Panel" data-val="102" data-status="Uniform factory finish. No repaint." data-alert="false"/>
+                                        <path class="svg-panel-trigger" id="panel-quarter" d="M 370 90 L 440 120 L 450 170 L 360 180 Z" data-name="Rear Quarter Panel" data-val="100" data-status="Uniform factory finish." data-alert="false"/>
+                                        <path class="svg-panel-trigger" id="panel-trunk" d="M 440 120 L 480 120 L 470 160 L 450 170 Z" data-name="Bootlid / Tailgate" data-val="99" data-status="Uniform factory finish." data-alert="false"/>
+                                        
+                                        <!-- Wheels -->
+                                        <circle cx="130" cy="180" r="25" fill="#05030B" stroke="rgba(168, 85, 247, 0.4)" stroke-width="2"/>
+                                        <circle cx="410" cy="180" r="25" fill="#05030B" stroke="rgba(168, 85, 247, 0.4)" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                
+                                <div class="paint-map-hud">
+                                    <div class="paint-hud-display" id="report-paint-hud">
+                                        <div class="paint-hud-value alert-value" id="hud-thickness-val">152 µm</div>
+                                        <div class="paint-hud-label">Thickness reading</div>
+                                        <div class="paint-hud-panel-name" id="hud-panel-name">Left Rear Door</div>
+                                        <p class="paint-hud-status-text" id="hud-status-msg">
+                                            Repaint detected. Thickness indicates dealer cosmetic panel touch-up likely to fix scratch.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">2.1</td>
+                                    <td class="check-desc">Paint finish - uniform shine, no orange peel texture</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Healthy gloss on Silky Silver finish</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">2.3</td>
+                                    <td class="check-desc">Paint thickness check with meter (80-140 µm factory standard)</td>
+                                    <td class="check-method">Measurement</td>
+                                    <td class="check-rating rating-minor">MINOR</td>
+                                    <td class="check-remarks">Left Rear Door is 152 µm (Touch-up repaint)</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">2.7</td>
+                                    <td class="check-desc">Panel gaps uniformity - bonnet, fenders, doors, boot lid</td>
+                                    <td class="check-method">Visual/Meas.</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Consistent 4-5mm panel gaps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Tyres & Wheels -->
+            <div class="checklist-group" id="tyres">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="disc" class="checklist-header-icon"></i>
+                        <span>Section 3: Tyres & Wheels Health</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">All Tyres Factory Fresh</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">3.1</td>
+                                    <td class="check-desc">All 4 tyres same brand and specifications</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Apollo Amazer 3G Maxx fitted</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">3.4</td>
+                                    <td class="check-desc">Tyre manufacturing date within last 6 months</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">DOT code 1426 (14th week of 2026)</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">3.6</td>
+                                    <td class="check-desc">Tread depth uniform across all tyres (7-8mm for new)</td>
+                                    <td class="check-method">Measurement</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Uniform 7.6 mm tread depth</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+           PAGE 5: DETAILED EVALUATION CHECKLISTS (PART 2)
+           ========================================== -->
+        <div class="print-page">
+            <div class="print-page-header">
+                <h2>Detailed Evaluation Checklist (2/2)</h2>
+                <span class="print-page-header-id">CRD-2026-WGR-042</span>
+            </div>
+
+            <!-- Section 4: Cabin Interior -->
+            <div class="checklist-group" id="interior">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="armchair" class="checklist-header-icon"></i>
+                        <span>Section 4: Cabin Seats & Upholstery</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-yellow">Seat Smudge Logged</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">4.1</td>
+                                    <td class="check-desc">Front seats upholstery - no stains, smudges, or tears</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-minor">MINOR</td>
+                                    <td class="check-remarks">Grease smudge on passenger bolster</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">4.18</td>
+                                    <td class="check-desc">All seatbelts lock when pulled quickly & retract smoothly</td>
+                                    <td class="check-method">Operation</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">All 5 seatbelts tested and lock</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">4.38</td>
+                                    <td class="check-desc">Odometer reading under 100 km (Yard storage check)</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Odometer reads 18 km</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: OBD2 & Electricals -->
+            <div class="checklist-group" id="electrical">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="cpu" class="checklist-header-icon"></i>
+                        <span>Section 5: OBD2 Diagnostics & Electricals</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Scan Clean (0 Faults)</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        
+                        <!-- OBD Terminal Log -->
+                        <div style="margin-top: 1.5rem; margin-bottom: 2rem;" class="obd-logs-terminal-wrapper">
+                            <h4 style="font-family: var(--ff-heading); color: var(--clr-text-white); margin-bottom: 1rem; font-size: 0.95rem; text-transform: uppercase;">
+                                Active OBD2 ECU Diagnostic Log (WagonR CNG 2025)
+                            </h4>
+                            <div class="obd-logs-terminal">
+                                <div class="obd-log-row"><span class="log-lbl">[System] Initializing connection to vehicle ECU...</span><span class="log-val-green">CONNECTED</span></div>
+                                <div class="obd-log-row"><span class="log-lbl">[System] Protocol: CAN Bus (ISO 15765-4)</span><span class="log-val-green">OK</span></div>
+                                <div class="obd-log-row"><span class="log-lbl">[System] Reading VIN from ECU...</span><span class="log-val-green">MA3EFE51S002938XX</span></div>
+                                <div class="obd-log-row"><span class="log-lbl">[ECU] Scanning Powertrain Control Module (PCM)...</span><span class="log-val-green">0 CODES FOUND</span></div>
+                                <div class="obd-log-row"><span class="log-lbl">[Live] Battery Voltage (Engine Off)</span><span class="log-val-green">12.62 V (Healthy)</span></div>
+                                <div class="obd-log-row"><span class="log-lbl">[Live] Alternator Charging Voltage</span><span class="log-val-green">14.12 V (Healthy)</span></div>
+                            </div>
+                        </div>
+
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">5.1</td>
+                                    <td class="check-desc">Battery manufacture date within last 3 months</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Exide battery, mfg: May 2026</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">5.5</td>
+                                    <td class="check-desc">Battery voltage between 12.4-12.8V (Engine Off)</td>
+                                    <td class="check-method">Measurement</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Readout is 12.6V</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Advanced Safety Features -->
+            <div class="checklist-group" id="advanced">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="shield" class="checklist-header-icon"></i>
+                        <span>Section 6: Advanced Safety Features</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Safety Systems OK</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">6.1</td>
+                                    <td class="check-desc">Reverse parking camera activates in reverse gear</td>
+                                    <td class="check-method">Operation</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Clear dashboard guidelines visible</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">6.9</td>
+                                    <td class="check-desc">Rear parking sensors beep frequency on object proximity</td>
+                                    <td class="check-method">Hearing/Op.</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Dual sensors working, loud alert</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+           PAGE 6: ENGINE, CNG & ROAD TEST DRIVE
+           ========================================== -->
+        <div class="print-page">
+            <div class="print-page-header">
+                <h2>Detailed Evaluation - Engine, CNG & Test Drive</h2>
+                <span class="print-page-header-id">CRD-2026-WGR-042</span>
+            </div>
+
+            <!-- Section 7: Engine & Mechanical Systems -->
+            <div class="checklist-group" id="engine">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="settings" class="checklist-header-icon"></i>
+                        <span>Section 7: Engine & Mechanical Systems</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Block & Fluids Clean</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">7.2</td>
+                                    <td class="check-desc">Engine oil level and color (Golden-amber standard)</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Dipstick level at Max, oil clean</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">7.5</td>
+                                    <td class="check-desc">Coolant and brake fluid reservoir levels</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Fluids at factory marks</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">7.12</td>
+                                    <td class="check-desc">No visible oil leaks or seepage from engine head gaskets</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Engine block dry and clean</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: CNG System Checks -->
+            <div class="checklist-group" id="cng">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="flame" class="checklist-header-icon" style="color: var(--clr-accent-orange);"></i>
+                        <span style="color: var(--clr-accent-orange);">Section 8: CNG System Compliance Inspection</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Gas Lines Secure</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        
+                        <div style="margin-top: 1.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: center;" class="cng-visual-summary-wrapper">
+                            <img src="assets/wagonr_cng_cylinder.png" alt="WagonR Boot CNG cylinder" style="border-radius: var(--radius-md); border: 1px solid var(--clr-border); width: 100%; height: 160px; object-fit: cover;">
+                            <div>
+                                <h4 style="font-family: var(--ff-heading); color: var(--clr-text-white); margin-bottom: 0.5rem; font-size: 0.95rem; text-transform: uppercase;">
+                                    Factory CNG Cylinder & Cage Details
+                                </h4>
+                                <p style="font-size: 0.85rem; line-height: 1.5; color: var(--clr-text-subdued);">
+                                    The 60-liter water capacity steel CNG tank is securely bolted behind the rear seats inside the protective black steel frame. The brass compliance tag is mounted. Leak test of all joint rings (soap-water checks) confirms perfect sealing.
+                                </p>
+                            </div>
+                        </div>
+
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-no">ID</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">8.8</td>
+                                    <td class="check-no">CNG-1</td>
+                                    <td class="check-desc">CNG cylinder installed properly in boot inside cage mount</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Secured, zero movement on frame</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">8.9</td>
+                                    <td class="check-no">CNG-2</td>
+                                    <td class="check-desc">CNG cylinder manufacture date within 6 months of delivery</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Mfg: April 2026 (Fresh cylinder)</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">8.10</td>
+                                    <td class="check-no">CNG-3</td>
+                                    <td class="check-desc">CNG cylinder hydro-test validation date (15-year stamp)</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Compliance plate stamped & verified</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">8.18</td>
+                                    <td class="check-no">CNG-5</td>
+                                    <td class="check-desc">CNG pipes leak check using soap-water bubbles test</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Tested joints at cylinder & bay; 0 leaks</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Test Drive Performance -->
+            <div class="checklist-group" id="testdrive">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="key" class="checklist-header-icon"></i>
+                        <span>Section 9: Road Test Performance</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Smooth Test Run</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">10.8</td>
+                                    <td class="check-desc">Clutch bite point comfortable, smooth pedal progressive action</td>
+                                    <td class="check-method">Feel</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Clean bite point, not spongy</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">10.16</td>
+                                    <td class="check-desc">Acceleration smooth in all gears without engine hesitation</td>
+                                    <td class="check-method">Feel</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Engine transitions seamlessly CNG to Petrol</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">10.22</td>
+                                    <td class="check-desc">Brakes bite progressively and stop vehicle straight (No pull)</td>
+                                    <td class="check-method">Operation</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Braking straight, ABS test ok</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Accessories & Handover -->
+            <div class="checklist-group" id="handover">
+                <button class="checklist-header" onclick="toggleGroup(this)">
+                    <span class="checklist-header-title">
+                        <i data-lucide="package" class="checklist-header-icon"></i>
+                        <span>Section 10: Accessories & Handover Toolkit</span>
+                    </span>
+                    <span class="checklist-status-summary">
+                        <span class="status-badge-inline badge-green">Toolkit Complete</span>
+                        <i data-lucide="chevron-down" class="chevron-icon"></i>
+                    </span>
+                </button>
+                <div class="checklist-content">
+                    <div class="checklist-table-wrapper">
+                        <table class="checklist-table">
+                            <thead>
+                                <tr>
+                                    <th class="check-no">#</th>
+                                    <th class="check-desc">Inspection Checkpoint</th>
+                                    <th class="check-method">Method</th>
+                                    <th class="check-rating">Rating</th>
+                                    <th class="check-remarks">Remarks / Readings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="check-no">11.15</td>
+                                    <td class="check-desc">Toolkit complete in boot (Jack, spanner, warning triangle)</td>
+                                    <td class="check-method">Visual</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Factory kit & spare wheel verified</td>
+                                </tr>
+                                <tr>
+                                    <td class="check-no">12.13</td>
+                                    <td class="check-desc">Both remote key fobs present and functional</td>
+                                    <td class="check-method">Operation</td>
+                                    <td class="check-rating rating-pass">PASS</td>
+                                    <td class="check-remarks">Lock, unlock, and keyless sync ok</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Sign-Off Handover Block -->
+            <section class="glass-card signoff-section">
+                <div class="sign-card">
+                    <div class="signature-line">Bhavya Rambhia</div>
+                    <div class="sign-meta">
+                        <span>CARROBAAR_Drive Lead Inspector</span>
+                        <span>Anand Office Code: CRD-GJR-07</span>
+                    </div>
+                </div>
+                
+                <div class="sign-card">
+                    <div class="signature-line" style="color: var(--clr-text-muted);">Awaiting Client Signature</div>
+                    <div class="sign-meta">
+                        <span>Maruti Dealer Coordinator Sign-Off</span>
+                        <span>Arena Stockyard, Anand</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Page Exploration Ribbon Section -->
+        <section class="exploration-ribbon-section" id="explore-hub">
+            <div class="container">
+                <div class="ribbon-grid">
+                    <!-- Card 1: Home Page -->
+                    <a href="index.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="home" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Welcome</span>
+                            <h3>Home Page</h3>
+                            <p>Return to main landing page for services, calculator, and booking.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Back to Home</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 2: Interactive Lab -->
+                    <a href="interactive-lab.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="scan" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Interactive Tool</span>
+                            <h3>Interactive Lab</h3>
+                            <p>Simulate paint depth checks and scan defects in real-time.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Try Scanner</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 3: Showcase Gallery -->
+                    <a href="inspection-gallery.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="image" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Visual Guide</span>
+                            <h3>Showcase Gallery</h3>
+                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>View Gallery</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 4: Car Buyer's Blog -->
+                    <a href="blog/index.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="book-open" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Knowledge Hub</span>
+                            <h3>Car Buyer's Blog</h3>
+                            <p>Empower yourself with RTO guides, buying advice, and checklists.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Read Blog</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    <a href="my-story.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="user" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Our Story</span>
+                            <h3>Meet Bhavya</h3>
+                            <p>Learn about our founder's journey, mission, and quality promise.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Read Story</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    <script>
+        // Collapsible Checklist Action
+        function toggleGroup(button) {
+            const group = button.closest('.checklist-group');
+            group.classList.toggle('active');
+            
+            const content = group.querySelector('.checklist-content');
+            if (group.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = "0";
+            }
+        }
+
+        // Expand checklist group programmatically
+        function expandGroup(group) {
+            group.classList.add('active');
+            const content = group.querySelector('.checklist-content');
+            if (content) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Gallery Filter logic
+        function filterGallery(category) {
+            // Update active tab button
+            const buttons = document.querySelectorAll('.gallery-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Set clicked button to active
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            // Filter items
+            const items = document.querySelectorAll('#main-gallery-grid .gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // SVG Interactive Paint Map Panel Clicks
+        const triggers = document.querySelectorAll('.svg-panel-trigger');
+        const hudValue = document.getElementById('hud-thickness-val');
+        const hudPanelName = document.getElementById('hud-panel-name');
+        const hudStatusMsg = document.getElementById('hud-status-msg');
+        const hudDisplay = document.getElementById('report-paint-hud');
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                // Remove selected state from all
+                triggers.forEach(t => t.classList.remove('selected'));
+                
+                // Add selected state to current
+                trigger.classList.add('selected');
+                
+                // Read properties
+                const name = trigger.getAttribute('data-name');
+                const val = trigger.getAttribute('data-val');
+                const status = trigger.getAttribute('data-status');
+                const isAlert = trigger.getAttribute('data-alert') === 'true';
+                
+                // Update HUD Panel
+                hudValue.textContent = `${val} µm`;
+                hudPanelName.textContent = name;
+                hudStatusMsg.textContent = status;
+                
+                // Alter styling based on alert
+                if (isAlert) {
+                    hudValue.className = "paint-hud-value alert-value";
+                } else {
+                    hudValue.className = "paint-hud-value";
+                }
+            });
+        });
+
+        // Initialize Lucide Icons & Navigation scroll triggers
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Auto-trigger expand on first checklist group for prototype showcase
+            const firstGroup = document.querySelector('.checklist-group');
+            if (firstGroup) {
+                firstGroup.classList.add('active');
+                const firstContent = firstGroup.querySelector('.checklist-content');
+                firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+            }
+            
+            // Auto-select the Left Rear Door alert panel on SVG
+            const alertPanel = document.getElementById('panel-rear-door');
+            if (alertPanel) {
+                alertPanel.classList.add('selected');
+            }
+
+            // Navigation Ribbon click scrolling & auto-expand logic
+            const navLinks = document.querySelectorAll('.report-section-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            e.preventDefault();
+                            
+                            // If target is a checklist group, expand it!
+                            if (targetEl.classList.contains('checklist-group')) {
+                                expandGroup(targetEl);
+                            }
+                            
+                            // Calculate scroll offset for sticky elements
+                            const header = document.querySelector('.report-header');
+                            const nav = document.querySelector('.report-section-nav');
+                            const headerHeight = header ? header.offsetHeight : 70;
+                            const navHeight = nav ? nav.offsetHeight : 50;
+                            const totalOffset = headerHeight + navHeight + 15; // 15px extra breathing room
+                            
+                            // Scroll to target
+                            const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+                            window.scrollTo({
+                                top: targetPosition - totalOffset,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Set active class
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            });
+
+            // Scroll highlighter to update active nav link on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '-120px 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.report-section-nav a[href="#${id}"]`);
+                        if (activeLink) {
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all checklist groups and the summary container
+            document.querySelectorAll('.checklist-group').forEach(group => observer.observe(group));
+            const summarySec = document.getElementById('summary');
+            if (summarySec) observer.observe(summarySec);
+        });
+    </script>
+</body>
+</html>

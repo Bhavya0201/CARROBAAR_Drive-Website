@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CARROBAAR_Drive Educational Blog Hub. Unbiased guides, new car PDI checklists, used car buying tips, and total cost of ownership advice written by certified quality specialists.">
+    <title>Car Buyer's Library & Blog | CARROBAAR_Drive</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <!-- Link Main CSS and Blog specific CSS -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
+    
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="blog-hub-page">
+
+    <!-- Mouse Glow -->
+    <div class="mouse-glow" id="mouse-glow"></div>
+
+    <!-- Sticky Header (Mirrors main landing header but with relative links) -->
+    <header class="main-header" id="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo" id="nav-logo">
+                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#showroom-reality" class="nav-link">Showroom Reality</a>
+                <a href="../index.html#estimator" class="nav-link">Calculator</a>
+                <a href="../index.html#services" class="nav-link">Services</a>
+                <a href="../index.html#founder" class="nav-link">About Me</a>
+                <a href="#" class="nav-link active">Blog</a>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="social-icons-group">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                </div>
+                
+                <a href="../index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
+                
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="blog-hub-main">
+        <!-- Hero Header -->
+        <section class="blog-hub-hero">
+            <div class="hero-bg-glow glow-1"></div>
+            <div class="container text-center">
+                <div class="badge-tag">
+                    <i data-lucide="book-open" class="badge-icon"></i>
+                    <span>Car Buyer's Library</span>
+                </div>
+                <h1 class="blog-hub-title"><span class="gradient-text">Automotive Wisdom</span> & Guides</h1>
+                <p class="blog-hub-description">
+                    Authoritative, independent advice from certified quality specialists. Learn how to scan vehicles, detect hidden yard storage damage, analyze resale factors, and negotiate like an expert.
+                </p>
+            </div>
+        </section>
+
+        <!-- Search & Category Filters -->
+        <section class="blog-filter-section">
+            <div class="container">
+                <div class="filter-controls">
+                    <!-- Search Bar -->
+                    <div class="search-bar-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="blog-search" placeholder="Search articles by title, keywords, or topics..." aria-label="Search articles">
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div class="category-filters" id="category-filters">
+                        <button class="filter-btn active" data-category="all">All Library</button>
+                        <button class="filter-btn" data-category="pdi-guides">PDI Guides</button>
+                        <button class="filter-btn" data-category="used-cars">Used Cars</button>
+                        <button class="filter-btn" data-category="buying-tips">Buying Tips</button>
+                        <button class="filter-btn" data-category="ownership-costs">Ownership Costs</button>
+                    </div>
+                </div>
+                
+                <!-- Active Filter Stats / No Results -->
+                <div class="filter-stats" id="filter-stats">
+                    Showing <span id="visible-count">10</span> articles
+                </div>
+                <div class="no-results" id="no-results">
+                    <i data-lucide="alert-circle" class="no-results-icon"></i>
+                    <h3>No articles found</h3>
+                    <p>We couldn't find any articles matching your search query. Try adjusting your filter tags or searching other keywords.</p>
+                    <button class="btn btn-secondary btn-sm" id="reset-filters">Reset All Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article List Grid -->
+        <section class="blog-grid-section">
+            <div class="container">
+                <div class="blog-grid" id="blog-grid">
+                    <!-- Blog Card 1 -->
+                    <article class="blog-card" data-category="pdi-guides" data-keywords="pre-delivery inspection pdi new car yard damage showroom registration">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_hero.jpg" alt="Independent pre-delivery inspection at dealer showroom" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">PDI Guides</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 12 Min Read</span>
+                            </div>
+                            <h3>Is Pre-Delivery Inspection (PDI) Really Necessary Before Taking Delivery Of A New Car?</h3>
+                            <p>Many car buyers assume a brand-new showroom car is automatically flawless. In reality, transportation damage, depot storage wear, and factory defects are incredibly common. Here's why a PDI is crucial.</p>
+                            <a href="pdi-necessary-before-delivery.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 2 -->
+                    <article class="blog-card" data-category="pdi-guides" data-keywords="checklist new car delivery showroom gaps paint obd2 panel">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/pdi_inspection.png" alt="15 step checklist for new car inspection" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">PDI Guides</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 15 Min Read</span>
+                            </div>
+                            <h3>15 Things You Must Check Before Taking Delivery Of A New Car</h3>
+                            <p>Vetting a new vehicle at the dealership showroom can be overwhelming. This comprehensive 15-step checklist covers panel gaps, engine fluid levels, electronics, and paint scans to protect your investment.</p>
+                            <a href="15-things-to-check-new-car-pdi.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 3 -->
+                    <article class="blog-card" data-category="used-cars" data-keywords="used car inspection buying mistakes lemon test drive odometer chassis">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_buying_assistance.jpg" alt="Used car checklist sheet diagnostic examination" class="blog-card-img">
+                            <span class="blog-card-category-badge purple">Used Cars</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 15 Min Read</span>
+                            </div>
+                            <h3>Used Car Buying Checklist: How To Avoid Expensive Mistakes</h3>
+                            <p>Buying a pre-owned car can save you money, but hidden chassis welding, odometer tempering, and engine blow-by can result in a financial lemon. Use our expert inspection checklist to check like a pro.</p>
+                            <a href="used-car-buying-checklist-mistakes.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 4 -->
+                    <article class="blog-card" data-category="pdi-guides" data-keywords="dealer trust independent pdi dealership inspection commission conflict">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_consultation.jpg" alt="Dealer showroom handover check" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">PDI Guides</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 10 Min Read</span>
+                            </div>
+                            <h3>Dealer Says Everything Is Fine — Should You Trust Them?</h3>
+                            <p>dealership checks are designed to speed up registration, not to protect you. Explore the inherent conflict of interest in dealership PDIs and why independent audits are a must-have for buyers.</p>
+                            <a href="dealer-trust-independent-pdi.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 5 -->
+                    <article class="blog-card" data-category="buying-tips" data-keywords="new car vs used financials depreciation loan insurance value comparison">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_xl6_paint_check.jpg" alt="Sedan vehicle selection and financial planning" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">Buying Tips</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 12 Min Read</span>
+                            </div>
+                            <h3>New Car vs Used Car: Which One Makes More Financial Sense?</h3>
+                            <p>Buying new gives you warranty cover and smell, but pre-owned lets you skip the first 30% depreciation hit. We build a complete 5-year mathematical comparison to help you choose smart.</p>
+                            <a href="new-car-vs-used-car-financials.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 6 -->
+                    <article class="blog-card" data-category="ownership-costs" data-keywords="hidden costs car ownership fuel insurance maintenance depreciation RTO">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_battery_check.jpg" alt="Technician checking battery fluids and filters" class="blog-card-img">
+                            <span class="blog-card-category-badge purple">Ownership Costs</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 10 Min Read</span>
+                            </div>
+                            <h3>7 Hidden Costs Of Car Ownership Nobody Talks About</h3>
+                            <p>Car ownership costs much more than the ex-showroom invoice. Learn how RTO road tax, tyre replacements, insurance renewals, and servicing can double your actual driving expenses.</p>
+                            <a href="hidden-costs-of-car-ownership.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 7 -->
+                    <article class="blog-card" data-category="buying-tips" data-keywords="ev vs petrol vs diesel hybrid fuel mileage running cost battery charging">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_engine.jpg" alt="EV battery and ICE engine comparison diagram representation" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">Buying Tips</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 14 Min Read</span>
+                            </div>
+                            <h3>EV vs Petrol vs Diesel vs Hybrid: Which Fuel Type Is Right For You?</h3>
+                            <p>Choosing a powertrain is confusing in 2026. Read our running cost math and usage parameters to find if you should go Electric, Petrol, Hybrid, or stick with a highway Diesel.</p>
+                            <a href="ev-vs-petrol-vs-diesel-hybrid.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 8 -->
+                    <article class="blog-card" data-category="used-cars" data-keywords="accident history used car paint depth structural chassis welds sealant damage">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/defect_transit_damage.png" alt="Using paint depth gauge on vehicle panel to scan for body repaints" class="blog-card-img">
+                            <span class="blog-card-category-badge purple">Used Cars</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 12 Min Read</span>
+                            </div>
+                            <h3>How To Check If A Used Car Has Been In An Accident</h3>
+                            <p>Sellers often hide collision repairs under shiny touch-ups. Learn how to check structural aprons, scan factory sealants, identify mismatched bolt threads, and use digital paint depth gauges.</p>
+                            <a href="check-used-car-accident-history.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 9 -->
+                    <article class="blog-card" data-category="buying-tips" data-keywords="car resale value factors brand depreciation demand maintenance spares color">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/caya_screen_check.jpg" alt="Car infotainment screen and diagnostics dashboard logs check" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">Buying Tips</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 10 Min Read</span>
+                            </div>
+                            <h3>Why Some Cars Have Terrible Resale Value (And Others Don't)</h3>
+                            <p>Some cars retain 75% value after 3 years, while others plummet to 40%. Read about the brand factors, spare part availability, buyer demand, and segment choices that determine depreciation.</p>
+                            <a href="car-resale-value-factors.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Card 10 -->
+                    <article class="blog-card" data-category="pdi-guides" data-keywords="pdi problems showroom transit damage battery cell engine module repaint defects">
+                        <div class="blog-card-img-wrapper">
+                            <img src="../assets/defect_panel_misalignment.png" alt="Showroom vehicle panel gap measurement alignment test" class="blog-card-img">
+                            <span class="blog-card-category-badge orange">PDI Guides</span>
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-meta-item"><i data-lucide="calendar"></i> June 2026</span>
+                                <span class="blog-meta-item"><i data-lucide="clock"></i> 13 Min Read</span>
+                            </div>
+                            <h3>10 Real Problems Found During Pre-Delivery Inspections</h3>
+                            <p>From hidden paint oversprays to loose sub-frame bolts and degraded battery cells stored in dusty yards, read about the real showroom defects we have caught during our independent audits.</p>
+                            <a href="10-real-problems-found-in-pdi.html" class="blog-card-link-btn">
+                                <span>Read Full Article</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Exploration Ribbon Section -->
+        <section class="exploration-ribbon-section" id="explore-hub">
+            <div class="container">
+                <div class="ribbon-grid">
+                    <!-- Card 1: Home Page -->
+                    <a href="../index.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="home" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Welcome</span>
+                            <h3>Home Page</h3>
+                            <p>Return to main landing page for services, calculator, and booking.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Back to Home</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 2: Interactive Lab -->
+                    <a href="../interactive-lab.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="scan" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Interactive Tool</span>
+                            <h3>Interactive Lab</h3>
+                            <p>Simulate paint depth checks and scan defects in real-time.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Try Scanner</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 3: Showcase Gallery -->
+                    <a href="../inspection-gallery.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="image" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Visual Guide</span>
+                            <h3>Showcase Gallery</h3>
+                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>View Gallery</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 4: Sample PDI Report -->
+                    <a href="../sample-pdi-report.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="file-text" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Live Demo</span>
+                            <h3>Sample PDI Report</h3>
+                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Open Report</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    <a href="../my-story.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="user" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Our Story</span>
+                            <h3>Meet Bhavya</h3>
+                            <p>Learn about our founder's journey, mission, and quality promise.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Read Story</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Mirrors landing footer but with relative links) -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand-col">
+                <a href="../index.html" class="logo footer-logo">
+                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                </a>
+                <p class="footer-tagline">Buy Better, Drive Smarter</p>
+                <p class="footer-about">
+                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Ensuring trust and peace of mind on every drive.
+                </p>
+                <div class="social-icons-group">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#services">Our Services</a></li>
+                    <li><a href="../index.html#estimator">Pricing Calculator</a></li>
+                    <li><a href="../index.html#process">Inspection Process</a></li>
+                    <li><a href="../index.html#founder">About Me</a></li>
+                    <li><a href="../index.html#faq">FAQs</a></li>
+                    <li><a href="../index.html#contact">Book Now</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact-col">
+                <h4>Contact Details</h4>
+                <ul class="footer-contact-info">
+                    <li>
+                        <i data-lucide="phone" class="footer-icon font-orange"></i>
+                        <span>Call or WhatsApp: <a href="tel:+917498013236">+91 74980 13236</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail" class="footer-icon font-purple"></i>
+                        <span>Email: <a href="mailto:carobaar.drive@gmail.com">carobaar.drive@gmail.com</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="map-pin" class="footer-icon font-orange"></i>
+                        <span>Service Area: Anand, Vadodara, Khambhat and Ahmedabad</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom text-center">
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. | Unbiased Automotive Inspections & Consultations.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Sticky Bottom CTA Bar -->
+    <div class="mobile-sticky-cta-bar">
+        <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%27d%20like%20to%20book%20an%20inspection%20or%20consultation." target="_blank" rel="noopener" class="mobile-sticky-wa-btn" aria-label="Chat on WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wa-btn-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <a href="../index.html#contact" class="btn btn-primary mobile-sticky-cta-btn">Book Inspection</a>
+    </div>
+
+    <!-- Client-Side Search & Filter Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lucide Icons initialization
+            lucide.createIcons();
+
+            // Header scroll effects
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const menuIcon = mobileToggle.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    menuIcon.setAttribute('data-lucide', 'x');
+                } else {
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                }
+                lucide.createIcons();
+            });
+
+            // Close mobile menu when nav-link clicked
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const menuIcon = mobileToggle.querySelector('i');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+
+            // Client-side search and filters
+            const searchInput = document.getElementById('blog-search');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const blogGrid = document.getElementById('blog-grid');
+            const blogCards = document.querySelectorAll('.blog-card');
+            const visibleCountEl = document.getElementById('visible-count');
+            const noResultsEl = document.getElementById('no-results');
+            const resetBtn = document.getElementById('reset-filters');
+            
+            let activeCategory = 'all';
+            let searchQuery = '';
+
+            function filterArticles() {
+                let matchCount = 0;
+                
+                blogCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardKeywords = card.getAttribute('data-keywords').toLowerCase();
+                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                    const cardDesc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+                    
+                    const matchesSearch = searchQuery === '' || 
+                                          cardTitle.includes(searchQuery) || 
+                                          cardDesc.includes(searchQuery) || 
+                                          cardKeywords.includes(searchQuery);
+                    
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = 'flex';
+                        matchCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                visibleCountEl.textContent = matchCount;
+                
+                if (matchCount === 0) {
+                    noResultsEl.style.display = 'block';
+                    blogGrid.style.display = 'none';
+                } else {
+                    noResultsEl.style.display = 'none';
+                    blogGrid.style.display = 'grid';
+                }
+            }
+
+            // Search input listener
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                filterArticles();
+            });
+
+            // Category filter click listener
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeCategory = btn.getAttribute('data-category');
+                    filterArticles();
+                });
+            });
+
+            // Reset filters listener
+            resetBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                filterBtns.forEach(b => b.classList.remove('active'));
+                filterBtns[0].classList.add('active'); // Set to 'All'
+                activeCategory = 'all';
+                filterArticles();
+            });
+            
+            // Site-wide Mouse Glow
+            const mouseGlow = document.getElementById('mouse-glow');
+            if(mouseGlow) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseGlow.style.opacity = '1';
+                    mouseGlow.style.left = e.clientX + 'px';
+                    mouseGlow.style.top = e.clientY + 'px';
+                });
+                document.addEventListener('mouseleave', () => {
+                    mouseGlow.style.opacity = '0';
+                });
+            }
+        });
+    </script>
+<script src="blog.js"></script>
+</body>
+</html>

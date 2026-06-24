@@ -1,0 +1,98 @@
+[
+  {
+    "name": "wagonr_inspecting",
+    "prompt": "A female technician in a white polo shirt with the logo 'CARROBAAR Drive' inspecting the engine bay under the hood of a metallic Silky Silver Maruti Suzuki WagonR 2025 tall-boy hatchback, dealership stockyard background, no Honda logos, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_front_profile",
+    "prompt": "Direct front view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, with a front number plate showing the word 'WagonR', parked in a dealership yard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_front_34_lh",
+    "prompt": "Front 3/4 left-hand side view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, with a front number plate showing the word 'WagonR', steel rims with black wheel caps, parked in a clean dealership stockyard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_front_34_rh",
+    "prompt": "Front 3/4 right-hand side view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing steel rims with black wheel caps, with a front number plate showing the word 'WagonR', parked in a dealership stockyard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_side_profile",
+    "prompt": "Direct left-hand side profile view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing steel rims with black wheel caps, dealership stockyard background, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_side_rh",
+    "prompt": "Direct right-hand side profile view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing steel rims with black wheel caps, dealership stockyard background, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_rear_profile",
+    "prompt": "Direct rear view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing tailgate and a rear number plate with the word 'WagonR', parked in a dealership yard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_rear_34_lh",
+    "prompt": "Rear 3/4 left-hand side view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing tailgate and a rear number plate with the word 'WagonR', steel rims with black wheel caps, dealership stockyard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_rear_34_rh",
+    "prompt": "Rear 3/4 right-hand side view of a metallic Silky Silver Maruti Suzuki WagonR 2025 VXI, showing tailgate and a rear number plate with the word 'WagonR', steel rims with black wheel caps, dealership stockyard, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_front_seats",
+    "prompt": "Interior side view showing the front seats of a Maruti Suzuki WagonR 2025 VXI, dual-tone beige and dark grey fabric upholstery, clean cabin, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_rear_seats",
+    "prompt": "Interior view showing the rear bench seat of a Maruti Suzuki WagonR 2025 VXI, dual-tone beige and dark grey fabric upholstery, clean cabin, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_cluster",
+    "prompt": "Close-up photo of the instrument cluster of a Maruti Suzuki WagonR 2025 VXI, featuring a large circular speedometer dial with orange backlighting and a small digital LCD display on the bottom right, dashboard console, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_console",
+    "prompt": "Close-up photo of the centre console of a Maruti Suzuki WagonR 2025 VXI, showing the grey dashboard with a double-DIN music system, circular dial AC controls below, and the manual transmission gear stick, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_door_trim_fl",
+    "prompt": "Close-up of the front left inner door trim panel of a Maruti Suzuki WagonR 2025 VXI, showing the beige and grey plastic panel, door handle, and power window switch, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_door_trim_fr",
+    "prompt": "Close-up of the front right inner door trim panel of a Maruti Suzuki WagonR 2025 VXI, showing the beige and grey plastic panel, door handle, and power window switch, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_door_trim_rl",
+    "prompt": "Close-up of the rear left inner door trim panel of a Maruti Suzuki WagonR 2025 VXI, showing the beige and grey plastic panel, door handle, and power window switch, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_door_trim_rr",
+    "prompt": "Close-up of the rear right inner door trim panel of a Maruti Suzuki WagonR 2025 VXI, showing the beige and grey plastic panel, door handle, and power window switch, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_boot_space",
+    "prompt": "Open boot luggage area of a Maruti Suzuki WagonR 2025 VXI, showing the factory-fitted CNG cylinder securely mounted in a metal frame behind the rear seats. The cylinder is painted white with a prominent red band, clean boot carpet, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_roof",
+    "prompt": "Exterior top-down view of the clean metallic Silky Silver roof panel of a Maruti Suzuki WagonR 2025 hatchback, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_headliner",
+    "prompt": "Interior view looking up at the clean fabric headliner (inner roof lining) and cabin lights of a Maruti Suzuki WagonR 2025, realistic automotive interior photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_wheel_fl",
+    "prompt": "Close-up of a brand new, clean front left wheel of a Maruti Suzuki WagonR 2025 VXI, showing a clean tyre with deep tread and a steel rim with a black wheel cap, no mud or dirt, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_wheel_fr",
+    "prompt": "Close-up of a brand new, clean front right wheel of a Maruti Suzuki WagonR 2025 VXI, showing a clean tyre with deep tread and a steel rim with a black wheel cap, no mud or dirt, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_wheel_rl",
+    "prompt": "Close-up of a brand new, clean rear left wheel of a Maruti Suzuki WagonR 2025 VXI, showing a clean tyre with deep tread and a steel rim with a black wheel cap, no mud or dirt, realistic automotive photography, 8k resolution"
+  },
+  {
+    "name": "wagonr_wheel_rr",
+    "prompt": "Close-up of a brand new, clean rear right wheel of a Maruti Suzuki WagonR 2025 VXI, showing a clean tyre with deep tread and a steel rim with a black wheel cap, no mud or dirt, realistic automotive photography, 8k resolution"
+  }
+]

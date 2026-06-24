@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CARROBAAR_Drive Interactive Automotive Lab. Test paint coating depth and scan for hidden transit or yard storage defects on Maruti WagonR using our digital simulators.">
+    <title>Interactive Laboratory & Paint Thickness Scanner | CARROBAAR_Drive</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="interactive-lab-page">
+
+    <!-- Site-wide Cursor Follower Glow -->
+    <div class="mouse-glow" id="mouse-glow"></div>    <!-- Sticky Navigation Header -->
+    <header class="main-header" id="header">
+        <div class="container header-container">
+            <a href="./index.html" class="logo" id="nav-logo">
+                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./interactive-lab.html" class="nav-link active">Interactive Lab</a>
+                <a href="./inspection-gallery.html" class="nav-link">Showcase Gallery</a>
+                <a href="./sample-pdi-report.html" class="nav-link">Sample Report</a>
+                <a href="./my-story.html" class="nav-link">My Story</a>
+                <a href="./blog/index.html" class="nav-link">Blog</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="./index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
+                
+                <!-- 3-Dash Hamburger Menu Icon Button -->
+                <button class="header-nav-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Menu">
+                    <span class="three-dash-line"></span>
+                    <span class="three-dash-line"></span>
+                    <span class="three-dash-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main style="padding-top: 80px;">
+        
+        <!-- Lab Hero Introduction Section -->
+        <section class="hero-section" id="lab-intro" style="min-height: auto; padding: 4rem 0 2rem 0;">
+            <div class="hero-bg-glow glow-1"></div>
+            <div class="container text-center">
+                <div class="badge-tag" style="margin: 0 auto 1.5rem auto; width: fit-content;">
+                    <i data-lucide="beaker" class="badge-icon"></i>
+                    <span>Precision Diagnostics Lab</span>
+                </div>
+                <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 1rem;">
+                    Interactive <span class="gradient-text">Automotive Laboratory</span>
+                </h1>
+                <p class="hero-description" style="max-width: 800px; margin: 0 auto 2rem auto; font-size: 1.1rem; color: var(--clr-text-subdued);">
+                    Experience the precision tools we use during our professional Pre-Delivery Inspections (PDI). Test paint coatings for hidden repaints or click wireframe hotspots to diagnose common dealership yard defects.
+                </p>
+                <div class="hero-actions" style="justify-content: center; gap: 1.5rem;">
+                    <a href="#paint-scanner" class="btn btn-primary">Paint Thickness Scanner</a>
+                    <a href="#pdi-spotter" class="btn btn-secondary">Interactive PDI Spotter</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paint Coating Thickness Gauge Section -->
+        <section class="paint-scanner-section" id="paint-scanner">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-purple">Precision Simulation</span>
+                    <h2 class="section-title">Paint Thickness Scanner</h2>
+                    <div class="header-divider divider-purple"></div>
+                    <p class="section-desc">
+                        Drag the thickness sensor probe across the car profile panel. Watch the micron readout check factory paint limits vs. thick aftermarket body filler (repaints).
+                    </p>
+                </div>
+
+                <div class="scanner-grid-wrapper">
+                    <!-- Left Column: Interactive Slider Panel -->
+                    <div class="scanner-visual-card">
+                        <div class="scanner-track-container">
+                            <!-- Background Image of Car Side Panel -->
+                            <img src="assets/caya_xl6_paint_check.jpg" alt="Car side profile scan panel" class="scanner-bg-image">
+                            
+                            <div class="scanner-panel-overlay"></div>
+                            
+                            <!-- Red/Orange Laser scan line that moves with input -->
+                            <div class="scan-laser-line" id="paint-laser"></div>
+                            
+                            <!-- Draggable Sensor probe that moves with input -->
+                            <div class="scanner-probe" id="paint-probe">
+                                <div class="probe-inner">
+                                    <span class="probe-pulse"></span>
+                                    <i data-lucide="scan" class="probe-icon"></i>
+                                </div>
+                                <span class="probe-label">SENSOR</span>
+                            </div>
+
+                            <!-- Paint Scan Zone Indicators (Labels overlayed on track) -->
+                            <div class="scan-zones-overlay">
+                                <div class="scan-zone-label" style="left: 15%;">Front Fender</div>
+                                <div class="scan-zone-label warning-zone" style="left: 55%;">Driver Door (Repaint Zone)</div>
+                                <div class="scan-zone-label" style="left: 85%;">Rear Quarter</div>
+                            </div>
+                            
+                            <!-- Custom Range Input Slider overlaying the entire box -->
+                            <input type="range" min="0" max="100" value="15" class="paint-slider" id="paint-slider">
+                        </div>
+                        <div class="scanner-slider-help">
+                            <i data-lucide="move-horizontal" class="help-icon"></i>
+                            <span>Drag or slide anywhere across the panel to scan</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Gauge Readout & Diagnostic LCD -->
+                    <div class="scanner-gauge-card glass-panel">
+                        <!-- Digital LCD display representing a professional coating gauge screen -->
+                        <div class="lcd-screen-container" id="lcd-screen">
+                            <div class="lcd-glow-overlay"></div>
+                            <div class="lcd-header">
+                                <span class="lcd-brand">CARROBAAR COATING RADAR</span>
+                                <span class="lcd-battery"><i data-lucide="battery" class="lcd-battery-icon"></i> 100%</span>
+                            </div>
+                            
+                            <div class="lcd-main-readout">
+                                <span class="lcd-number" id="lcd-micron">98</span>
+                                <span class="lcd-unit">µm</span>
+                            </div>
+                            
+                            <div class="lcd-status-bar" id="lcd-status-box">
+                                <span class="lcd-status-badge green-badge" id="lcd-status-badge">FACTORY OK</span>
+                                <span class="lcd-message" id="lcd-status-msg">Paint within original factory limits</span>
+                            </div>
+                        </div>
+
+                        <!-- Gauge Warning details -->
+                        <div class="gauge-legend-container">
+                            <h4 class="legend-title">Reading Guide Reference</h4>
+                            
+                            <div class="legend-rows">
+                                <div class="legend-row">
+                                    <div class="legend-color-dot dot-thin"></div>
+                                    <div class="legend-info">
+                                        <strong>&lt; 80 µm (Thin Paint)</strong>
+                                        <p>Excessive machine polishing or poor factory coating. Susceptible to damage.</p>
+                                    </div>
+                                </div>
+                                <div class="legend-row active-row" id="legend-factory">
+                                    <div class="legend-color-dot dot-factory"></div>
+                                    <div class="legend-info">
+                                        <strong>80 – 140 µm (Factory Standard)</strong>
+                                        <p>Original OEM specification. Uniform, high-quality protective layer.</p>
+                                    </div>
+                                </div>
+                                <div class="legend-row" id="legend-repaint">
+                                    <div class="legend-color-dot dot-repaint"></div>
+                                    <div class="legend-info">
+                                        <strong>&gt; 180 µm (Repaint / Body Filler)</strong>
+                                        <p>Indicates panel repair, filler application, and subsequent repaint from dealer/yard damage.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Diagnostic Alert Callout Box -->
+                        <div class="scan-alert-callout warning-state" id="scan-alert-box">
+                            <div class="callout-icon-box">
+                                <i data-lucide="info" class="callout-icon" id="callout-alert-icon"></i>
+                            </div>
+                            <div class="callout-text">
+                                <h5 id="callout-alert-title">Factory Coating</h5>
+                                <p id="callout-alert-desc">Scan coordinates indicate uniform factory finish. No signs of panel removal or cosmetic respraying.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive PDI Spotter Section -->
+        <section class="pdi-spotter-section" id="pdi-spotter" style="border-top: 1px solid rgba(168, 85, 247, 0.1);">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-orange">Interactive Laboratory</span>
+                    <h2 class="section-title">Interactive PDI Spotter</h2>
+                    <div class="header-divider divider-orange"></div>
+                    <p class="section-desc">
+                        Explore typical pre-delivery defect hotspots. Click on the glowing sensor nodes on the car wireframe to inspect real defects captured during our PDI checkups.
+                    </p>
+                </div>
+
+                <div class="spotter-grid-wrapper">
+                    <!-- Left: Interactive Wireframe Car SVG -->
+                    <div class="spotter-visual-card">
+                        <div class="wireframe-container">
+                            <div class="grid-overlay"></div>
+                            <!-- SVG Top-Down Car Wireframe -->
+                            <svg class="car-wireframe" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="wireframeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.2"/>
+                                        <stop offset="50%" stop-color="#a855f7" stop-opacity="0.4"/>
+                                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.2"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Outer Boundary Grid Lines -->
+                                <line x1="100" y1="50" x2="700" y2="50" stroke="rgba(168, 85, 247, 0.15)" stroke-dasharray="4,4"/>
+                                <line x1="100" y1="350" x2="700" y2="350" stroke="rgba(168, 85, 247, 0.15)" stroke-dasharray="4,4"/>
+                                <line x1="100" y1="200" x2="700" y2="200" stroke="rgba(255, 107, 0, 0.1)" stroke-dasharray="2,2"/>
+                                
+                                <!-- Car Body Outline -->
+                                <path d="M 120 160 
+                                         C 120 130, 140 100, 190 90 
+                                         C 240 80, 480 80, 580 90 
+                                         C 650 97, 680 120, 690 150 
+                                         C 700 180, 700 220, 690 250 
+                                         C 680 280, 650 303, 580 310 
+                                         C 480 320, 240 320, 190 310 
+                                         C 140 300, 120 270, 120 240 Z" 
+                                      fill="url(#wireframeGrad)" stroke="rgba(168, 85, 247, 0.6)" stroke-width="2"/>
+                                      
+                                <!-- Windshield & Windows -->
+                                <path d="M 230 120 C 240 110, 280 110, 290 120 L 290 280 C 280 290, 240 290, 230 280 Z" fill="none" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1.5"/>
+                                <path d="M 310 110 L 440 110 C 460 110, 470 120, 480 130 L 480 270 C 470 280, 460 290, 440 290 L 310 290 Z" fill="none" stroke="rgba(168, 85, 247, 0.3)" stroke-width="1.5"/>
+                                <path d="M 500 125 C 510 120, 560 120, 580 125 L 595 150 L 595 250 L 580 275 C 560 280, 510 280, 500 275 Z" fill="none" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1.5"/>
+                                
+                                <!-- Headlights & Grille -->
+                                <path d="M 120 130 C 130 135, 140 135, 145 130" fill="none" stroke="rgba(255, 107, 0, 0.5)" stroke-width="2"/>
+                                <path d="M 120 270 C 130 265, 140 265, 145 270" fill="none" stroke="rgba(255, 107, 0, 0.5)" stroke-width="2"/>
+                                <rect x="115" y="165" width="8" height="70" rx="3" fill="none" stroke="rgba(168, 85, 247, 0.5)" stroke-width="1.5"/>
+                                
+                                <!-- Wheels -->
+                                <rect x="180" y="65" width="65" height="25" rx="5" fill="#0c0a1f" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1"/>
+                                <rect x="180" y="310" width="65" height="25" rx="5" fill="#0c0a1f" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1"/>
+                                <rect x="520" y="65" width="65" height="25" rx="5" fill="#0c0a1f" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1"/>
+                                <rect x="520" y="310" width="65" height="25" rx="5" fill="#0c0a1f" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1"/>
+                            </svg>
+
+                            <!-- Hotspots Overlay (Absolute positions) -->
+                            <!-- Hotspot 1: Front Bumper -->
+                            <div class="spotter-hotspot active" style="left: 17%; top: 32.5%;"
+                                 data-area="Front Bumper"
+                                 data-issue="Transit Scraping & Panel Misalignment"
+                                 data-tool="Under-car Scanners & Digital Callipers"
+                                 data-cost="₹6,000 – ₹18,000"
+                                 data-img="assets/defect_transit_damage.png"
+                                 data-desc="Deep scraping and loose bumper clips caused during transporter loading. Left unresolved, this leads to paint peeling and high-speed bumper vibration.">
+                                <span class="hotspot-core"></span>
+                                <span class="hotspot-pulse"></span>
+                                <span class="hotspot-number">1</span>
+                            </div>
+
+                            <!-- Hotspot 2: Rear Left Door/Panel -->
+                            <div class="spotter-hotspot" style="left: 68%; top: 22%;"
+                                 data-area="Left Quarter Panel"
+                                 data-issue="Non-Factory Repaint & High Micron Readings"
+                                 data-tool="Paint Coating Thickness Gauge"
+                                 data-cost="₹8,000 – ₹25,000 (Depreciation loss: ₹50k+)"
+                                 data-img="assets/blog_paint_depth_blue.png"
+                                 data-desc="Re-painted panel detected with thickness peaking at 285 µm. Points to transit damage repair at the dealership prior to delivery. Significantly hurts resale value.">
+                                <span class="hotspot-core"></span>
+                                <span class="hotspot-pulse"></span>
+                                <span class="hotspot-number">2</span>
+                            </div>
+
+                            <!-- Hotspot 3: Engine Bay -->
+                            <div class="spotter-hotspot" style="left: 28%; top: 50%;"
+                                 data-area="Engine Bay"
+                                 data-issue="Rodent Chewed Engine Insulator"
+                                 data-tool="Under-hood High-Intensity LED Scan"
+                                 data-cost="₹12,000 – ₹45,000"
+                                 data-img="assets/blog_rodent_damage.png"
+                                 data-desc="Rodent damage identified on engine firewall insulator and main wiring sheath during yard storage. Can trigger short circuits or engine fires if not replaced.">
+                                <span class="hotspot-core"></span>
+                                <span class="hotspot-pulse"></span>
+                                <span class="hotspot-number">3</span>
+                            </div>
+
+                            <!-- Hotspot 4: Dashboard/Console -->
+                            <div class="spotter-hotspot" style="left: 45%; top: 40%;"
+                                 data-area="Dashboard Electronics"
+                                 data-issue="Pinched Electrical Wiring & Fault Codes"
+                                 data-tool="OBD2 Diagnostic System Scanner"
+                                 data-cost="₹15,000 – ₹55,000"
+                                 data-img="assets/defect_electrical_fault.png"
+                                 data-desc="OBD diagnostic system flags sensor disconnects due to a pinched harness near the fuse box. Causes intermittent infotainment blackouts and steering fault alerts.">
+                                <span class="hotspot-core"></span>
+                                <span class="hotspot-pulse"></span>
+                                <span class="hotspot-number">4</span>
+                            </div>
+
+                            <!-- Hotspot 5: Underbody -->
+                            <div class="spotter-hotspot" style="left: 55%; top: 76%;"
+                                 data-area="Underbody Chassis"
+                                 data-issue="Loose Protection Shields & Early Rust"
+                                 data-tool="Underbody Mechanical Lift & Inspection"
+                                 data-cost="₹5,000 – ₹15,000"
+                                 data-img="assets/blog_underbody_rust.png"
+                                 data-desc="Chassis frame showing early surface rust and missing mounting clips on the engine splash guard. Water splash during transit speeds up metal corrosion.">
+                                <span class="hotspot-core"></span>
+                                <span class="hotspot-pulse"></span>
+                                <span class="hotspot-number">5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Glassmorphic Dashboard Details -->
+                    <div class="spotter-dashboard-card glass-panel">
+                        <div class="dashboard-status-header">
+                            <span class="status-indicator-dot pulsing-green"></span>
+                            <span class="status-indicator-text">DIAGNOSTIC RADAR ACTIVE</span>
+                        </div>
+                        
+                        <div class="dashboard-details-body">
+                            <div class="info-group">
+                                <span class="info-label">Inspection Zone</span>
+                                <h3 id="spotter-area" class="info-value text-glow-purple">Front Bumper</h3>
+                            </div>
+                            
+                            <div class="info-group">
+                                <span class="info-label">Defect Classification</span>
+                                <p id="spotter-issue" class="info-value-text font-orange">Transit Scraping & Panel Misalignment</p>
+                            </div>
+                            
+                            <div class="info-group">
+                                <span class="info-label">Diagnostic Tool Used</span>
+                                <span id="spotter-tool" class="info-tag-outline">Under-car Scanners & Digital Callipers</span>
+                            </div>
+
+                            <div class="info-group">
+                                <span class="info-label">Repair Cost Out-of-Pocket</span>
+                                <div id="spotter-cost" class="cost-badge">₹6,000 – ₹18,000</div>
+                            </div>
+                            
+                            <div class="info-group desc-group">
+                                <span class="info-label">Diagnostic Summary</span>
+                                <p id="spotter-desc" class="info-description">Deep scraping and loose bumper clips caused during transporter loading. Left unresolved, this leads to paint peeling and high-speed bumper vibration.</p>
+                            </div>
+                        </div>
+
+                        <!-- Defect Image Preview Card -->
+                        <div class="dashboard-visual-preview">
+                            <div class="preview-overlay">
+                                <span class="preview-tag"><i data-lucide="camera" class="preview-icon"></i> ACTUAL PHOTO</span>
+                            </div>
+                            <img id="spotter-img" src="assets/defect_transit_damage.png" alt="Defect Visual Check" class="preview-photo">
+                            <div class="radar-sweep-line"></div>
+                        </div>
+
+                        <div class="dashboard-action">
+                            <a href="./index.html#contact" class="btn btn-primary btn-glow-orange w-full text-center">
+                                <span>Book Professional PDI</span>
+                                <i data-lucide="arrow-right" class="btn-arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Page Exploration Ribbon Section -->
+        <section class="exploration-ribbon-section" id="explore-hub">
+            <div class="container">
+                <div class="ribbon-grid">
+                    <!-- Card 1: Home Page -->
+                    <a href="./index.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="home" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Welcome</span>
+                            <h3>Home Page</h3>
+                            <p>Return to main landing page for services, calculator, and booking.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Back to Home</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 2: Inspection Gallery -->
+                    <a href="inspection-gallery.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="image" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Visual Guide</span>
+                            <h3>Showcase Gallery</h3>
+                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>View Gallery</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 3: Sample PDI Report -->
+                    <a href="sample-pdi-report.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="file-text" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Live Demo</span>
+                            <h3>Sample PDI Report</h3>
+                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Open Report</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                    
+                    <!-- Card 4: Car Buyer's Blog -->
+                    <a href="blog/index.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="book-open" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Knowledge Hub</span>
+                            <h3>Car Buyer's Blog</h3>
+                            <p>Empower yourself with RTO guides, buying advice, and checklists.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Read Blog</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    <a href="my-story.html" class="ribbon-card purple-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="user" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-purple">Our Story</span>
+                            <h3>Meet Bhavya</h3>
+                            <p>Learn about our founder's journey, mission, and quality promise.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Read Story</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand-col">
+                <a href="./index.html" class="logo">
+                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                </a>
+                <p class="footer-pitch">
+                    Unbiased, commission-free car inspections helping you buy better and drive smarter in Gujarat.
+                </p>
+                <div class="social-links-footer">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-link-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-link-icon" aria-label="YouTube">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4>Quick Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./index.html#showroom-reality">Showroom Reality</a></li>
+                    <li><a href="./index.html#estimator">Calculator</a></li>
+                    <li><a href="./index.html#process">Our Process</a></li>
+                    <li><a href="./index.html#faq">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact-col">
+                <h4>Contact Details</h4>
+                <ul class="footer-contact-info">
+                    <li>
+                        <i data-lucide="phone" class="footer-icon font-orange"></i>
+                        <span><a href="tel:+917498013236">+91 74980 13236</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail" class="footer-icon font-purple"></i>
+                        <span><a href="mailto:carobaar.drive@gmail.com">carobaar.drive@gmail.com</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="map-pin" class="footer-icon font-orange"></i>
+                        <span>Serving in Anand, Vadodara, Khambhat and Ahmedabad</span>
+                    </li>
+                </ul>
+                <div class="whatsapp-btn-container">
+                    <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%20want%20to%20book%20an%20inspection." target="_blank" rel="noopener" class="btn btn-whatsapp">
+                        <i data-lucide="phone-call" class="wa-btn-icon"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Serving in Anand, Vadodara, Khambhat and Ahmedabad.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Sticky CTA Bar -->
+    <div class="mobile-sticky-cta-bar">
+        <a href="./index.html#contact" class="btn btn-primary mobile-sticky-cta-btn">Book Inspection</a>
+        <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%20want%20to%20book%20an%20inspection." target="_blank" rel="noopener" class="mobile-sticky-wa-btn" aria-label="WhatsApp Chat">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        </a>
+    </div>
+
+    <!-- Floating WhatsApp CTA button -->
+    <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%20want%20to%20book%20an%20inspection." target="_blank" rel="noopener" class="whatsapp-floating-btn" id="whatsapp-floating-btn" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle wa-floating-icon"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        <span class="wa-floating-label">Need Help Choosing A Car? Chat Now</span>
+    </a>
+
+    <!-- Floating Quick Navigation Trigger (Always accessible three-dash menu) -->
+    <button class="quick-nav-trigger" id="quick-nav-trigger" aria-label="Open Navigation Menu">
+        <span class="three-dash-line"></span>
+        <span class="three-dash-line"></span>
+        <span class="three-dash-line"></span>
+    </button>
+
+    <!-- Sleek Glassmorphism Quick Navigation Drawer -->
+    <div class="quick-nav-overlay" id="quick-nav-overlay">
+        <div class="quick-nav-drawer">
+            <button class="quick-nav-close" id="quick-nav-close" aria-label="Close Menu">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="quick-nav-header">
+                <a href="./index.html" class="logo">
+                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                </a>
+                <p class="quick-nav-subtitle">Quick Navigator</p>
+            </div>
+            <nav class="quick-nav-links">
+                <div class="nav-group-title">On This Page</div>
+                <a href="#lab-intro" class="quick-nav-item"><i data-lucide="home"></i> Lab Introduction</a>
+                <a href="#paint-scanner" class="quick-nav-item"><i data-lucide="activity"></i> Paint Thickness Scanner</a>
+                <a href="#pdi-spotter" class="quick-nav-item"><i data-lucide="scan"></i> Interactive PDI Spotter</a>
+                
+                <div class="nav-group-title">Explore More (New Tab)</div>
+                <a href="./index.html" target="_blank" class="quick-nav-item"><i data-lucide="home"></i> Home Page <i data-lucide="external-link" class="ext-icon"></i></a>
+                <a href="./inspection-gallery.html" target="_blank" class="quick-nav-item"><i data-lucide="image"></i> Showcase Gallery <i data-lucide="external-link" class="ext-icon"></i></a>
+                <a href="./my-story.html" target="_blank" class="quick-nav-item"><i data-lucide="user"></i> Meet Bhavya (My Story) <i data-lucide="external-link" class="ext-icon"></i></a>
+                <a href="./blog/index.html" target="_blank" class="quick-nav-item"><i data-lucide="book-open"></i> Car Buyer's Blog <i data-lucide="external-link" class="ext-icon"></i></a>
+                <a href="./sample-pdi-report.html" target="_blank" class="quick-nav-item"><i data-lucide="file-text"></i> WagonR Sample Report <i data-lucide="external-link" class="ext-icon"></i></a>
+                
+                <a href="./index.html#contact" class="quick-nav-item btn-quick-nav-cta"><i data-lucide="calendar"></i> Book Inspection</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- JS Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

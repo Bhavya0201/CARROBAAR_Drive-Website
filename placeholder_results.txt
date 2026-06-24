@@ -1,0 +1,124 @@
+Scanning 10 blog files for image placeholders...
+
+=== File: 10-real-problems-found-in-pdi.html ===
+Placeholder #1:
+  Title: Figure 2: Digital Paint Depth Meter Showing Repaint Micron Levels
+  Prompt: A close-up photograph of a digital paint depth meter held against the glossy metallic blue paint of a car door. The digital screen displays "285 µm" (microns). The hand holding the meter is wearing a black nitrile inspection glove. The paint surface shows soft showroom light reflections. Sharp details, highly realistic.
+
+Placeholder #2:
+  Title: Figure 3: Rodent Damage on Main Engine Wiring Harness
+  Prompt: A macro photograph of an automotive wiring harness inside an engine bay. Several wires have their yellow and black insulation chewed away, showing exposed copper strands. Tiny bite marks are visible on the surrounding plastic wraps. The engine bay is dusty. Natural light, high detail, macro lens.
+
+=== File: 15-things-to-check-new-car-pdi.html ===
+Placeholder #1:
+  Title: Infographic 1: VIN Code Anatomy &amp; Decoding Map
+  Prompt: Macro photo of a metal chassis VIN plate stamped with a 17-character alphanumeric string, with a clean digital graphics overlay highlighting the 10th and 12th characters in orange, indicating the year 2026 and month of May. High-contrast detail on a textured metal surface under passenger seat carpet.
+
+Placeholder #2:
+  Title: Infographic 2: Paint depth scanning points and Micron zones
+  Prompt: Photorealistic shot of a digital paint thickness gauge held against the rear panel of a vehicle. The digital screen displays "245 μm" in red, indicating a repaint. Symmetrical soft lighting, close-up details showing metallic flake paint textures.
+
+Placeholder #3:
+  Title: Infographic 3: DOT Tyre Code &amp; Glass Stamp Decoding
+  Prompt: Close-up photo of a tyre sidewall showing the oval stamp with embossed numbers "2026", highlighted with soft neon lighting. High-detail rubber texture, dirt details in the tread blocks.
+
+=== File: car-resale-value-factors.html ===
+Placeholder #1:
+  Title: Infographic: The Resale Depreciation Curve by Segment
+  Prompt: A high-quality, professional corporate line graph showing the depreciation curves of four vehicle segments: EVs, Luxury Sedans, Compact Hatchbacks, and Body-on-Frame SUVs over 1, 3, 5, and 7 years. The y-axis shows "Residual Value (%)" from 100% down to 10%, and the x-axis shows "Years of Ownership". The line for Body-on-Frame SUVs is colored green and stays highest, while the EV line is colored red and drops sharply. Modern corporate styling, dark theme, clean typography.
+
+Placeholder #2:
+  Title: Infographic: The Spare Parts Sourcing Lifecycle
+  Prompt: A professional flowchart diagram detailing the supply chain of automotive spare parts in India. It shows two pathways: Pathway A (Open Distribution) with open over-the-counter sales leading to local garage mechanics and high resale value. Pathway B (Restricted/Exited Brands) showing restricted dealer-only parts leading to long garage repair delays and low resale value. Clean vector infographic style, high-contrast colors.
+
+Placeholder #3:
+  Title: Infographic: Transmission Types and Resale Market Performance
+  Prompt: A comparative graphic grid with four panels representing four transmission types: Torque Converter, CVT, DSG/DCT, and AMT. Each panel includes a mechanical icon of a gear system and two meters: "Repair Liability" (high/medium/low) and "Resale Demand". DSG/DCT shows high repair liability and medium resale demand. Torque Converter shows low repair liability and high resale demand. Modern clean flat design, purple and orange accent colors.
+
+=== File: check-used-car-accident-history.html ===
+Placeholder #1:
+  Title: Infographic 1: Paint Depth Gauge Readings Across Repair Types
+  Prompt: Close-up of a hand holding a digital paint depth meter against a metallic dark blue car door panel. The gauge screen displays "480 μm" with a red warning light. Visible orange peel paint texture in the background. High detail, commercial automotive quality.
+
+Placeholder #2:
+  Title: Infographic 2: Decoding Glass Manufacturing Date Stamps
+  Prompt: Close-up macro photo of a glass manufacturer stamp on a car window. The stamp displays a brand logo "AIS" with a single-digit "20" and 4 dots preceding it, indicating the manufacture year. Sharp focus, clear glass texture with subtle reflection of the sky.
+
+Placeholder #3:
+  Title: Infographic 3: Factory Spot Welds vs. Aftermarket MIG Welds
+  Prompt: High-contrast close-up showing the metallic joint of a car pillar. On the left side are neat, robotically stamped circular indentations representing factory spot welds. On the right side, show messy, uneven hand MIG weld lines and drippy seam sealer. Text labels "Factory Robotic Spot Welds" and "Aftermarket MIG Repair".
+
+=== File: dealer-trust-independent-pdi.html ===
+Placeholder #1:
+  Title: Infographic 1: The Timeline of Leverage: Pre-Registration vs. Post-Registration
+  Prompt: Infographic style vector diagram with a high-contrast timeline. On the left: 'Unregistered Vehicle (100% Buyer Leverage)' in orange, showing options to reject, swap, or discount. On the right: 'RTO Registered (0% Leverage)' in purple, showing restricted options limited to warranty repairs and workshop visits. Clean fonts, professional layout.
+
+Placeholder #2:
+  Title: Infographic 2: Pinched Console Wiring Harness Anatomy
+  Prompt: Technical close-up illustration of a car's center console dashboard structure from the side. A multi-wire harness wrapped in black tape is pinched tightly under a silver metal bracket. One wire is frayed, exposing copper strands touching the metal, with a small spark graphic. High detail, labeled components.
+
+Placeholder #3:
+  Title: Infographic 3: Sample CARROBAAR_Drive PDI Report Dashboard
+  Prompt: Modern UI design dashboard on a tablet screen. The title reads 'CARROBAAR_Drive Inspection Report'. Sections show a vehicle silhouette with green micron numbers (110, 115, 112) and one orange section highlighting a door at (245 microns) with 'Local Repaint Detected' label. Diagnostics status reads 'ECU DTCs: None'. Clean, futuristic look.
+
+=== File: ev-vs-petrol-vs-diesel-hybrid.html ===
+Placeholder #1:
+  Title: Infographic 1: The Powertrain Financial Break-Even Curve
+  Prompt: A clean, high-contrast digital graph showing four intersecting curves colored in orange (Petrol), blue (Diesel), purple (Strong Hybrid), and green (EV). The X-axis represents 'Annual Mileage (0 to 40,000 km)' and the Y-axis represents 'Total 5-Year Cost'. Symmetrical layout, neon glowing grid lines on a dark background.
+
+Placeholder #2:
+  Title: Infographic 2: Diesel DPF Soot Loading and Regeneration Failure
+  Prompt: Technical schematic diagram of a modern diesel vehicle exhaust system. Shows the Diesel Oxidation Catalyst and the Diesel Particulate Filter clogged with dark soot particles. Red arrows indicate high-heat active regeneration flow, with an insert diagram showing fuel leaking past piston rings into the oil pan. Professional engineering style, clean lines.
+
+=== File: hidden-costs-of-car-ownership.html ===
+Placeholder #1:
+  Title: Infographic: The Anatomy of a Modern Car Insurance Policy
+  Prompt: A clean, modern infographic layout comparing "Standard Insurance" vs "Zero-Depreciation + Add-ons". On the left, a standard policy shows 50% red cross marks over plastic, rubber, and engine components. On the right, a premium policy shows green checkmarks over the entire vehicle body, engine cover, and key fob. Sleek vector style with high contrast, purple and orange accents.
+
+Placeholder #2:
+  Title: Infographic: ARAI Claims vs. Real-World Fuel Economy
+  Prompt: A side-by-side comparison diagram. On the left, a clean lab dynamometer testing setup with a glowing certificate showing "20.1 km/l". On the right, the same car stuck in a chaotic Indian city traffic jam, surrounded by auto-rickshaws and bikes under a hot sun, with a fuel dispenser graphic showing "11.2 km/l". Clear vector graphics, labels, professional colors.
+
+Placeholder #3:
+  Title: Infographic: The CARROBAAR_Drive Quality Shield
+  Prompt: A professional technician in a clean black polo shirt with a CARROBAAR_Drive logo, standing next to a car engine bay, holding a digital tablet displaying checkmarks. Next to him is a shiny car body showing no paint defects. Behind him is a modern, premium car showroom setup. Clean focus, professional automotive photography style.
+
+=== File: new-car-vs-used-car-financials.html ===
+Placeholder #1:
+  Title: Infographic 1: The New vs. Used Depreciation Curve Comparison
+  Prompt: A clean line graph comparing two depreciation curves over 8 years. A red line representing a new car starts high and plunges steeply down. A blue line representing a used car starts at Year 3 and slopes downward at a much flatter, gentler angle. Grid lines, clear axis labels reading "Value (INR)" and "Ownership Years 1-8". Minimalist tech aesthetic.
+
+Placeholder #2:
+  Title: Infographic 2: Motor Insurance Premium Delta over 5 Years
+  Prompt: A comparative bar chart showing 5 pairs of columns (Year 1 to Year 5). The red columns (New Car Insurance) start at 45k and slowly decline. The purple columns (Used Car Insurance) start at 24k and decline. A clear arrow between them labeled "5-Year Insurance Savings: INR 58,000". Dark clean UI style.
+
+Placeholder #3:
+  Title: Infographic 3: The 150+ Point Vehicle Inspection Protocol
+  Prompt: Close-up of a digital paint depth meter held against a dark purple car fender, displaying "280 microns" in glowing text. The hand holding the meter is wearing a black mechanic's glove. Clean shot with shallow depth of field.
+
+=== File: pdi-necessary-before-delivery.html ===
+Placeholder #1:
+  Title: Infographic: The Storage Depot Degradation Loop
+  Prompt: A photo-realistic, wide-angle shot of a dusty, unpaved dealer stockyard on the outskirts of an Indian city. Hundreds of brand-new SUV vehicles are parked bumper-to-bumper under a blazing, high-noon summer sun, with visible dust devils and heat shimmer rising off the metal hoods. Close-up details reveal dry dirt patches on tires, water spots on windows, and dry conditions. Cinematic lighting, industrial depot setting.
+
+Placeholder #2:
+  Title: Infographic: Deciphering Paint Depth Gauge Readings
+  Prompt: A extreme close-up photo-realistic shot of a technician\'s hand holding a high-precision digital paint depth meter against the passenger-side metal door of a new, metallic blue sedan. The digital screen of the meter shows a reading of "285 µm" (microns), with the background showing the vehicle\'s paint reflecting showroom lights. The contrast between a factory fender reading 95 µm and this repainted door is clear. Photo-realistic, crisp focus, macro lens.
+
+Placeholder #3:
+  Title: Infographic: The CARROBAAR_Drive Inspection Protocol
+  Prompt: A high-tech digital tablet interface laying flat on the hood of a car. The screen displays a CARROBAAR_Drive vehicle inspection report with color-coded green, yellow, and red status indicators for body panels, battery health, and OBD2 scans. Modern UI design, sleek dark theme, photo-realistic, professional setting.
+
+=== File: used-car-buying-checklist-mistakes.html ===
+Placeholder #1:
+  Title: Infographic 1: Piston Ring Failure &amp; Crankcase Pressurization
+  Prompt: 2D technical illustration of an internal combustion engine cylinder. Detail a worn piston ring set allowing hot orange combustion gas to bypass the piston down into the blue oil oil sump. Sharp labels indicating "Worn Piston Rings", "Combustion Gas Escape", and "Crankcase Pressurization". High contrast dark background.
+
+Placeholder #2:
+  Title: Infographic 2: Redundant Module Odometer Comparison Map
+  Prompt: Close-up on a modern automotive diagnostic screen showing a vehicle scan report. Bold text readouts display "Instrument Cluster: 42,300 km" alongside "Transmission Control Unit: 118,700 km" highlighted with a bright red warning frame. Sleek UI design.
+
+Placeholder #3:
+  Title: Infographic 3: Underbody Rust &amp; Scrape Zones
+  Prompt: Close-up photo under a vehicle chassis looking at the front suspension frame. Showing heavy flaking orange rust eating through the black painted structural rails. Visible dirt, road grime, and wet hydraulic line connections. Realistic textures.
+

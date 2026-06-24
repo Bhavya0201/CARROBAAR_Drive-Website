@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ultimate Used Car Inspection Checklist. Learn how to detect odometer rollback via ECU/TCU scan, diagnose engine blow-by, inspect chassis welds, check for head gasket failure, and calculate repair costs. Written by Bhavya Rambhia.">
+    <title>Used Car Buying Checklist: How To Avoid Expensive Mistakes | CARROBAAR_Drive</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
+    
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="blog-article-page">
+
+    <!-- Mouse Glow effect -->
+    <div class="mouse-glow" id="mouse-glow"></div>
+
+    <!-- Sticky Navigation Header -->
+    <header class="main-header" id="header">
+        <div class="container header-container">
+            <a href="../index.html" class="logo" id="nav-logo">
+                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#showroom-reality" class="nav-link">Showroom Reality</a>
+                <a href="../index.html#estimator" class="nav-link">Calculator</a>
+                <a href="../index.html#services" class="nav-link">Services</a>
+                <a href="../index.html#founder" class="nav-link">About Me</a>
+                <a href="index.html" class="nav-link active">Blog</a>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="social-icons-group">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                </div>
+                
+                <a href="../index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
+                
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-page">
+        <!-- Article Hero Section -->
+        <section class="article-hero">
+            <div class="container">
+                <div class="article-breadcrumbs">
+                    <a href="../index.html">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="index.html">Blog Hub</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="current-page">Used Car Buying Checklist</span>
+                </div>
+                
+                <div class="article-header">
+                    <span class="blog-card-category-badge orange">Used Car Guides</span>
+                    <h1 class="article-title">Used Car Buying Checklist: How to Conduct Technical Diagnostics and Avoid Costly Dealer Traps</h1>
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <img src="../assets/founder_bhavya.jpg" alt="Bhavya Rambhia" class="author-img">
+                            <span>By <strong>Bhavya Rambhia</strong></span>
+                        </div>
+                        <div class="article-meta-item">
+                            <i data-lucide="calendar"></i>
+                            <span>June 2026</span>
+                        </div>
+                        <div class="article-meta-item">
+                            <i data-lucide="clock"></i>
+                            <span>25 Min Read</span>
+                        </div>
+                        <div class="article-meta-item">
+                            <i data-lucide="tag"></i>
+                            <span>Used Car Inspection Checklist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Image -->
+        <section class="article-featured-visual">
+            <div class="container">
+                <div class="article-hero-img-wrapper">
+                    <img src="../assets/caya_buying_assistance.jpg" alt="A professional mechanical engineer performing a pre-purchase diagnostic scan on a used vehicle, evaluating the engine bay components and chassis welds." />
+                </div>
+                <p class="visual-descriptor-caption">
+                    Figure 1: Evaluating a pre-owned vehicle requires a systematic technical inspection. Clean cosmetic detail can easily mask hidden structural, mechanical, and diagnostic issues.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="article-layout-section">
+            <div class="container article-layout">
+                
+                <!-- Sidebar Navigation (TOC) -->
+                <aside class="article-sidebar">
+                    <div class="article-toc-box">
+                        <h4 class="toc-title">
+                            <i data-lucide="list"></i>
+                            <span>On This Page</span>
+                        </h4>
+                        <nav>
+                            <ul class="toc-list" id="toc-list">
+                                <li><a href="#market-risks" class="toc-link">1. The Used Car Minefield</a></li>
+                                <li><a href="#paperwork-legal" class="toc-link">2. Paperwork &amp; Due Diligence</a></li>
+                                <li><a href="#engine-blowby" class="toc-link">3. Engine Blow-By Check</a></li>
+                                <li><a href="#odometer-rollback" class="toc-link">4. Odometer Rollback Detection</a></li>
+                                <li><a href="#head-gasket" class="toc-link">5. Head Gasket &amp; Cooling</a></li>
+                                <li><a href="#chassis-welds" class="toc-link">6. Chassis &amp; Apron Welds</a></li>
+                                <li><a href="#suspension-steering" class="toc-link">7. Suspension &amp; Steering</a></li>
+                                <li><a href="#underbody-rust" class="toc-link">8. Underbody &amp; Rust Check</a></li>
+                                <li><a href="#rollback-case-study" class="toc-link">9. Case Study: Odometer Fraud</a></li>
+                                <li><a href="#interactive-checklist" class="toc-link">10. Pre-Purchase Checklist</a></li>
+                                <li><a href="#repair-costs" class="toc-link">11. Estimated Repair Costs</a></li>
+                                <li><a href="#faq" class="toc-link">12. FAQ Accordion</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+
+                <!-- Article Content Body -->
+                <div class="article-content">
+                    
+                    <h2 id="market-risks">1. The Used Car Minefield: Why Aesthetic Shine Hides Mechanical Crises</h2>
+                    <p>
+                        The used car market is a minefield of asymmetric information. Sellers, particularly commercial used car dealers, possess complete knowledge of a vehicle's faults, history, and failures, while you, the buyer, are left to make a decision based on a clean exterior polish and a short drive around the block. In my career as an Automotive Quality and Customer Experience Professional, I have inspected thousands of vehicles, and the story remains consistent: <strong>aesthetic condition rarely reflects mechanical reality</strong>.
+                    </p>
+                    <p>
+                        Unscrupulous sellers use detailing methods to mask severe mechanical wear. Steam cleaning the engine bay removes evidence of chronic oil or coolant leaks; heavy silicone sprays make old hoses look new; and thick chassis undercoating masks deep corrosion or weld repairs. A vehicle that looks like it just rolled off the showroom floor may actually have a worn engine block, a rolled-back odometer, a bent chassis, or a failing head gasket. 
+                    </p>
+                    <p>
+                        Without a structured <strong>Used Car Inspection Checklist</strong> and technical diagnostic equipment, buying a used car is a gamble. If you purchase a car and discover a major defect later, you will have to bear the cost of repairs. At <strong>CARROBAAR_Drive</strong>, we operate with a strict zero-conflict-of-interest policy, providing objective technical audits so you can buy with confidence.
+                    </p>
+                    
+                    <div class="callout-box orange">
+                        <div class="callout-title">
+                            <i data-lucide="alert-triangle"></i>
+                            <span>The Commercial Detailing Illusion</span>
+                        </div>
+                        <p>
+                            Dealers routinely apply heavy petroleum-based dressers to the engine compartment and tire treads. While this creates a high-gloss look that mimics a new car, it serves a dual purpose: the shiny coating temporarily seals slow oil leaks around the valve cover gasket and masks tire dry-rot cracks. Always look past the shine and focus on the metallic castings, gaskets, and structural welds.
+                        </p>
+                    </div>
+
+                    <h2 id="paperwork-legal">2. Paperwork &amp; Legal Due Diligence: Verifying the Vehicle's Identity</h2>
+                    <p>
+                        A technical inspection is useless if the paperwork is not in order. Before you begin inspecting the mechanical components, you must verify the vehicle's documentation.
+                    </p>
+                    
+                    <h3>A. Registration Certificate (RC) Verification</h3>
+                    <p>
+                        Check the physical RC card or the digital record on the Vahan portal. Match the <strong>Chassis Number (VIN)</strong> and <strong>Engine Number</strong> stamped on the vehicle's structural frame (usually stamped on the floorboard under the driver's seat, on the engine firewall, or on the strut tower) with the RC details. A mismatch indicates a swapped engine or a stolen vehicle chassis.
+                    </p>
+                    <p>
+                        Pay attention to the owner count. Every owner change reduces the vehicle's market value. If a car is listed as a single-owner vehicle, but the RC shows "Owner No: 3", the seller is misleading you. Additionally, look for the word "DUPLICATE" or "DUP" on the card. A duplicate RC is issued when the original is lost, but it is also used to sell cars with outstanding loans where the original RC is held by the financier.
+                    </p>
+                    
+                    <h3>B. Insurance History &amp; No Claim Bonus (NCB)</h3>
+                    <p>
+                        Request the current comprehensive insurance policy document. Look for the <strong>No Claim Bonus (NCB)</strong> percentage. The NCB is a discount on the insurance premium that grows each year the owner does not make a claim.
+                    </p>
+                    <ul>
+                        <li><strong>NCB of 35% to 50%:</strong> The owner has not made an insurance claim for 3 to 5 years, suggesting a history free of major accidents.</li>
+                        <li><strong>NCB of 0%:</strong> The owner made a claim in the previous year. You must investigate what was repaired. Request the insurance company's claim history log or check the body panels for resprays and fillers.</li>
+                    </ul>
+
+                    <h3>C. Hypothecation Status (HP) &amp; NOC</h3>
+                    <p>
+                        If the vehicle was purchased with a loan, the RC will show a hypothecation to the lending bank. Ensure that the seller provides a Bank <strong>No Objection Certificate (NOC)</strong> and two copies of <strong>Form 35</strong> stamped by the bank. If these are missing, the RTO will not transfer ownership, and you could be held liable for the remaining loan balance.
+                    </p>
+
+                    <div class="table-responsive-container">
+                        <div class="table-scroll-hint">
+                            <i data-lucide="smartphone"></i>
+                            <span>Swipe horizontally to scroll table</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Document Type</th>
+                                        <th>Key Element to Inspect</th>
+                                        <th>Risk / Red Flag</th>
+                                        <th>Validation Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Registration Certificate (RC)</strong></td>
+                                        <td>Chassis (VIN) stamp, Owner number, duplicate tag</td>
+                                        <td>Swapped engine, outstanding loan, stolen vehicle, incorrect ownership trail</td>
+                                        <td>Match metal stamp under driver seat or firewall to RC card and Vahan app</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Insurance Policy</strong></td>
+                                        <td>No Claim Bonus (NCB) percentage</td>
+                                        <td>0% NCB indicates recent major accident repairs and body shop work</td>
+                                        <td>Request policy premium breakdown page; query insurer for claim records</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Service History Invoices</strong></td>
+                                        <td>Dates, mileage progression, component changes</td>
+                                        <td>Gaps in timeline, sudden mileage drops, major transmission/engine work</td>
+                                        <td>Walk into authorized dealer workshop with the VIN to query national database</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RTO Challan &amp; Blacklist</strong></td>
+                                        <td>Pending fines, theft records, court blacklisting</td>
+                                        <td>Inability to transfer registration, pending vehicle impoundment orders</td>
+                                        <td>Search registration number on E-Challan portal and Vahan registry</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h2 id="engine-blowby">3. Engine Blow-By Check: How to Expose Internal Engine Wear</h2>
+                    <p>
+                        Engine blow-by is a critical mechanical failure indicating worn piston rings, glazed cylinder walls, or internal engine wear. When blow-by occurs, the engine loses compression and burns oil, eventually requiring a complete engine rebuild or overhaul.
+                    </p>
+                    
+                    <h3>The Mechanics of Blow-By</h3>
+                    <p>
+                        During the combustion stroke, high-pressure gas is generated to force the piston down. The piston rings—consisting of compression, scraper, and oil rings—are designed to seal the gap between the piston and the cylinder wall. Over time, as an engine runs, friction wears down these rings. Dust bypass (due to a dirty air filter) can also score the cylinder walls.
+                    </p>
+                    <p>
+                        When the seal fails, a portion of the high-pressure combustion gases leaks past the piston rings into the crankcase. The crankcase becomes pressurized with hot, oil-laden combustion vapor. While a healthy engine routes minor vapors back into the intake manifold via the <strong>Positive Crankcase Ventilation (PCV)</strong> valve, severe blow-by overwhelms the PCV system. This causes high pressure to build up in the oil sump.
+                    </p>
+
+                    
+                <div class="inline-image-block">
+                    <div class="visual-image-wrapper">
+                        <img src="../assets/blog_rodent_damage.png" alt="Infographic 1: Piston Ring Failure &amp; Crankcase Pressurization">
+                    </div>
+                    <h5>Infographic 1: Piston Ring Failure &amp; Crankcase Pressurization</h5>
+                    <p>A cross-sectional diagram illustrating how combustion gas escapes past worn piston rings into the crankcase, causing oil vapors to exit through the oil cap and dipstick.</p>
+                </div>
+
+                    <h3>Step-by-Step Diagnostic Check for Blow-By</h3>
+                    <ol>
+                        <li><strong>Bring Engine to Operating Temperature:</strong> Start the engine and let it run until the temperature gauge reaches the center (approx. 85°C to 95°C). Worn metal parts expand when hot, so diagnosing blow-by is most accurate at operating temperature.</li>
+                        <li><strong>Conduct the Oil Filler Cap Test (The Rattle Test):</strong> With the engine idling, open the hood and unscrew the oil filler cap. Do not lift it off; instead, place it loosely back on the filler neck.
+                            <ul>
+                                <li><em>Pass:</em> The cap should sit still or vibrate slightly due to normal engine movement. No gas pressure should lift it.</li>
+                                <li><em>Fail:</em> The cap is blown off the neck or dances violently. This indicates that excessive crankcase pressure is escaping.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Inspect the Vapor Output:</strong> Look closely at the open filler neck. A light, faint steam that dissipates immediately is normal condensation. A steady stream of grey, blue, or dark smoke is a sign of oil burning inside the crankcase due to piston ring bypass.</li>
+                        <li><strong>Conduct the Dipstick Test:</strong> Pull the oil dipstick out while the engine is running. Look for puffs of smoke coming out of the dipstick tube. Hold a clean white sheet of paper 2 inches above the open tube for 10 seconds. If the paper is sprayed with engine oil droplets, high pressure is forcing oil out of the sump.</li>
+                        <li><strong>Evaluate Tailpipe Smoke:</strong> Ask an assistant to press the accelerator pedal up to 3,000 RPM.
+                            <ul>
+                                <li><em>Blue smoke under load:</em> Confirms worn piston rings or cylinder walls.</li>
+                                <li><em>Blue smoke on deceleration:</em> Indicates worn valve guide seals drawing oil into the intake manifold under vacuum.</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h2 id="odometer-rollback">4. Odometer Rollback Detection: Checking ECU, TCU, and ABS Modules</h2>
+                    <p>
+                        Odometer tampering is a common fraud in the used car market. Unscrupulous sellers can alter an electronic odometer in under 10 minutes using diagnostic toolkits connected to the OBD2 port. By rolling a vehicle back from 1,20,000 km to 45,000 km, they can artificially increase its resale value.
+                    </p>
+                    
+                    <h3>A. Electronic Odometer Architecture</h3>
+                    <p>
+                        Modern odometers display mileage on a digital screen, but this value is stored in non-volatile memory (EEPROM) chips within the instrument cluster. Cheap handheld programming tools (such as Digiprog or Carprog) write new mileage values directly to this chip. However, manufacturers store mileage data in other control modules as well.
+                    </p>
+
+                    <h3>B. Comparison of Redundant Modules</h3>
+                    <p>
+                        In modern vehicles, mileage is recorded independently by several onboard computers:
+                    </p>
+                    <ol>
+                        <li><strong>Transmission Control Unit (TCU):</strong> Records mileage during gear shifts, clutch engagements, and hydraulic solenoid operations.</li>
+                        <li><strong>ABS/ESP Module:</strong> Computes mileage by counting wheel rotation sensor pulses.</li>
+                        <li><strong>Body Control Module (BCM):</strong> Records mileage to manage service intervals and lighting features.</li>
+                        <li><strong>Engine Control Unit (ECU):</strong> Logs engine operations and diagnostic fault occurrences.</li>
+                    </ol>
+                    <p>
+                        Since updating all of these modules requires advanced, brand-specific diagnostic tools, most rollback services only update the instrument cluster display.
+                    </p>
+                    <p>
+                        An inspector can connect an OBD2 scanner (such as an Autel Maxisys or Launch X431) to query these modules. If the instrument cluster reads 38,000 km but the TCU or ABS module has logged 96,000 km, the odometer has been tampered with.
+                    </p>
+
+                    
+                <div class="inline-image-block">
+                    <div class="visual-image-wrapper">
+                        <img src="../assets/blog_report_tablet.png" alt="Infographic 2: Redundant Module Odometer Comparison Map">
+                    </div>
+                    <h5>Infographic 2: Redundant Module Odometer Comparison Map</h5>
+                    <p>Diagram showing how an OBD2 scanner communicates with the instrument cluster, ECU, TCU, and ABS modules to highlight mileage discrepancies.</p>
+                </div>
+
+                    <h3>C. Engine Running Hours Validation</h3>
+                    <p>
+                        If the seller has cleared the logs in the other modules, you can still check the <strong>Engine Running Hours</strong>. Query the ECU for the total hours the engine has run since leaving the factory. Calculate the average speed of the vehicle using the formula:
+                    </p>
+                    <div class="callout-box purple" style="text-align: center;">
+                        <strong>Average Speed (km/h) = Displayed Odometer Mileage (km) ÷ Total Engine Running Hours (h)</strong>
+                    </div>
+                    <p>
+                        Let's look at how to interpret the results:
+                    </p>
+                    <ul>
+                        <li><strong>Realistic Average Speed (25 km/h to 45 km/h):</strong> Normal for mixed city and highway driving. For example, 45,000 km divided by 1,500 hours equals an average speed of 30 km/h.</li>
+                        <li><strong>Unrealistic Average Speed (under 10 km/h):</strong> Suggests a rollback. For example, if a car shows 15,000 km on the odometer but has 2,500 engine hours, its average speed would be 6 km/h. Unless the vehicle spent its entire life idling, the odometer has likely been rolled back while the engine hour log was ignored.</li>
+                    </ul>
+
+                    <h3>D. Physical Wear Indicators</h3>
+                    <p>
+                        If diagnostic tools are unavailable, check these physical wear indicators:
+                    </p>
+                    <ul>
+                        <li><strong>Front Brake Rotors:</strong> Run your finger along the outer edge of the front brake discs. Rotors typically develop a lip (about 1.5mm deep) after 50,000 to 60,000 km of driving. If a car showing 20,000 km has a deep, sharp ridge on the rotor, its actual mileage is likely much higher.</li>
+                        <li><strong>Pedal Rubbers &amp; Gear Knobs:</strong> Inspect the rubber pads on the brake, clutch, and accelerator pedals. If the rubber is worn down to the bare metal, the vehicle has likely covered over 80,000 km. A steering wheel wrap that is worn smooth or a gear shifter with faded text also indicates high mileage.</li>
+                        <li><strong>Tyre DOT Codes:</strong> Locate the 4-digit week/year stamp (e.g., "1222" means the 12th week of 2022) on the tyre sidewall. Tires usually last 40,000 to 50,000 km. If a car showing 20,000 km is fitted with a second set of tires (or tires with a date code newer than the vehicle's manufacture year), it suggests the original set wore out at 45,000 km, after which the odometer was rolled back.</li>
+                    </ul>
+
+                    <h2 id="head-gasket">5. Head Gasket &amp; Cooling Audit: Identifying Internal Gasket Leaks</h2>
+                    <p>
+                        A blown head gasket is a serious engine defect that allows coolant and engine oil to mix, leading to overheating, cylinder head warping, and potential engine failure.
+                    </p>
+
+                    <h3>A. Head Gasket Function</h3>
+                    <p>
+                        The head gasket seals the connection between the cylinder block and the cylinder head. It maintains compression in the combustion chambers while keeping oil passages (operating at up to 60 PSI) and coolant passages (operating at up to 15 PSI) isolated from each other.
+                    </p>
+
+                    <h3>B. Identifying Oil-Coolant Emulsion</h3>
+                    <p>
+                        When the head gasket fails between adjacent oil and coolant passages, oil enters the coolant or coolant enters the oil sump. As the engine runs, the heat and moving parts whip the oil and coolant into a thick, light-brown emulsion that resembles mayonnaise.
+                    </p>
+                    <ul>
+                        <li><strong>Check the Oil Cap:</strong> Unscrew the engine oil filler cap. Inspect the underside. A thick coating of yellowish-brown, creamy sludge indicates that coolant is mixing with the oil. (Note: A tiny film of condensation can form in cold weather from short trips, but a large buildup is a sign of a leak).</li>
+                        <li><strong>Check the Dipstick:</strong> Pull the dipstick out. If the oil is a milky, muddy brown color instead of clear amber or black, the crankcase is contaminated.</li>
+                        <li><strong>Check the Coolant Reservoir:</strong> Open the expansion tank. If you see dark oily sludge floating on top of the coolant, oil is leaking into the cooling system.</li>
+                    </ul>
+
+                    <h3>C. The Sweet Exhaust Smell &amp; White Smoke</h3>
+                    <p>
+                        Ethylene glycol (coolant) burning in the combustion chamber produces a sweet smell from the tailpipe. If the exhaust smells sweet and produces white smoke that does not clear after the engine warms up, coolant is entering the cylinders.
+                    </p>
+
+                    <h3>D. The Radiator Bubble Test</h3>
+                    <p>
+                        Ensure the engine is completely cold before opening the radiator or expansion tank cap. Start the engine and watch the coolant surface. A continuous stream of bubbles rising through the liquid indicates that high-pressure combustion gases are bypassing the head gasket and venting into the cooling jacket.
+                    </p>
+
+                    <h3>E. Chemical Block Test (CO2 Detector)</h3>
+                    <p>
+                        For a definitive diagnosis, use a combustion leak detector kit. Place the test chamber over the open radiator neck and draw air through the blue test fluid (bromothymol blue). If combustion gases are present in the cooling system, the carbon dioxide will turn the fluid yellow (for petrol engines) or green (for diesel engines).
+                    </p>
+
+                    <h2 id="chassis-welds">6. Structural Chassis &amp; Apron Welds: Spotting Major Collision Repairs</h2>
+                    <p>
+                        A car with structural chassis damage is unsafe. Modern passenger cars feature monocoque designs where the structural shell acts as the passenger safety cage and alignment reference. Once this structure is bent in a crash, it lose its strength. Crumple zones that have been damaged and repaired will not absorb impact correctly in a future accident, putting the passengers at risk.
+                    </p>
+
+                    <h3>A. Strut Tower Apron Inspection</h3>
+                    <p>
+                        Open the engine bay and examine the suspension aprons (strut towers). These structures support the front suspension and engine load.
+                    </p>
+                    <p>
+                        Look at the spot welds and seam sealer. Factory spot welds are uniform, circular depressions applied by robotic arms, and the seam sealer is neat and even. In a car that has been repaired after an accident, you will see irregular, hand-welded beads, wrinkled sheet metal, and thick, unevenly applied sealant.
+                    </p>
+
+                    <div class="table-responsive-container">
+                        <div class="table-scroll-hint">
+                            <i data-lucide="smartphone"></i>
+                            <span>Swipe horizontally to scroll table</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Chassis Section</th>
+                                        <th>Factory Normal State</th>
+                                        <th>Repaired / Accident State Indicator</th>
+                                        <th>Diagnostic Importance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Strut Apron (Strut Tower)</strong></td>
+                                        <td>Uniform circular spot welds; smooth robot-laid sealant</td>
+                                        <td>Lumpy hand welds, thick seam sealer, rippled metal, fresh paint</td>
+                                        <td>Critical. Holds suspension alignment. Damage causes unstable handling.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Rocker Pinch Welds (Sills)</strong></td>
+                                        <td>Straight, clean metal folds along the vehicle base</td>
+                                        <td>Scrapes, teeth marks, bent metal flanges every 2 feet</td>
+                                        <td>High. Shows the car was mounted on a hydraulic frame puller.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Boot Floor (Spare Wheel Well)</strong></td>
+                                        <td>Flat, painted metal sheet with neat round drainage holes</td>
+                                        <td>Crinkled metal floor, hammer marks, aftermarket caulking</td>
+                                        <td>Moderate. Indicates the car suffered a rear-end collision.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>A/B/C Pillars</strong></td>
+                                        <td>Clean paint depth (90-130μm); uniform spot welds under rubber</td>
+                                        <td>Paint depth >250μm; missing welds under pulled rubber seals</td>
+                                        <td>Severe. Safety cage compromised. High risk of rollover collapse.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3>B. Frame Pulling and Clamp Marks</h3>
+                    <p>
+                        When a chassis is bent in a collision, body shops use hydraulic frame machines to pull the metal back to specification. To do this, heavy clamps grip the pinch welds along the rocker panels (sills).
+                    </p>
+                    <p>
+                        Crawl underneath the car and inspect the bottom flanges below the doors. If you see notches, deep scratches, or teeth marks on the metal folds, the chassis has been straightened on a frame machine.
+                    </p>
+
+                    <h3>C. Crumple Zones and Inner Wings</h3>
+                    <p>
+                        Inspect the front impact bar (behind the grille), the radiator core support, the inner wings, and the boot floor under the carpet. These areas feature crumple zones designed to absorb crash energy by collapsing. If you find wavy metal, weld lines, or hammer marks, the crumple zones have already collapsed and been repaired.
+                    </p>
+
+                    <h3>D. Subframe Bolts and Alignment</h3>
+                    <p>
+                        Inspect the bolts securing the front subframe to the chassis. If the bolt heads are rounded or show scrape marks, the subframe was removed. This is often done to replace damaged engine components, steering systems, or to realign the frame after an accident.
+                    </p>
+
+                    <h2 id="suspension-steering">7. Suspension &amp; Steering Test: Identifying Worn Chassis Components</h2>
+                    <p>
+                        A worn suspension or steering system leads to unstable handling and poor braking. Replacing these components can be expensive.
+                    </p>
+
+                    <h3>A. Worn Control Arm Bushes and Ball Joints</h3>
+                    <p>
+                        The control arms connect the wheel hub to the subframe. They feature rubber bushes that damp road vibrations and ball joints that allow the suspension to articulate.
+                    </p>
+                    <p>
+                        Over time, the rubber bushes crack, tear, or slip out of their sleeves. The rubber boots on ball joints can also split, allowing grease to escape and dirt to enter. This creates play in the joint, which can lead to component failure at high speeds.
+                    </p>
+
+                    <h3>B. Suspension Rattle Diagnosis</h3>
+                    <p>
+                        Drive the vehicle over a rough road or speed bumps at 20 km/h to 30 km/h. Listen for the following sounds:
+                    </p>
+                    <ul>
+                        <li><strong>Dull Thudding/Clunking:</strong> Worn control arm bushes or worn strut mount bearings.</li>
+                        <li><strong>Sharp Metallic Clanking:</strong> Worn stabilizer link rods or dry, loose ball joints.</li>
+                        <li><strong>Creaking/Squeaking:</strong> Dry or cracked rubber anti-roll bar (sway bar) bushes.</li>
+                    </ul>
+
+                    <h3>C. Shock Absorber Fluid Leaks</h3>
+                    <p>
+                        Shock absorbers use hydraulic fluid to control suspension bounce. Inspect the shock absorber bodies behind the wheels. If you see wet oil running down the damper housing, or a thick build-up of dirt and road grime stuck to the shaft, the hydraulic seals have failed. A leaking shock absorber will bounce excessively, which increases braking distances and causes uneven tire wear.
+                    </p>
+
+                    <h3>D. Steering Rack Play and Column Clunks</h3>
+                    <p>
+                        Park the vehicle and turn the steering wheel side-to-side while listening closely.
+                    </p>
+                    <ul>
+                        <li>If the steering wheel moves more than 10 to 15 degrees before the wheels respond, there is play in the inner tie rod ends or the steering rack gear teeth.</li>
+                        <li>A clicking or clunking noise from the footwell when turning indicates wear in the steering column's universal joints or the rack's guide bushing. Replacing a steering rack is a costly repair.</li>
+                    </ul>
+
+                    <h2 id="underbody-rust">8. Underbody Scrapes and Rust: The Silent Killers of Older Cars</h2>
+                    <p>
+                        Underbody damage and corrosion can ruin a vehicle. Rust is a problem in coastal areas (such as Anand, Vadodara, Khambhat, and Ahmedabad) where humidity and salty air accelerate oxidation.
+                    </p>
+
+                    <h3>A. Underbody Scrapes</h3>
+                    <p>
+                        Examine the floor pan, frame rails, exhaust pipe, and oil sump. Low-slung vehicles often scrape over speed bumps.
+                    </p>
+                    <p>
+                        A dented oil sump can restrict oil flow, leading to engine wear. Scraped or crushed exhaust pipes increase backpressure, reducing engine efficiency. Look for cracked plastic underbody shields as well; if these are loose, they can detach at high speeds.
+                    </p>
+
+                    <h3>B. Rust Inspection</h3>
+                    <p>
+                        Inspect the rocker panels, wheel arches, brake line pipes, and suspension mounting points.
+                    </p>
+                    <ul>
+                        <li><strong>Surface Rust:</strong> Light brown discoloration that can be cleaned and painted. This is common and manageable.</li>
+                        <li><strong>Structural Rust:</strong> Flaking metal, bubbling paint, or holes. If you can push a screwdriver through the rusted frame rail, the vehicle's structural integrity is compromised. The car should be rejected.</li>
+                    </ul>
+
+                    
+                <div class="inline-image-block">
+                    <div class="visual-image-wrapper">
+                        <img src="../assets/blog_underbody_rust.png" alt="Infographic 3: Underbody Rust &amp; Scrape Zones">
+                    </div>
+                    <h5>Infographic 3: Underbody Rust &amp; Scrape Zones</h5>
+                    <p>Underbody diagram highlighting key inspection areas: oil sump, frame rails, brake line routing, rocker panels, and suspension mountings.</p>
+                </div>
+
+                    <h2 id="rollback-case-study">9. Real-World Case Study: Catching Odometer Fraud on a Used Sedan</h2>
+                    
+                    <div class="case-study-box">
+                        <div class="case-study-header">
+                            <h3 class="case-study-title">
+                                <i data-lucide="alert-circle"></i>
+                                <span>Used Sedan Odometer Rollback Detection</span>
+                            </h3>
+                            <span class="case-study-badge" style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">Rollback Exposed</span>
+                        </div>
+                        <div class="case-study-grid">
+                            <div class="case-study-field">
+                                <strong>Vehicle Audited</strong>
+                                <p>Honda City 1.5L i-VTEC V (2021 model, Manual Transmission)</p>
+                            </div>
+                            <div class="case-study-field">
+                                <strong>Client Location</strong>
+                                <p>Ahmedabad Used Car Dealer Yard</p>
+                            </div>
+                            <div class="case-study-field">
+                                <strong>Displayed Odometer</strong>
+                                <p>38,400 km (Instrument Cluster display)</p>
+                            </div>
+                            <div class="case-study-field">
+                                <strong>Actual Odometer logged</strong>
+                                <p>94,600 km (Logged in Engine Control Unit and ABS log records)</p>
+                            </div>
+                            <div class="case-study-field">
+                                <strong>Inspector Findings</strong>
+                                <p>During the pre-purchase inspection, we connected an OBD2 diagnostic scanner to check the modules. The instrument cluster displayed 38,400 km, but the Engine Control Unit (ECU) stored a diagnostic fault code (misfire on Cylinder 3) that occurred at 94,120 km. Further scans of the ABS module history showed wheel rotation mileage logs matching 94,600 km.</p>
+                                <p>Physical inspections supported these findings: the front brake rotors had a deep 2mm ridge, the rubber brake pedal pad was worn down to the metal, and the tires had a DOT code from late 2024, indicating they were a replacement set—an unusual occurrence for a vehicle with only 38,000 km.</p>
+                            </div>
+                            <div class="case-study-field">
+                                <strong>Outcome</strong>
+                                <p>We provided the client with the diagnostic logs and physical wear evidence. Confronted with the data, the dealer claimed it was a "computer error" but offered a ₹1.2 Lakh discount. Armed with the proof, the client chose to reject the vehicle and avoid buying a car that was close to requiring a major service suspension and timing belt overhaul.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="interactive-checklist">10. Interactive Used Car Inspection Checklist</h2>
+                    <p>
+                        Use this interactive checklist during your next inspection. Check off each item as you verify it.
+                    </p>
+
+                    <div class="article-checklist-card">
+                        <h4 class="checklist-card-title">
+                            <i data-lucide="check-square"></i>
+                            <span>8 Vital Pre-Purchase Checks</span>
+                        </h4>
+                        <p class="checklist-card-subtitle">Perform these checks to evaluate the vehicle's condition before negotiating a purchase.</p>
+                        
+                        <ul class="interactive-checklist">
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-blowby">
+                                <span><strong>Check for Engine Blow-By:</strong> Verify that the oil filler cap does not rattle or blow off when rested loosely on the hot idling engine.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-obd">
+                                <span><strong>Compare Odometer Modules:</strong> Connect an OBD2 scanner and crosscheck mileage across the ECU, TCU, BCM, and ABS modules.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-gasket">
+                                <span><strong>Inspect for Head Gasket Emulsion:</strong> Verify that the oil cap, dipstick, and coolant tank are free of milky, yellowish sludge.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-frame">
+                                <span><strong>Audit Chassis &amp; Aprons:</strong> Inspect the suspension towers, radiator core support, and sills for weld repairs or frame-puller clamp marks.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-shocks">
+                                <span><strong>Check Dampers for Leaks:</strong> Inspect the shock absorbers for oil leakage or accumulated road grime on the body.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-steering">
+                                <span><strong>Test Steering Play:</strong> Rock the steering wheel to check for free play or clicking sounds from the rack housing.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-rust">
+                                <span><strong>Inspect Underbody &amp; Rust:</strong> Look for floor pan scrapes, dented oil sumps, and structural corrosion on frame rails.</span>
+                            </li>
+                            <li class="chk-item">
+                                <input type="checkbox" id="chk-history">
+                                <span><strong>Verify Paperwork &amp; Service History:</strong> Match the VIN stamps, check the insurance NCB percentage, and review past service records.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h2 id="repair-costs">11. Estimated Repair Costs: What Worn Components Will Cost You</h2>
+                    <p>
+                        If you miss a defect during your pre-purchase inspection, you will have to pay for repairs yourself. Below is an estimation of repair costs for common mechanical issues across different vehicle categories.
+                    </p>
+
+                    <div class="table-responsive-container">
+                        <div class="table-scroll-hint">
+                            <i data-lucide="smartphone"></i>
+                            <span>Swipe horizontally to scroll table</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Defect / Component Repair</th>
+                                        <th>Hatchback (e.g., Swift, i10)</th>
+                                        <th>Sedan (e.g., City, Verna)</th>
+                                        <th>SUV / Crossover (e.g., Creta, Harrier)</th>
+                                        <th>Labor Complexity &amp; Time Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Engine Overhaul (Blow-by / Piston Ring failure)</strong></td>
+                                        <td>₹35,000 – ₹55,000</td>
+                                        <td>₹50,000 – ₹75,000</td>
+                                        <td>₹75,000 – ₹1,30,000</td>
+                                        <td>High. Engine must be removed and disassembled. Takes 4 to 7 days.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Suspension Overhaul (Bushes, Ball joints, Struts)</strong></td>
+                                        <td>₹12,000 – ₹18,000</td>
+                                        <td>₹18,000 – ₹28,000</td>
+                                        <td>₹25,000 – ₹45,000</td>
+                                        <td>Moderate. Pressing bushes and replacing struts. Takes 1 day.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Steering Rack Replacement (Play / Leaks)</strong></td>
+                                        <td>₹8,000 – ₹15,000</td>
+                                        <td>₹14,000 – ₹25,000</td>
+                                        <td>₹22,000 – ₹45,000</td>
+                                        <td>Moderate. Wheel alignment is required afterward. Takes 5 to 8 hours.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Full Tyre Replacement Set (4 Tyres)</strong></td>
+                                        <td>₹12,000 – ₹18,000</td>
+                                        <td>₹18,000 – ₹28,000</td>
+                                        <td>₹26,000 – ₹55,000</td>
+                                        <td>Low. Balancing and alignment needed. Takes 1 to 2 hours.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Head Gasket Replacement (Gasket swap, head skim)</strong></td>
+                                        <td>₹10,000 – ₹15,000</td>
+                                        <td>₹15,000 – ₹22,000</td>
+                                        <td>₹20,000 – ₹38,000</td>
+                                        <td>High. Cylinder head must be skimmed at a machine shop. Takes 2 days.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p>
+                        These costs can affect your purchasing budget. A used car listed for ₹4 Lakhs that requires a suspension overhaul and new tires will cost you an additional ₹45,000 immediately. You can use these estimates to negotiate the purchase price down or choose to reject the vehicle if the repair costs are too high.
+                    </p>
+
+                    <h2 id="faq">12. Used Car Inspection FAQs: Expert Answers to Common Questions</h2>
+                    
+                    <div class="article-faqs-wrapper">
+                        <h3 class="article-faq-title">Frequently Asked Questions</h3>
+                        <div class="article-faq-group">
+                            
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>Is it safe to buy a car that has a repainted panel if there is no structural damage?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        Yes, it is generally safe to buy a car with a repainted panel, provided the repair is cosmetic (such as fixing a bumper scrape or door scratch) and the paint depth reads under 250 microns without underlying body filler. However, if the paint depth exceeds 400-500 microns, it indicates a dent was filled with polyester putty (bondo). This can crack and rust over time. Ensure the inner structures, such as the pillars and aprons, are undamaged.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>What are the signs of a flood-damaged car, and how can I spot them?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        Flood damage can cause ongoing electrical issues. To spot a flood-damaged car:
+                                        1. Pull the seatbelts all the way out; check for mud lines or musty odors at the bottom.
+                                        2. Inspect the metal rails under the front seats; look for rust on unpainted bolt threads.
+                                        3. Look under the dashboard for dried mud or silt in electrical wiring connectors.
+                                        4. Sniff the cabin with the doors closed; a musty, moldy smell indicates wet floor underfelt insulation.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>How do I verify if the engine block has micro-cracks or head gasket issues without dismantling it?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        You can check for micro-cracks and head gasket issues using non-destructive tests:
+                                        1. **The chemical combustion leak test (block test):** Places CO2 sensitive fluid over the cooling neck to detect combustion gases.
+                                        2. **Cooling system pressure test:** Connects a hand pump to the radiator neck and pressurizes the system to 15 PSI. If the pressure drops but no external leaks are visible, coolant is entering the cylinders through a cracked block or blown gasket.
+                                        3. **Compression test:** Measures compression levels across all cylinders using a gauge in the spark plug holes. Low compression in adjacent cylinders indicates a leak.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>Can a dealer hide odometer rollback by swapping the ECU along with the instrument cluster?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        Swapping the ECU and instrument cluster is rare because it requires replacing the immobilizer keys, ignition barrels, and coding the modules to match the chassis VIN. Even if they do, mileage data is often still stored in other modules like the ABS/ESP module, the electronic steering lock, or the Body Control Module (BCM). An OBD2 scan of all modules will usually reveal a mismatch.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>What is the difference between mechanical blow-by and normal crankcase ventilation?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        All engines produce a minor amount of vapor due to combustion gases passing the piston rings. The positive crankcase ventilation (PCV) valve routes this vapor back into the intake manifold. 
+                                        Normal ventilation creates a light pulse of air at the oil filler neck when the cap is removed. Blow-by, however, creates high pressure that actively blows the oil cap off the neck and produces steady blue or grey smoke, indicating worn piston rings.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>How do I spot structural chassis repairs on a car that has been repainted and undercoated?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        Undercoating can mask chassis welds and rust. To spot structural repairs:
+                                        1. Inspect the engine bay aprons and frame rails from above; look for irregular weld beads or ripples in the sheet metal.
+                                        2. Check the door pillars and trunk seams under the rubber weatherstripping for factory spot welds.
+                                        3. Examine the chassis rails for asymmetry; the driver-side rail should match the passenger-side rail exactly.
+                                        4. Check the alignment of the subframe bolts; misaligned bolts indicate the frame has shifted.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>What are the signs that a steering rack needs complete replacement rather than a repair?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        You should replace the steering rack if:
+                                        1. There is heavy hydraulic oil leakage from the rack end seals (on power steering models).
+                                        2. There is physical wear on the rack-and-pinion gear teeth, causing a "flat spot" or binding when turning.
+                                        3. You hear a loud clunking noise when turning that cannot be fixed by adjusting the guide bush play.
+                                        Minor issues like worn tie rod ends or stabilizer links can be replaced individually without replacing the entire rack.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>Are service history records from third-party workshops reliable?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        Third-party workshop invoices can be useful but are easier to fake than authorized dealer service histories. Always cross-check the dates and odometer readings on the invoices with the vehicle's condition. You can also contact the workshop directly to verify the records.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>How can I test the automatic transmission during a short test drive?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        During the test drive, pay attention to the transmission:
+                                        1. **Shift delays:** The transmission should engage gear ("Drive" or "Reverse") within 1 second of moving the selector. Delays suggest low fluid pressure or worn clutches.
+                                        2. **Harsh shifting:** Shifts should be smooth. A sudden jerk or shudder when shifting indicates mechanical wear.
+                                        3. **Slipping:** If the engine RPM increases but the vehicle does not accelerate, the transmission clutches are slipping.
+                                        Verify that there are no transmission warning lights on the dashboard.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span>What should I do if I discover an odometer rollback after buying a used car?</span>
+                                    <i data-lucide="chevron-down" class="faq-icon"></i>
+                                </button>
+                                <div class="faq-answer">
+                                    <div class="faq-answer-inner">
+                                        If you discover odometer fraud after purchasing a vehicle:
+                                        1. Collect your evidence, including diagnostic scans and service history records.
+                                        2. Contact the seller and present the proof, demanding a refund or compensation.
+                                        3. If they refuse, you can file a complaint at the local consumer court for unfair trade practices, or file a police complaint for cheating and fraud.
+                                        Conducting a pre-purchase inspection is the best way to avoid these situations entirely.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Article CTA Card -->
+                    <div class="article-cta-card">
+                        <div class="article-cta-card-content">
+                            <h3 class="article-cta-title">Avoid Used Car Scams: Book a Professional Pre-Purchase Inspection</h3>
+                            <p class="article-cta-desc">
+                                Protect your investment from odometer rollbacks, hidden accident repairs, and engine blow-by. Book an independent Used Car Inspection with CARROBAAR_Drive today. Our mechanical engineers will provide a detailed report within 3 hours.
+                            </p>
+                            <div class="article-cta-buttons">
+                                <a href="../index.html#contact" class="btn btn-primary btn-lg">Book Used Car Inspection</a>
+                                <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%20want%20to%20book%20a%20Used%20Car%20Pre-Purchase%20inspection." target="_blank" rel="noopener" class="btn btn-secondary btn-lg">
+                                    <i data-lucide="phone"></i>
+                                    <span>Chat with an Inspector</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand-col">
+                <a href="../index.html" class="logo footer-logo">
+                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                </a>
+                <p class="footer-tagline">Buy Better, Drive Smarter</p>
+                <p class="footer-about">
+                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Ensuring trust and peace of mind on every drive.
+                </p>
+                <div class="social-icons-group">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html#services">Our Services</a></li>
+                    <li><a href="../index.html#estimator">Pricing Calculator</a></li>
+                    <li><a href="../index.html#process">Inspection Process</a></li>
+                    <li><a href="../index.html#founder">About Me</a></li>
+                    <li><a href="../index.html#faq">FAQs</a></li>
+                    <li><a href="../index.html#contact">Book Now</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact-col">
+                <h4>Contact Details</h4>
+                <ul class="footer-contact-info">
+                    <li>
+                        <i data-lucide="phone" class="footer-icon font-orange"></i>
+                        <span>Call or WhatsApp: <a href="tel:+917498013236">+91 74980 13236</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="mail" class="footer-icon font-purple"></i>
+                        <span>Email: <a href="mailto:carobaar.drive@gmail.com">carobaar.drive@gmail.com</a></span>
+                    </li>
+                    <li>
+                        <i data-lucide="map-pin" class="footer-icon font-orange"></i>
+                        <span>Service Area: Anand, Vadodara, Khambhat and Ahmedabad</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container footer-bottom text-center">
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. | Unbiased Automotive Inspections & Consultations.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Sticky Bottom CTA Bar -->
+    <div class="mobile-sticky-cta-bar">
+        <a href="https://wa.me/917498013236?text=Hi%20CARROBAAR_Drive,%20I%27d%20like%20to%20book%20a%20Used%20Car%20inspection." target="_blank" rel="noopener" class="mobile-sticky-wa-btn" aria-label="Chat on WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wa-btn-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <a href="../index.html#contact" class="btn btn-primary mobile-sticky-cta-btn">Book Inspection</a>
+    </div>
+
+    <!-- Client-Side Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lucide Icons initialization
+            lucide.createIcons();
+
+            // Header scroll effects
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (mobileToggle && navMenu) {
+                mobileToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    const menuIcon = mobileToggle.querySelector('i');
+                    if (navMenu.classList.contains('active')) {
+                        menuIcon.setAttribute('data-lucide', 'x');
+                    } else {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                    }
+                    lucide.createIcons();
+                });
+            }
+
+            // Close mobile menu when nav-link is clicked
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu) navMenu.classList.remove('active');
+                    const menuIcon = mobileToggle ? mobileToggle.querySelector('i') : null;
+                    if (menuIcon) {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                    }
+                    lucide.createIcons();
+                });
+            });
+
+            // FAQ Accordion Toggles
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const faqAnswer = faqItem.querySelector('.faq-answer');
+                    
+                    // Toggle active class on clicked item
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all other items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = '0';
+                    });
+                    
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                        faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Interactive Checklist Strike-through Logic
+            const checkboxes = document.querySelectorAll('.chk-item input[type="checkbox"]');
+            checkboxes.forEach(chk => {
+                chk.addEventListener('change', () => {
+                    const labelSpan = chk.nextElementSibling;
+                    if (chk.checked) {
+                        labelSpan.style.textDecoration = 'line-through';
+                        labelSpan.style.opacity = '0.7';
+                        labelSpan.style.color = '#718096';
+                    } else {
+                        labelSpan.style.textDecoration = 'none';
+                        labelSpan.style.opacity = '1';
+                        labelSpan.style.color = '#E2E8F0';
+                    }
+                });
+            });
+
+            // Site-wide Mouse Glow
+            const mouseGlow = document.getElementById('mouse-glow');
+            if (mouseGlow) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseGlow.style.opacity = '1';
+                    mouseGlow.style.left = e.clientX + 'px';
+                    mouseGlow.style.top = e.clientY + 'px';
+                });
+                document.addEventListener('mouseleave', () => {
+                    mouseGlow.style.opacity = '0';
+                });
+            }
+
+            // Scroll Spy for TOC active state
+            const sections = document.querySelectorAll('h2');
+            const tocLinks = document.querySelectorAll('.toc-link');
+
+            window.addEventListener('scroll', () => {
+                let currentId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= (sectionTop - 120)) {
+                        currentId = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+<script src="blog.js"></script>
+</body>
+</html>
