@@ -18,7 +18,13 @@ app.use(express.static(__dirname));
 
 // Initialize Twilio Client helper
 let twilioClient = null;
-if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {
+const hasTwilioCreds = process.env.TWILIO_ACCOUNT_SID && 
+                       process.env.TWILIO_AUTH_TOKEN && 
+                       process.env.TWILIO_ACCOUNT_SID !== 'none' && 
+                       process.env.TWILIO_ACCOUNT_SID !== 'NA' &&
+                       !process.env.TWILIO_ACCOUNT_SID.includes('your_');
+
+if (hasTwilioCreds) {
     try {
         twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
         console.log('✅ Twilio SDK initialized successfully.');
@@ -26,7 +32,7 @@ if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {
         console.error('❌ Failed to initialize Twilio client:', err.message);
     }
 } else {
-    console.warn('⚠️ Warning: TWILIO_ACCOUNT_SID or TWILIO_AUTH_TOKEN is missing. Notification services will run in dry-run mode.');
+    console.warn('⚠️ Warning: TWILIO_ACCOUNT_SID or TWILIO_AUTH_TOKEN is missing or disabled. Notification services will run in dry-run mode.');
 }
 
 // Google OAuth Status
