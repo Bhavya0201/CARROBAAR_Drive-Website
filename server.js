@@ -13,6 +13,16 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Ensure HTML responses never cache in browser so changes reflect instantly on refresh
+app.use((req, res, next) => {
+    if (req.path.endsWith('.html') || req.path === '/' || !req.path.includes('.')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+    }
+    next();
+});
+
 // Clean URLs Middleware: Redirect any *.html URL to clean extensionless URL
 app.use((req, res, next) => {
     if (req.path === '/index.html') {
