@@ -13,6 +13,38 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Clean URLs Middleware: Redirect any *.html URL to clean extensionless URL
+app.use((req, res, next) => {
+    if (req.path === '/index.html') {
+        return res.redirect(301, '/');
+    }
+    if (req.path.endsWith('.html') && !req.path.includes('/assets/')) {
+        const cleanPath = req.path.slice(0, -5);
+        return res.redirect(301, cleanPath);
+    }
+    next();
+});
+
+// Explicit Clean URL Page Routes
+app.get('/sample-pdi-report', (req, res) => {
+    res.sendFile(path.join(__dirname, 'sample-pdi-report.html'));
+});
+app.get('/my-story', (req, res) => {
+    res.sendFile(path.join(__dirname, 'my-story.html'));
+});
+app.get('/vin-decoder', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoder.html'));
+});
+app.get('/interactive-lab', (req, res) => {
+    res.sendFile(path.join(__dirname, 'interactive-lab.html'));
+});
+app.get('/vin-decoding-explained', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoding-explained.html'));
+});
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'blog', 'index.html'));
+});
+
 // Serve static frontend assets from the root directory
 app.use(express.static(__dirname));
 
@@ -40,6 +72,9 @@ if (process.env.GOOGLE_CLIENT_ID) {
     console.log('✅ Google OAuth 2.0 initialized with Client ID:', process.env.GOOGLE_CLIENT_ID);
 }
 
+// Initialize Supabase Database Helper
+const supabase = require('./db');
+
 // Persistent Lead Database File (leads.json)
 const LEADS_FILE = path.join(__dirname, 'leads.json');
 
@@ -55,14 +90,36 @@ function getLeads() {
     return [];
 }
 
-function saveLead(lead) {
+async function saveLead(lead) {
     const leads = getLeads();
     leads.push(lead);
     try {
         fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf8');
-        console.log(`✅ Lead saved to leads.json: ${lead.fullName} (${lead.phoneNumber}) - ${lead.location}`);
+        console.log(`✅ Lead saved to leads.json: ${lead.fullName || lead.name}`);
     } catch (err) {
         console.error('Error writing to leads.json:', err.message);
+    }
+
+    if (supabase) {
+        try {
+            const { data, error } = await supabase.from('leads').insert([{
+                full_name: lead.fullName || lead.name || '',
+                email: lead.email || '',
+                phone_number: lead.phoneNumber || lead.phone || '',
+                location: lead.location || '',
+                picture: lead.picture || '',
+                google_id: lead.googleId || '',
+                verified_at: lead.verifiedAt || new Date().toISOString(),
+                source: lead.source || 'web_app'
+            }]);
+            if (error) {
+                console.error('⚠️ Supabase Insert Warning:', error.message);
+            } else {
+                console.log('⚡ Lead synced to Supabase database table "leads" successfully.');
+            }
+        } catch (err) {
+            console.error('⚠️ Supabase Sync Error:', err.message);
+        }
     }
 }
 
@@ -450,8 +507,12 @@ app.post('/api/auth/google', (req, res) => {
         try {
             const parts = credential.split('.');
             if (parts.length === 3) {
-                const payloadJson = Buffer.from(parts[1], 'base64').toString('utf8');
-                const payload = JSON.parse(payloadJson);
+                let base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4 !== 0) {
+                    base64 += '=';
+                }
+                const jsonPayload = Buffer.from(base64, 'base64').toString('utf8');
+                const payload = JSON.parse(jsonPayload);
                 fullName = payload.name || payload.given_name || 'Google User';
                 email = payload.email || '';
                 picture = payload.picture || '';
@@ -463,10 +524,10 @@ app.post('/api/auth/google', (req, res) => {
     }
 
     if (!fullName && gUser) {
-        fullName = gUser.name || 'Google User';
+        fullName = gUser.name || gUser.given_name || 'Google User';
         email = gUser.email || '';
         picture = gUser.picture || '';
-        googleId = gUser.id || gUser.sub || '';
+        googleId = gUser.sub || gUser.id || '';
     }
 
     if (!email) {
