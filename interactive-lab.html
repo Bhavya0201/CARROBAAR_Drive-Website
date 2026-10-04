@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=light-grey11">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,20 +26,58 @@
     <div class="mouse-glow" id="mouse-glow"></div>    <!-- Sticky Navigation Header -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="./index.html" class="logo" id="nav-logo">
-                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            <a href="./index.html" class="logo" id="nav-logo" aria-label="CARROBAAR Drive Home">
+                <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
                 <a href="./index.html" class="nav-link">Home</a>
-                <a href="./interactive-lab.html" class="nav-link active">Interactive Lab</a>
-                <a href="./inspection-gallery.html" class="nav-link">Showcase Gallery</a>
                 <a href="./sample-pdi-report.html" class="nav-link">Sample Report</a>
                 <a href="./my-story.html" class="nav-link">My Story</a>
+                <a href="./vin-decoder.html" class="nav-link">VIN Decoder</a>
                 <a href="./blog/index.html" class="nav-link">Blog</a>
             </nav>
             
             <div class="header-actions">
+                <!-- Verified User Auth Container (Sign In or Logged-in Dropdown) -->
+                <div class="header-auth-container" id="header-auth-container">
+                    <!-- State 1: Logged Out - Sign In Button -->
+                    <button class="btn-header-signin" id="header-signin-btn" type="button" aria-label="Sign In">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Sign In</span>
+                    </button>
+
+                    <!-- State 2: Logged In - User Avatar & Profile Dropdown -->
+                    <div class="header-user-dropdown-wrapper" id="header-user-badge" style="display: none;">
+                        <button class="header-user-pill-btn" id="header-user-menu-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="header-user-avatar" id="header-user-avatar" referrerpolicy="no-referrer">
+                            <span class="header-user-name-short" id="header-user-name">Bhavya</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down dropdown-arrow"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+
+                        <!-- Floating Profile Dropdown -->
+                        <div class="header-user-menu-dropdown" id="header-user-menu-dropdown">
+                            <div class="user-menu-header">
+                                <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="user-menu-avatar" id="header-menu-avatar" referrerpolicy="no-referrer">
+                                <div class="user-menu-info">
+                                    <span class="user-menu-name" id="header-menu-fullname">Bhavya</span>
+                                    <span class="header-verified-pill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Member
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="user-menu-divider"></div>
+                            <button class="user-menu-item logout-btn" id="header-logout-btn" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <a href="./index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
                 
                 <!-- 3-Dash Hamburger Menu Icon Button -->
@@ -293,7 +331,7 @@
                                  data-issue="Pinched Electrical Wiring & Fault Codes"
                                  data-tool="OBD2 Diagnostic System Scanner"
                                  data-cost="₹15,000 – ₹55,000"
-                                 data-img="assets/defect_electrical_fault.png"
+                                 data-img="assets/defect_electrical_fault.jpg"
                                  data-desc="OBD diagnostic system flags sensor disconnects due to a pinched harness near the fuse box. Causes intermittent infotainment blackouts and steering fault alerts.">
                                 <span class="hotspot-core"></span>
                                 <span class="hotspot-pulse"></span>
@@ -389,24 +427,7 @@
                         </div>
                     </a>
                     
-                    <!-- Card 2: Inspection Gallery -->
-                    <a href="inspection-gallery.html" class="ribbon-card orange-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="image" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-orange">Visual Guide</span>
-                            <h3>Showcase Gallery</h3>
-                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>View Gallery</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 3: Sample PDI Report -->
+                    <!-- Card 2: Sample PDI Report -->
                     <a href="sample-pdi-report.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -415,7 +436,7 @@
                         <div class="ribbon-content">
                             <span class="ribbon-tag tag-purple">Live Demo</span>
                             <h3>Sample PDI Report</h3>
-                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                            <p>Explore an interactive 300+ point checksheet for WagonR CNG.</p>
                         </div>
                         <div class="ribbon-action">
                             <span>Open Report</span>
@@ -423,7 +444,7 @@
                         </div>
                     </a>
                     
-                    <!-- Card 4: Car Buyer's Blog -->
+                    <!-- Card 3: Car Buyer's Blog -->
                     <a href="blog/index.html" class="ribbon-card orange-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -439,8 +460,8 @@
                             <i data-lucide="arrow-right"></i>
                         </div>
                     </a>
-
-                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    
+                    <!-- Card 4: Meet Bhavya (My Story) -->
                     <a href="my-story.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -505,7 +526,7 @@
                     </li>
                     <li>
                         <i data-lucide="map-pin" class="footer-icon font-orange"></i>
-                        <span>Serving in Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Services Serving in Gujarat</span>
                     </li>
                 </ul>
                 <div class="whatsapp-btn-container">
@@ -518,7 +539,7 @@
         </div>
         
         <div class="footer-bottom text-center">
-            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Serving in Anand, Vadodara, Khambhat and Ahmedabad.</p>
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Services Serving in Gujarat.</p>
         </div>
     </footer>
 
@@ -563,7 +584,6 @@
                 
                 <div class="nav-group-title">Explore More (New Tab)</div>
                 <a href="./index.html" target="_blank" class="quick-nav-item"><i data-lucide="home"></i> Home Page <i data-lucide="external-link" class="ext-icon"></i></a>
-                <a href="./inspection-gallery.html" target="_blank" class="quick-nav-item"><i data-lucide="image"></i> Showcase Gallery <i data-lucide="external-link" class="ext-icon"></i></a>
                 <a href="./my-story.html" target="_blank" class="quick-nav-item"><i data-lucide="user"></i> Meet Bhavya (My Story) <i data-lucide="external-link" class="ext-icon"></i></a>
                 <a href="./blog/index.html" target="_blank" class="quick-nav-item"><i data-lucide="book-open"></i> Car Buyer's Blog <i data-lucide="external-link" class="ext-icon"></i></a>
                 <a href="./sample-pdi-report.html" target="_blank" class="quick-nav-item"><i data-lucide="file-text"></i> WagonR Sample Report <i data-lucide="external-link" class="ext-icon"></i></a>

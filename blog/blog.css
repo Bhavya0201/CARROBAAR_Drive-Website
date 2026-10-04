@@ -38,7 +38,7 @@
     border-bottom: 1px solid rgba(168, 85, 247, 0.08);
     position: sticky;
     top: 50px;
-    background-color: rgba(8, 6, 18, 0.9);
+    background-color: rgba(245, 244, 249, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 100;
@@ -111,8 +111,8 @@
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--clr-text-subdued);
-    background-color: rgba(25, 20, 53, 0.5);
-    border: 1px solid rgba(168, 85, 247, 0.12);
+    background-color: #EAE9F0;
+    border: 1px solid var(--clr-border);
     padding: 0.6rem 1.2rem;
     border-radius: var(--radius-full);
     cursor: pointer;
@@ -121,15 +121,15 @@
 }
 
 .filter-btn:hover {
-    color: var(--clr-text-white);
-    background-color: rgba(168, 85, 247, 0.1);
-    border-color: rgba(168, 85, 247, 0.3);
+    color: var(--clr-text-real-white);
+    background-color: var(--clr-accent-purple);
+    border-color: var(--clr-accent-purple);
 }
 
 .filter-btn.active {
     background-color: var(--clr-accent-orange);
     border-color: var(--clr-accent-orange);
-    color: var(--clr-text-white);
+    color: var(--clr-text-real-white);
     box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
 }
 
@@ -204,7 +204,7 @@
 }
 
 .blog-card:hover .blog-card-link-btn {
-    color: var(--clr-text-white);
+    color: var(--clr-text-real-white);
 }
 
 .blog-card:hover .blog-card-link-btn svg,
@@ -399,7 +399,7 @@
 .article-content {
     max-width: 740px;
     font-size: 1.05rem;
-    color: #E2E8F0; /* Brighter slate for reading comfort */
+    color: var(--clr-text-subdued); /* Slate Purple for reading comfort */
     line-height: 1.8;
 }
 
@@ -514,12 +514,12 @@
 
 /* Case Study Callouts */
 .case-study-box {
-    background-color: #0d091e;
-    border: 1px solid rgba(168, 85, 247, 0.2);
+    background-color: var(--clr-bg-tertiary);
+    border: 1px solid var(--clr-border);
     border-radius: var(--radius-md);
     padding: 2.2rem;
     margin: 3rem 0;
-    box-shadow: var(--shadow-lg), inset 0 0 15px rgba(168, 85, 247, 0.05);
+    box-shadow: var(--shadow-md);
 }
 
 .case-study-header {
@@ -824,7 +824,7 @@
 }
 
 .table-responsive tr:hover td {
-    background-color: rgba(25, 20, 53, 0.3);
+    background-color: var(--clr-bg-tertiary);
     color: var(--clr-text-white);
 }
 
@@ -914,15 +914,15 @@
    Booking CTAs inside / footer of Articles
    ------------------------------------------ */
 .article-cta-card {
-    background: linear-gradient(135deg, rgba(8, 6, 18, 0.9) 0%, rgba(16, 12, 34, 0.9) 100%);
-    border: 1px solid rgba(255, 107, 0, 0.3);
+    background: linear-gradient(135deg, var(--clr-bg-secondary) 0%, var(--clr-bg-tertiary) 100%);
+    border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
     padding: 3.5rem 3rem;
     text-align: center;
     position: relative;
     overflow: hidden;
     margin: 4.5rem 0;
-    box-shadow: var(--shadow-lg), var(--glow-orange);
+    box-shadow: var(--shadow-md);
 }
 
 .article-cta-card::after {

@@ -15,8 +15,8 @@
     <link rel="icon" type="image/png" href="../favicon.png">
     
     <!-- Link Main CSS and Blog specific CSS -->
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="../styles.css?v=light-grey12">
+    <link rel="stylesheet" href="blog.css?v=light-theme3">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,8 +29,11 @@
     <!-- Sticky Header (Mirrors main landing header but with relative links) -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="../index.html" class="logo" id="nav-logo">
-                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            <a href="../index.html" class="logo" id="nav-logo" aria-label="CARROBAAR Drive Home">
+                <img src="../assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
@@ -338,41 +341,7 @@
                         </div>
                     </a>
                     
-                    <!-- Card 2: Interactive Lab -->
-                    <a href="../interactive-lab.html" class="ribbon-card orange-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="scan" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-orange">Interactive Tool</span>
-                            <h3>Interactive Lab</h3>
-                            <p>Simulate paint depth checks and scan defects in real-time.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>Try Scanner</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 3: Showcase Gallery -->
-                    <a href="../inspection-gallery.html" class="ribbon-card purple-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="image" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-purple">Visual Guide</span>
-                            <h3>Showcase Gallery</h3>
-                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>View Gallery</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 4: Sample PDI Report -->
+                    <!-- Card 2: Sample PDI Report -->
                     <a href="../sample-pdi-report.html" class="ribbon-card orange-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -381,7 +350,7 @@
                         <div class="ribbon-content">
                             <span class="ribbon-tag tag-orange">Live Demo</span>
                             <h3>Sample PDI Report</h3>
-                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                            <p>Explore an interactive 300+ point checksheet for WagonR CNG.</p>
                         </div>
                         <div class="ribbon-action">
                             <span>Open Report</span>
@@ -389,7 +358,7 @@
                         </div>
                     </a>
 
-                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    <!-- Card 3: Meet Bhavya (My Story) -->
                     <a href="../my-story.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -419,7 +388,7 @@
                 </a>
                 <p class="footer-tagline">Buy Better, Drive Smarter</p>
                 <p class="footer-about">
-                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Ensuring trust and peace of mind on every drive.
+                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Gujarat. Ensuring trust and peace of mind on every drive.
                 </p>
                 <div class="social-icons-group">
                     <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
@@ -456,7 +425,7 @@
                     </li>
                     <li>
                         <i data-lucide="map-pin" class="footer-icon font-orange"></i>
-                        <span>Service Area: Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Service Area: Gujarat</span>
                     </li>
                 </ul>
             </div>

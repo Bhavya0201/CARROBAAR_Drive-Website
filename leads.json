@@ -1,0 +1,136 @@
+[
+  {
+    "id": "lead_1788620803781",
+    "fullName": "PDI Test User",
+    "location": "Surat",
+    "phoneNumber": "9876543210",
+    "verifiedAt": "2026-09-05T15:06:43.781Z",
+    "source": "sample_pdi_report"
+  },
+  {
+    "id": "google_lead_1788621240827",
+    "fullName": "Bhavya Shah",
+    "email": "bhavya.shah@carrobaar.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-09-05T15:14:00.827Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621450334",
+    "fullName": "CARROBAAR Client",
+    "email": "client@carrobaar.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-09-05T15:17:30.334Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621765637",
+    "fullName": "Bhavya Shah",
+    "email": "bhavya.shah@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-09-05T15:22:45.637Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621805651",
+    "fullName": "Bhavya Shah",
+    "email": "bhavya.shah@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-09-05T15:23:25.651Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621818813",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIOhRB-J0lfjDUZdV4RlDlh9l1smR4XDr3BW2TtHVXdaDIDjW4FXg=s96-c",
+    "googleId": "117674757916062168547",
+    "verifiedAt": "2026-09-05T15:23:38.813Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621835563",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIOhRB-J0lfjDUZdV4RlDlh9l1smR4XDr3BW2TtHVXdaDIDjW4FXg=s96-c",
+    "googleId": "117674757916062168547",
+    "verifiedAt": "2026-09-05T15:23:55.563Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788621978473",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIOhRB-J0lfjDUZdV4RlDlh9l1smR4XDr3BW2TtHVXdaDIDjW4FXg=s96-c",
+    "googleId": "117674757916062168547",
+    "verifiedAt": "2026-09-05T15:26:18.473Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1788622335854",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-09-05T15:32:15.854Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1790933320613",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-10-02T09:28:40.613Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1790933336409",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-10-02T09:28:56.409Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1790933661409",
+    "fullName": "Padmakshi Gadgil",
+    "email": "padmakshigadgil.1406@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLB7DC6P6kLtbw6hGNBP_L9g9fGgAA0ng7pExal1wG68cl9p1VV=s96-c",
+    "googleId": "115601270484301377397",
+    "verifiedAt": "2026-10-02T09:34:21.409Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "google_lead_1790941763347",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq8X93k5J",
+    "googleId": "",
+    "verifiedAt": "2026-10-02T11:49:23.347Z",
+    "source": "google_sign_in"
+  },
+  {
+    "id": "user_lead_1790943581667",
+    "fullName": "Test User",
+    "email": "test@example.com",
+    "phone": "9876543210",
+    "picture": "",
+    "verifiedAt": "2026-10-02T12:19:41.667Z",
+    "source": "manual_auth_form"
+  },
+  {
+    "id": "google_lead_1790951062509",
+    "fullName": "Bhavya Rambhia",
+    "email": "bhavya.rambhia@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIOhRB-J0lfjDUZdV4RlDlh9l1smR4XDr3BW2TtHVXdaDIDjW4FXg=s96-c",
+    "googleId": "117674757916062168547",
+    "verifiedAt": "2026-10-02T14:24:22.509Z",
+    "source": "google_sign_in"
+  }
+]

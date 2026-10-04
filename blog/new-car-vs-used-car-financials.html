@@ -15,8 +15,8 @@
     <link rel="icon" type="image/png" href="../favicon.png">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="../styles.css?v=light-grey12">
+    <link rel="stylesheet" href="blog.css?v=light-theme3">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,8 +29,11 @@
     <!-- Sticky Navigation Header -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="../index.html" class="logo" id="nav-logo">
-                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            <a href="../index.html" class="logo" id="nav-logo" aria-label="CARROBAAR Drive Home">
+                <img src="../assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
@@ -706,9 +709,9 @@
                     
                 <div class="inline-image-block">
                     <div class="visual-image-wrapper">
-                        <img src="../assets/blog_paint_depth_blue.png" alt="Infographic 3: The 150+ Point Vehicle Inspection Protocol">
+                        <img src="../assets/blog_paint_depth_blue.png" alt="Infographic 3: The 300+ Point Vehicle Inspection Protocol">
                     </div>
-                    <h5>Infographic 3: The 150+ Point Vehicle Inspection Protocol</h5>
+                    <h5>Infographic 3: The 300+ Point Vehicle Inspection Protocol</h5>
                     <p>A breakdown of the critical checkpoints checked by CARROBAAR_Drive inspectors, including paint depth analysis, OBD2 scanning, structural checks, and mechanical diagnostics.</p>
                 </div>
 
@@ -875,7 +878,7 @@
                 </a>
                 <p class="footer-tagline">Buy Better, Drive Smarter</p>
                 <p class="footer-about">
-                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Ensuring trust and peace of mind on every drive.
+                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Gujarat. Ensuring trust and peace of mind on every drive.
                 </p>
                 <div class="social-icons-group">
                     <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
@@ -912,7 +915,7 @@
                     </li>
                     <li>
                         <i data-lucide="map-pin" class="footer-icon font-orange"></i>
-                        <span>Service Area: Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Service Area: Gujarat</span>
                     </li>
                 </ul>
             </div>
@@ -1007,11 +1010,11 @@
                     if (chk.checked) {
                         labelSpan.style.textDecoration = 'line-through';
                         labelSpan.style.opacity = '0.7';
-                        labelSpan.style.color = '#718096';
+                        labelSpan.style.color = 'var(--clr-text-muted)';
                     } else {
                         labelSpan.style.textDecoration = 'none';
                         labelSpan.style.opacity = '1';
-                        labelSpan.style.color = '#E2E8F0';
+                        labelSpan.style.color = 'var(--clr-text-subdued)';
                     }
                 });
             });

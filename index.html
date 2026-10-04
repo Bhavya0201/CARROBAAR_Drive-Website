@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Independent car inspection, new car PDI, and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Buy better, drive smarter with CARROBAAR_Drive.">
-    <title>CARROBAAR_Drive - Car Inspection & Consultation | Serving in Anand, Vadodara, Khambhat and Ahmedabad</title>
+    <meta name="description" content="Independent car inspection, new car PDI, and automotive consultation services serving in Gujarat. Buy better, drive smarter with CARROBAAR_Drive.">
+    <title>CARROBAAR_Drive - Car Inspection & Consultation | Services Serving in Gujarat</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,10 +15,13 @@
     <link rel="icon" type="image/png" href="favicon.png">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=light-grey11">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Identity Services (Google Sign-In SDK) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -28,20 +31,77 @@
     <!-- Sticky Navigation Header -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="#" class="logo" id="nav-logo">
-                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            <a href="#" class="logo" id="nav-logo" aria-label="CARROBAAR PDI Home">
+                <img src="assets/logo.png" alt="CARROBAAR PDI Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
                 <a href="#hero" class="nav-link">Home</a>
-                <a href="./interactive-lab.html" class="nav-link">Interactive Lab</a>
-                <a href="./inspection-gallery.html" class="nav-link">Showcase Gallery</a>
                 <a href="./sample-pdi-report.html" class="nav-link">Sample Report</a>
                 <a href="./my-story.html" class="nav-link">My Story</a>
+                <a href="./vin-decoder.html" class="nav-link">VIN Decoder</a>
                 <a href="./blog/index.html" class="nav-link">Blog</a>
             </nav>
             
             <div class="header-actions">
+                <!-- Verified User Auth Container (Sign In or Logged-in Dropdown) -->
+                <div class="header-auth-container" id="header-auth-container">
+                    <!-- State 1: Logged Out - Sign In Button -->
+                    <button class="btn-header-signin" id="header-signin-btn" type="button" aria-label="Sign In">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Sign In</span>
+                    </button>
+
+                    <!-- State 2: Logged In - User Avatar & Profile Dropdown -->
+                    <div class="header-user-dropdown-wrapper" id="header-user-badge" style="display: none;">
+                        <button class="header-user-pill-btn" id="header-user-menu-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="header-user-avatar" id="header-user-avatar" referrerpolicy="no-referrer">
+                            <span class="header-user-name-short" id="header-user-name">Bhavya</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down dropdown-arrow"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+
+                        <!-- Floating Profile Dropdown -->
+                        <div class="header-user-menu-dropdown" id="header-user-menu-dropdown">
+                            <div class="user-menu-header">
+                                <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="user-menu-avatar" id="header-menu-avatar" referrerpolicy="no-referrer">
+                                <div class="user-menu-info">
+                                    <span class="user-menu-name" id="header-menu-fullname">Bhavya</span>
+                                    <span class="header-verified-pill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Member
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="user-menu-divider"></div>
+                            <button class="user-menu-item logout-btn" id="header-logout-btn" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Minimal Beta Tester Viewport Switcher (Developer Mode Only) -->
+                <div class="header-beta-tester" id="header-beta-tester" style="display: none;">
+                    <span class="beta-badge-pill" title="Beta Testing Viewport Switcher">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.28 1.28L3 12l5.8 1.9a2 2 0 0 1 1.28 1.28L12 21l1.9-5.8a2 2 0 0 1 1.28-1.28L21 12l-5.8-1.9a2 2 0 0 1-1.28-1.28Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                        BETA
+                    </span>
+                    <div class="header-viewport-switcher">
+                        <button class="preview-mode-btn header-mode-btn active" data-mode="laptop" title="Laptop View (100%)" aria-label="Laptop View">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-laptop"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55A1 1 0 0 1 20.36 20H3.64a1 1 0 0 1-.92-1.45L4 16"/></svg>
+                        </button>
+                        <button class="preview-mode-btn header-mode-btn" data-mode="tablet" title="Tablet View Mockup" aria-label="Tablet View">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tablet"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+                        </button>
+                        <button class="preview-mode-btn header-mode-btn" data-mode="mobile" title="Mobile View Mockup" aria-label="Mobile View">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Social Links -->
                 <div class="social-icons-group">
                     <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
@@ -75,7 +135,7 @@
                 <div class="hero-content">
                     <div class="badge-tag">
                         <i data-lucide="map-pin" class="badge-icon"></i>
-                        <span>Serving in Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Services Serving in Gujarat</span>
                     </div>
                     
                     <h1 class="hero-title">
@@ -101,7 +161,7 @@
                         </div>
                         <div class="trust-badge-item">
                             <i data-lucide="check-square" class="badge-icon-check font-orange"></i>
-                            <span>180+ Points</span>
+                            <span>300+ Points</span>
                         </div>
                         <div class="trust-badge-item">
                             <i data-lucide="file-text" class="badge-icon-check font-purple"></i>
@@ -109,7 +169,7 @@
                         </div>
                         <div class="trust-badge-item">
                             <i data-lucide="map-pin" class="badge-icon-check font-orange"></i>
-                            <span>Serving Gujarat (Anand • Vadodara • Ahmedabad • Khambhat)</span>
+                            <span>Services Serving in Gujarat</span>
                         </div>
                     </div>
                     
@@ -138,41 +198,7 @@
         <section class="exploration-ribbon-section" id="explore-hub">
             <div class="container">
                 <div class="ribbon-grid">
-                    <!-- Card 1: Interactive Lab -->
-                    <a href="interactive-lab.html" class="ribbon-card purple-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="scan" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-purple">Interactive Tool</span>
-                            <h3>Interactive Lab</h3>
-                            <p>Simulate paint depth checks and scan defects in real-time.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>Try Scanner</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 2: Inspection Gallery -->
-                    <a href="inspection-gallery.html" class="ribbon-card orange-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="image" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-orange">Visual Guide</span>
-                            <h3>Showcase Gallery</h3>
-                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>View Gallery</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 3: Sample PDI Report -->
+                    <!-- Card 1: Sample PDI Report -->
                     <a href="sample-pdi-report.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -181,7 +207,7 @@
                         <div class="ribbon-content">
                             <span class="ribbon-tag tag-purple">Live Demo</span>
                             <h3>Sample PDI Report</h3>
-                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                            <p>Explore an interactive 300+ point checksheet for WagonR CNG.</p>
                         </div>
                         <div class="ribbon-action">
                             <span>Open Report</span>
@@ -189,7 +215,7 @@
                         </div>
                     </a>
                     
-                    <!-- Card 4: Car Buyer's Blog -->
+                    <!-- Card 2: Car Buyer's Blog -->
                     <a href="blog/index.html" class="ribbon-card orange-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -206,7 +232,7 @@
                         </div>
                     </a>
 
-                    <!-- Card 5: Meet Bhavya (My Story) -->
+                    <!-- Card 3: Meet Bhavya (My Story) -->
                     <a href="my-story.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -219,6 +245,23 @@
                         </div>
                         <div class="ribbon-action">
                             <span>Read Story</span>
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <!-- Card 4: Free VIN Decoder Tool -->
+                    <a href="vin-decoder.html" class="ribbon-card orange-glow-hover">
+                        <div class="ribbon-card-bg"></div>
+                        <div class="ribbon-icon-container">
+                            <i data-lucide="shield-check" class="ribbon-icon"></i>
+                        </div>
+                        <div class="ribbon-content">
+                            <span class="ribbon-tag tag-orange">Free Utility Tool</span>
+                            <h3>VIN Month & Year Decoder</h3>
+                            <p>Check your car's exact manufacturing month and year instantly.</p>
+                        </div>
+                        <div class="ribbon-action">
+                            <span>Decode VIN Date</span>
                             <i data-lucide="arrow-right"></i>
                         </div>
                     </a>
@@ -239,55 +282,55 @@
                 </div>
 
                 <div class="defects-grid">
-                    <!-- Card 1 -->
+                    <!-- Card 1: Roof Panel Alignment -->
                     <div class="defect-card">
                         <div class="defect-img-wrapper">
-                            <img src="assets/defect_transit_damage.png" alt="Bumper scratch and respray touch-up defect on a brand new car" class="defect-img">
+                            <img src="assets/defect_roof_scratch.png" alt="Roof Panel alignment and paint surface inspection" class="defect-img" loading="lazy">
                             <div class="red-inspection-circle"></div>
-                            <div class="defect-badge">Transit Damage</div>
+                            <div class="defect-badge">Roof Panel Scratch</div>
                         </div>
                         <div class="defect-content">
-                            <h3>Transit Damage</h3>
-                            <p>Small bumper scratch or paint touch-up found before delivery, indicating minor accidents during transport.</p>
+                            <h3>Roof Panel Alignment</h3>
+                            <p>Surface scratches and roof panel alignment defects identified during paint depth gauge & reflection checks.</p>
                         </div>
                     </div>
 
-                    <!-- Card 2 -->
+                    <!-- Card 2: Wheel RL Design & Cap Assembly -->
                     <div class="defect-card">
                         <div class="defect-img-wrapper">
-                            <img src="assets/defect_panel_misalignment.png" alt="Panel gap and alignment defects on brand new vehicle" class="defect-img">
+                            <img src="assets/defect_wheel_variant.png" alt="Wheel RL design variant difference and hub cap inspection" class="defect-img" loading="lazy">
                             <div class="red-inspection-circle"></div>
-                            <div class="defect-badge">Panel Misalignment</div>
+                            <div class="defect-badge">Wheel Variant Variance</div>
                         </div>
                         <div class="defect-content">
-                            <h3>Panel Misalignment</h3>
-                            <p>Uneven bonnet or door gaps indicating improper factory fitment or post-transit panel replacements.</p>
+                            <h3>Wheel & Rim Assembly</h3>
+                            <p>Wheel rim finish and hub cap assembly mismatch flagged against factory trim specifications.</p>
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
+                    <!-- Card 3: Door Trim Fitment -->
                     <div class="defect-card">
                         <div class="defect-img-wrapper">
-                            <img src="assets/defect_electrical_fault.png" alt="Cabin dashboard electrical diagnostic code faults" class="defect-img">
+                            <img src="assets/defect_door_trim.png" alt="Interior door panel trim and rubber weatherstrip seal fitment" class="defect-img" loading="lazy">
                             <div class="red-inspection-circle"></div>
-                            <div class="defect-badge">Electrical Defect</div>
+                            <div class="defect-badge">Door Trim Fitment</div>
                         </div>
                         <div class="defect-content">
-                            <h3>Electrical Defect</h3>
-                            <p>Faulty switch illumination, touchscreen system bugs, or sensor calibration issues from the factory.</p>
+                            <h3>Door Trim Fitment</h3>
+                            <p>Improper fitment of interior door panel trim and misaligned weatherstrip seals detected on passenger door.</p>
                         </div>
                     </div>
 
-                    <!-- Card 4 -->
+                    <!-- Card 4: Wiper Cowl & Glass Staining -->
                     <div class="defect-card">
                         <div class="defect-img-wrapper">
-                            <img src="assets/defect_battery_degradation.png" alt="Voltmeter load test showing weak battery cell charge in dealer yard" class="defect-img">
+                            <img src="assets/defect_wiper_cowl.png" alt="Wiper arm streak marks, cowl plastic and windshield glass inspection" class="defect-img" loading="lazy">
                             <div class="red-inspection-circle"></div>
-                            <div class="defect-badge">Battery Degradation</div>
+                            <div class="defect-badge">Wiper Cowl Stains</div>
                         </div>
                         <div class="defect-content">
-                            <h3>Battery Degradation</h3>
-                            <p>Vehicles stored in dusty open yards for months, leading to permanent chemical battery degradation.</p>
+                            <h3>Wiper Arm & Cowl Stains</h3>
+                            <p>Wiper arm sweep friction marks, cowl plastic oxidation, and glass mineral staining from outdoor yard storage.</p>
                         </div>
                     </div>
                 </div>
@@ -311,16 +354,18 @@
                             <span class="cost-val">₹10,000 – ₹50,000+</span>
                         </div>
                         <div class="cost-item-row">
-                            <span class="cost-label">Battery replacement:</span>
+                            <span class="cost-label">Battery Replacement:</span>
                             <span class="cost-val">₹5,000 – ₹20,000+</span>
                         </div>
                         <div class="cost-item-row">
-                            <span class="cost-label">Panel Replacement/Dentwork:</span>
+                            <span class="cost-label">Panel Replacement / Dentwork:</span>
                             <span class="cost-val">₹10,000 – ₹40,000+</span>
                         </div>
-                        <div class="cost-divider"></div>
-                        <div class="pdi-saving-row">
-                            <span class="pdi-label">CARROBAAR_Drive Professional PDI:</span>
+                        <div class="pdi-saving-card">
+                            <div class="pdi-saving-header">
+                                <i data-lucide="shield-check" class="pdi-shield-icon"></i>
+                                <span class="pdi-label">CARROBAAR PDI Professional Inspection</span>
+                            </div>
                             <span class="pdi-val font-orange">Starting from ₹999</span>
                         </div>
                     </div>
@@ -338,50 +383,48 @@
         <!-- Sample PDI Report Promotion Section -->
         <section class="sample-report-promo-section" id="sample-report-promo">
             <div class="container">
-                <div class="glass-card promo-card-wrapper" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; align-items: center; border-color: rgba(255, 107, 0, 0.2); box-shadow: var(--shadow-lg), var(--glow-orange); margin-bottom: 0; padding: 2.5rem;">
-                    
+                <div class="glass-card promo-card-wrapper">
                     <!-- Left: Report Preview Visuals -->
-                    <div class="promo-visual-side" style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--clr-border); height: 320px; background-color: #0c0a1f;">
-                        <img src="assets/wagonr_pdi_hero.png" alt="Silky Silver Maruti WagonR 2025 undergoing checkup" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
-                        <div class="promo-overlay-badge" style="position: absolute; top: 15px; left: 15px; background: rgba(8, 6, 18, 0.9); border: 1px solid var(--clr-accent-orange); color: var(--clr-accent-orange); font-family: var(--ff-heading); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-sm); letter-spacing: 1px; text-transform: uppercase;">
+                    <div class="promo-visual-side">
+                        <img src="assets/wagonr_pdi_hero.png" alt="Silky Silver Maruti WagonR 2025 undergoing checkup" class="promo-hero-img" loading="lazy">
+                        <div class="promo-overlay-badge">
                             Interactive Sample Report
                         </div>
-                        <div class="promo-score-circle" style="position: absolute; bottom: 20px; right: 20px; width: 80px; height: 80px; border-radius: 50%; background: rgba(16, 12, 34, 0.9); border: 2px solid var(--clr-accent-purple); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--clr-accent-purple-glow);">
-                            <span style="font-family: var(--ff-heading); font-size: 1.8rem; font-weight: 800; color: var(--clr-text-white); line-height: 1;">94</span>
-                            <span style="font-size: 0.55rem; font-weight: 700; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Health</span>
+                        <div class="promo-score-circle">
+                            <span class="score-number">88</span>
+                            <span class="score-label">Health</span>
                         </div>
                     </div>
 
                     <!-- Right: Promo content -->
-                    <div class="promo-info-side" style="display: flex; flex-direction: column; gap: 1.2rem;">
-                        <span class="section-subtitle font-orange" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--clr-accent-orange);">Downloadable PDF Included</span>
-                        <h2 style="font-family: var(--ff-heading); font-size: 2rem; font-weight: 800; color: var(--clr-text-white); line-height: 1.25;">
+                    <div class="promo-info-side">
+                        <span class="section-subtitle font-orange">Downloadable PDF Included</span>
+                        <h2 class="promo-title">
                             See a Live PDI Inspection Report
                         </h2>
-                        <div class="header-divider divider-orange" style="width: 50px; height: 3px; background-color: var(--clr-accent-orange); border-radius: var(--radius-full); margin: 0.5rem 0;"></div>
+                        <div class="header-divider divider-orange"></div>
                         
-                        <p style="font-size: 0.95rem; line-height: 1.6; color: var(--clr-text-subdued);">
+                        <p class="promo-desc">
                             Curious what your inspection report will look like? Browse our comprehensive digital checksheet for a brand new <strong>Maruti WagonR CNG VXI (2025 Model)</strong>. 
                         </p>
                         
-                        <div class="promo-features-list" style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem; color: var(--clr-text-white); font-weight: 500;">
-                            <div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--clr-accent-purple); flex-shrink: 0;"></i> 180+ Point Yard Checklist Verifications</div>
-                            <div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--clr-accent-purple); flex-shrink: 0;"></i> Clickable Paint Thickness Panel Heatmap</div>
-                            <div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="shield-check" style="width: 18px; height: 18px; color: var(--clr-accent-purple); flex-shrink: 0;"></i> Live OBD2 ECU Terminal Diagnostic Logs</div>
+                        <div class="promo-features-list">
+                            <div class="promo-feature-item"><i data-lucide="shield-check" class="promo-feat-icon font-purple"></i> <span>300+ Point Yard Checklist Verifications</span></div>
+                            <div class="promo-feature-item"><i data-lucide="shield-check" class="promo-feat-icon font-purple"></i> <span>Clickable Paint Thickness Panel Heatmap</span></div>
+                            <div class="promo-feature-item"><i data-lucide="shield-check" class="promo-feat-icon font-purple"></i> <span>Live OBD2 ECU Terminal Diagnostic Logs</span></div>
                         </div>
 
-                        <div class="promo-cta-buttons" style="display: flex; gap: 1.2rem; margin-top: 0.8rem; flex-wrap: wrap;">
-                            <a href="./sample-pdi-report.html" class="btn btn-primary btn-glow-orange" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 8px; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none;">
+                        <div class="promo-cta-buttons">
+                            <a href="./sample-pdi-report.html" class="btn btn-primary btn-glow-orange">
                                 <span>Open Interactive Report</span>
-                                <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                                <i data-lucide="external-link"></i>
                             </a>
-                            <a href="./sample-pdi-report.html" onclick="window.open('./sample-pdi-report.html'); return false;" class="btn btn-outline" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--clr-border); color: var(--clr-text-white); border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; background: none; transition: var(--transition-fast);">
-                                <i data-lucide="download" style="width: 16px; height: 16px; color: var(--clr-accent-orange);"></i>
+                            <a href="#" class="btn-outline btn-download-report" data-action="download-report">
+                                <i data-lucide="download" class="font-orange"></i>
                                 <span>Get Sample PDF</span>
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -488,39 +531,128 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Interactive Before-After Simulator -->
-                <div class="simulator-wrapper">
-                    <h3 class="simulator-title text-center">Interactive Inspection Simulator</h3>
-                    <p class="simulator-desc text-center">Drag the slider below to see how our inspectors catch hidden defects (Before) and verify dealer corrections (After).</p>
-                    
-                    <div class="before-after-slider-wrapper">
-                        <div class="before-after-slider">
-                            <!-- After Image (Background) -->
-                            <div class="slider-img after-img">
-                                <img src="assets/defect_panel_misalignment.png" alt="Corrected Showroom Panel Alignment State">
-                                <div class="slider-label label-after">After (Dealer Corrected)</div>
+                    <!-- Finding 4: Flood Damage & Stockyard Water Logging -->
+                    <div class="finding-horizontal-card">
+                        <div class="finding-img-col">
+                            <img src="assets/blog_underbody_rust.png" alt="Stockyard Flood Damage & Underbody Silt Check" class="finding-img">
+                        </div>
+                        <div class="finding-content-col">
+                            <div class="finding-card-header">
+                                <div class="header-tags">
+                                    <span class="finding-tag" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);">Tata Safari (Monsoon Yard Unit)</span>
+                                    <span class="dealer-correction-badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);"><i data-lucide="shield-alert" class="badge-icon-check"></i> Unit Rejected Pre-Registration</span>
+                                </div>
+                                <h3 style="color: #EF4444;">Stockyard Water Logging & Flood Damage</h3>
                             </div>
-                            <!-- Before Image (Foreground overlay) -->
-                            <div class="slider-img before-img" id="slider-before-img">
-                                <img src="assets/defect_panel_misalignment.png" alt="Detected Showroom Panel Gap Misalignment">
-                                <div class="defect-overlay-glow" style="top: 32%; left: 42%; width: 70px; height: 70px;"></div>
-                                <div class="slider-label label-before">Before (Issue Flagged)</div>
-                            </div>
-                            <!-- Handle -->
-                            <div class="slider-handle" id="slider-handle">
-                                <div class="slider-handle-line"></div>
-                                <div class="slider-handle-button">
-                                    <!-- Inline SVG for Chevrons Left Right -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="handle-icon"><path d="m18 8 4 4-4 4M6 8l-4 4 4 4M2 12h20"/></svg>
+                            <div class="finding-detail-grid">
+                                <div class="detail-block">
+                                    <strong>Issue Found:</strong>
+                                    <p>Dried silt mud inside chassis subframe crevices, seat runner rail surface rust, and dampness under floor carpets from open stockyard monsoon water logging.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Risk / Consequence:</strong>
+                                    <p>ECU wiring harness corrosion, short-circuits, mould growth, and severe premature chassis rust worth lakhs in damage post-delivery.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Dealer Action Taken:</strong>
+                                    <p>Inspector flagged flood signs immediately; dealer cancelled allotment of damaged yard car and assigned a fresh factory-dispatched batch vehicle.</p>
                                 </div>
                             </div>
-                            <!-- Range Input -->
-                            <input type="range" min="0" max="100" value="50" class="slider-range-input" id="slider-range" aria-label="Drag to compare before and after">
+                        </div>
+                    </div>
+                    <!-- Finding 5: Odometer Tampering & Meter Back Fraud -->
+                    <div class="finding-horizontal-card">
+                        <div class="finding-img-col">
+                            <img src="assets/defect_odometer_tampering.png" alt="Odometer Tampering & Mileage Rollback Audit" class="finding-img">
+                        </div>
+                        <div class="finding-content-col">
+                            <div class="finding-card-header">
+                                <div class="header-tags">
+                                    <span class="finding-tag" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);">Used Luxury / Executive Sedan</span>
+                                    <span class="dealer-correction-badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);"><i data-lucide="alert-triangle" class="badge-icon-check"></i> Fraud Detected & Flagged</span>
+                                </div>
+                                <h3 style="color: #EF4444;">Odometer Tampering (95,000 km Reversal)</h3>
+                            </div>
+                            <div class="finding-detail-grid">
+                                <div class="detail-block">
+                                    <strong>Issue Found:</strong>
+                                    <p>Speedometer display showed 147,892 km, but deep OBD ECU diagnostic scan revealed actual engine mileage stored as 243,117 km.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Risk / Consequence:</strong>
+                                    <p>Buyer was about to overpay by ₹3.8 Lakhs for a severely worn-out vehicle near major gearbox and suspension overhaul failure.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Action Taken:</strong>
+                                    <p>Inspector presented non-sequential ECU logs to buyer; transaction aborted instantly, saving buyer from massive financial fraud.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finding 6: Structural Chassis Weld & Accident Repair -->
+                    <div class="finding-horizontal-card">
+                        <div class="finding-img-col">
+                            <img src="assets/defect_chassis_structural.png" alt="Chassis Structural Damage & Re-Weld Check" class="finding-img">
+                        </div>
+                        <div class="finding-content-col">
+                            <div class="finding-card-header">
+                                <div class="header-tags">
+                                    <span class="finding-tag" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);">Pre-Owned SUV</span>
+                                    <span class="dealer-correction-badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);"><i data-lucide="shield-alert" class="badge-icon-check"></i> Structural Integrity Failed</span>
+                                </div>
+                                <h3 style="color: #EF4444;">Chassis Frame Rail Re-Weld & Structural Damage</h3>
+                            </div>
+                            <div class="finding-detail-grid">
+                                <div class="detail-block">
+                                    <strong>Issue Found:</strong>
+                                    <p>Non-factory underbody arc welds, heat distortion marks, and pulled crumple zone rails from major unreported side impact accident.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Risk / Consequence:</strong>
+                                    <p>Severely compromised cabin crash safety, high-speed alignment drift, premature tyre shredding, and zero resale market value.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Action Taken:</strong>
+                                    <p>Detailed structural failure photos logged in inspection dossier; buyer walked away safely before transferring token amount.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finding 7: Engine Sludge & Mechanical Compression Defect -->
+                    <div class="finding-horizontal-card">
+                        <div class="finding-img-col">
+                            <img src="assets/defect_engine_sludge.png" alt="Engine Oil Sludge & Valve Head Leak Inspection" class="finding-img">
+                        </div>
+                        <div class="finding-content-col">
+                            <div class="finding-card-header">
+                                <div class="header-tags">
+                                    <span class="finding-tag" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3);">Used Hatchback</span>
+                                    <span class="dealer-correction-badge" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border-color: rgba(245, 158, 11, 0.3);"><i data-lucide="wrench" class="badge-icon-check"></i> Mechanical Defect Flagged</span>
+                                </div>
+                                <h3 style="color: #F59E0B;">Engine Oil Sludge & Compression Leakage</h3>
+                            </div>
+                            <div class="finding-detail-grid">
+                                <div class="detail-block">
+                                    <strong>Issue Found:</strong>
+                                    <p>Heavy carbon sludge deposits under valve cover cap, dark exhaust smoke, and oil seepage near head gasket seam from delayed oil changes.</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Risk / Consequence:</strong>
+                                    <p>Impending engine seizure, loss of pickup compression, and mandatory engine overhaul requirement (costing ₹85,000+).</p>
+                                </div>
+                                <div class="detail-block">
+                                    <strong>Action Taken:</strong>
+                                    <p>Mechanical defect report leveraged to negotiate a ₹95,000 price discount directly with seller before purchase completion.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </section>
 
@@ -578,7 +710,7 @@
                     <!-- Service 1 -->
                     <div class="service-card">
                         <div class="service-card-img-wrapper">
-                            <img src="assets/caya_paint_check.jpg" alt="CAYA conducting New Car Pre-Delivery Inspection" class="service-card-img">
+                            <img src="assets/caya_paint_check.jpg" alt="CAYA conducting New Car Pre-Delivery Inspection" class="service-card-img" loading="lazy">
                         </div>
                         <div class="service-card-content">
                             <div class="service-icon-box orange-glow">
@@ -586,13 +718,13 @@
                             </div>
                             <h3 class="service-card-title">New Car PDI & Inspection</h3>
                             <p class="service-card-desc">
-                                Don't let dealers hand you a damaged or repainted vehicle. We perform an exhaustive pre-delivery inspection at dealerships in Anand, Vadodara, Khambhat and Ahmedabad before registration.
+                                Don't let dealers hand you a damaged or repainted vehicle. We perform an exhaustive pre-delivery inspection at dealerships in Gujarat before registration.
                             </p>
                             <ul class="service-points">
                                 <li><i data-lucide="check" class="point-icon"></i> Paint depth and repaint check</li>
                                 <li><i data-lucide="check" class="point-icon"></i> Panel gaps & cosmetic blemishes</li>
-                                <li><i data-lucide="check" class="point-icon"></i> Cabin electronics & features test</li>
-                                <li><i data-lucide="check" class="point-icon"></i> Fluid check & engine idle review</li>
+                                <li><i data-lucide="check" class="point-icon"></i> <strong>Stockyard flood & water logging audit</strong></li>
+                                <li><i data-lucide="check" class="point-icon"></i> Cabin electronics & OBD diagnostics</li>
                             </ul>
                         </div>
                     </div>
@@ -600,7 +732,7 @@
                     <!-- Service 2 -->
                     <div class="service-card">
                         <div class="service-card-img-wrapper">
-                            <img src="assets/caya_battery_check.jpg" alt="CAYA conducting electrical system diagnostics check" class="service-card-img">
+                            <img src="assets/caya_battery_check.jpg" alt="CAYA conducting electrical system diagnostics check" class="service-card-img" loading="lazy">
                         </div>
                         <div class="service-card-content">
                             <div class="service-icon-box purple-glow">
@@ -611,9 +743,9 @@
                                 In-depth inspection at the seller's location. Avoid buying a lemon by uncovering hidden mechanical problems, structure damage, or meter tempering.
                             </p>
                             <ul class="service-points">
-                                <li><i data-lucide="check" class="point-icon"></i> 180+ Point mechanical inspection</li>
+                                <li><i data-lucide="check" class="point-icon"></i> 300+ Point mechanical inspection</li>
+                                <li><i data-lucide="check" class="point-icon"></i> <strong>Accident & flood damage verification</strong></li>
                                 <li><i data-lucide="check" class="point-icon"></i> Chassis & structural integrity check</li>
-                                <li><i data-lucide="check" class="point-icon"></i> Comprehensive test drive review</li>
                                 <li><i data-lucide="check" class="point-icon"></i> Detailed digital report with photos</li>
                             </ul>
                         </div>
@@ -622,7 +754,7 @@
                     <!-- Service 3 -->
                     <div class="service-card">
                         <div class="service-card-img-wrapper">
-                            <img src="assets/caya_buying_assistance.jpg" alt="CAYA explaining Market Value Report tablet to buyers - CARROBAAR_Drive" class="service-card-img">
+                            <img src="assets/caya_buying_assistance.jpg" alt="CAYA explaining Market Value Report tablet to buyers - CARROBAAR_Drive" class="service-card-img" loading="lazy">
                         </div>
                         <div class="service-card-content">
                             <div class="service-icon-box orange-glow">
@@ -644,7 +776,7 @@
                     <!-- Service 4 -->
                     <div class="service-card">
                         <div class="service-card-img-wrapper">
-                            <img src="assets/caya_consultation.jpg" alt="CAYA giving an automotive powertrain comparison presentation to a client - CARROBAAR_Drive" class="service-card-img">
+                            <img src="assets/caya_consultation.jpg" alt="CAYA giving an automotive powertrain comparison presentation to a client - CARROBAAR_Drive" class="service-card-img" loading="lazy">
                         </div>
                         <div class="service-card-content">
                             <div class="service-icon-box purple-glow">
@@ -674,126 +806,243 @@
                     <h2 class="section-title">Inspection Pricing Calculator</h2>
                     <div class="header-divider divider-orange"></div>
                     <p class="section-desc">
-                        Get transparent pricing for inspections. Serving in Anand, Vadodara, Khambhat and Ahmedabad. Select your vehicle type and required service below.
+                        Get transparent pricing for inspections in Gujarat. Select your vehicle category and service type for instant plan details.
                     </p>
                 </div>
                 
-            <div class="estimator-grid-wrapper">
-                <div class="estimator-box">
-                    <div class="estimator-inputs">
-                        <!-- Step 1: Select Vehicle Type -->
-                        <div class="input-group">
-                            <label class="input-label"><span class="number-badge">1</span> Select Vehicle Category</label>
-                            <div class="grid-options segment-options" id="vehicle-options">
-                                <button class="segment-btn active" data-vehicle="hatchback">
-                                    <i data-lucide="car" class="opt-icon"></i>
-                                    <span>Hatchback</span>
-                                </button>
-                                <button class="segment-btn" data-vehicle="sedan">
-                                    <!-- Custom Sedan SVG side profile -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sedan opt-icon"><path d="M19 17h2c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1h-2v-1.5c0-.8-.7-1.5-1.5-1.5H15L12.5 6H6L4 10H2.5c-.8 0-1.5.7-1.5 1.5V16c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
-                                    <span>Sedan</span>
-                                </button>
-                                <button class="segment-btn" data-vehicle="suv">
-                                    <i data-lucide="truck" class="opt-icon"></i>
-                                    <span>SUV / MUV</span>
-                                </button>
-                                <button class="segment-btn" data-vehicle="ev">
-                                    <i data-lucide="zap" class="opt-icon"></i>
-                                    <span>Electric (EV)</span>
-                                </button>
-                                <button class="segment-btn" data-vehicle="luxury">
-                                    <i data-lucide="gem" class="opt-icon"></i>
-                                    <span>Luxury</span>
-                                </button>
+                <div class="estimator-grid-wrapper">
+                    <div class="estimator-box">
+                        <div class="estimator-inputs">
+                            <!-- Step 1: Select Vehicle Type -->
+                            <div class="input-group">
+                                <label class="input-label"><span class="number-badge">1</span> Select Vehicle Category</label>
+                                <div class="grid-options segment-options" id="vehicle-options">
+                                    <button class="segment-btn active" data-vehicle="hatchback">
+                                        <i data-lucide="car" class="opt-icon"></i>
+                                        <span>Hatchback</span>
+                                    </button>
+                                    <button class="segment-btn" data-vehicle="sedan">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sedan opt-icon"><path d="M19 17h2c.6 0 1-.4 1-1v-2c0-.6-.4-1-1-1h-2v-1.5c0-.8-.7-1.5-1.5-1.5H15L12.5 6H6L4 10H2.5c-.8 0-1.5.7-1.5 1.5V16c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
+                                        <span>Sedan</span>
+                                    </button>
+                                    <button class="segment-btn" data-vehicle="suv">
+                                        <i data-lucide="truck" class="opt-icon"></i>
+                                        <span>SUV / MUV</span>
+                                    </button>
+                                    <button class="segment-btn" data-vehicle="ev">
+                                        <i data-lucide="zap" class="opt-icon"></i>
+                                        <span>Electric (EV)</span>
+                                    </button>
+                                    <button class="segment-btn" data-vehicle="luxury">
+                                        <i data-lucide="gem" class="opt-icon"></i>
+                                        <span>Luxury</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Select Service Type -->
+                            <div class="input-group">
+                                <label class="input-label"><span class="number-badge">2</span> Choose Required Service</label>
+                                <div class="grid-options list-options" id="service-options">
+                                    <button class="list-option-btn active" data-service="pdi">
+                                        <div class="opt-details">
+                                            <span class="opt-title">New Car Pre-Delivery Inspection (PDI)</span>
+                                            <span class="opt-subtitle">Showroom inspection before registration</span>
+                                        </div>
+                                        <i data-lucide="check-circle-2" class="checked-icon"></i>
+                                    </button>
+                                    <button class="list-option-btn" data-service="used-inspection">
+                                        <div class="opt-details">
+                                            <span class="opt-title">Used Car Inspection (300+ Points)</span>
+                                            <span class="opt-subtitle">Structural, mechanical & electrical review</span>
+                                        </div>
+                                        <i data-lucide="check-circle-2" class="checked-icon"></i>
+                                    </button>
+                                    <button class="list-option-btn" data-service="buying-assistance">
+                                        <div class="opt-details">
+                                            <span class="opt-title">Buying & Negotiation Assistance</span>
+                                            <span class="opt-subtitle">Value check, paperwork, and negotiation guidance</span>
+                                        </div>
+                                        <i data-lucide="check-circle-2" class="checked-icon"></i>
+                                    </button>
+                                    <button class="list-option-btn" data-service="consultation">
+                                        <div class="opt-details">
+                                            <span class="opt-title">Personal Automotive Consultation</span>
+                                            <span class="opt-subtitle">Unbiased guidance to select your ideal car</span>
+                                        </div>
+                                        <i data-lucide="check-circle-2" class="checked-icon"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Step 2: Select Service Type -->
-                        <div class="input-group">
-                            <label class="input-label"><span class="number-badge">2</span> Choose Required Service</label>
-                            <div class="grid-options list-options" id="service-options">
-                                <button class="list-option-btn active" data-service="pdi">
-                                    <div class="opt-details">
-                                        <span class="opt-title">New Car Pre-Delivery Inspection (PDI)</span>
-                                        <span class="opt-subtitle">Showroom inspection before registration</span>
+                        <!-- Estimator Output Details -->
+                        <div class="estimator-result">
+                            <div class="result-card">
+                                <h3 class="result-title">Plan Summary</h3>
+                                <div class="result-meta">
+                                    <span class="selected-plan-name" id="display-plan-name">New Car Pre-Delivery Inspection</span>
+                                    <span class="selected-vehicle-type" id="display-vehicle-type">Hatchback Category</span>
+                                </div>
+                                
+                                <div class="price-container">
+                                    <span class="currency">₹</span>
+                                    <span class="price-value" id="display-price">1,999</span>
+                                    <span class="price-suffix">/ session</span>
+                                </div>
+                                
+                                <div class="divider"></div>
+                                
+                                <div class="inclusions-section">
+                                    <h4 class="inclusions-title">What's Included:</h4>
+                                    <ul class="inclusions-list" id="display-inclusions">
+                                        <li><i data-lucide="check" class="inc-icon"></i> Detailed Showroom Inspection</li>
+                                        <li><i data-lucide="check" class="inc-icon"></i> Paint damage & panel gap scans</li>
+                                        <li><i data-lucide="check" class="inc-icon"></i> Internal systems checklist</li>
+                                        <li><i data-lucide="check" class="inc-icon"></i> Delivery approval feedback</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="result-extra-info">
+                                    <div class="info-row">
+                                        <span class="info-label"><i data-lucide="clock" class="row-icon"></i> Duration:</span>
+                                        <span id="display-duration" class="info-value">1.5 Hours</span>
                                     </div>
-                                    <i data-lucide="check-circle-2" class="checked-icon"></i>
-                                </button>
-                                <button class="list-option-btn" data-service="used-inspection">
-                                    <div class="opt-details">
-                                        <span class="opt-title">Used Car Inspection (180+ Points)</span>
-                                        <span class="opt-subtitle">Structural, mechanical & electrical review</span>
+                                    <div class="info-row">
+                                        <span class="info-label"><i data-lucide="file-text" class="row-icon"></i> Report Delivery:</span>
+                                        <span id="display-delivery" class="info-value">Within 3 Hours</span>
                                     </div>
-                                    <i data-lucide="check-circle-2" class="checked-icon"></i>
-                                </button>
-                                <button class="list-option-btn" data-service="buying-assistance">
-                                    <div class="opt-details">
-                                        <span class="opt-title">Buying & Negotiation Assistance</span>
-                                        <span class="opt-subtitle">Value check, paperwork, and agent assistance</span>
-                                    </div>
-                                    <i data-lucide="check-circle-2" class="checked-icon"></i>
-                                </button>
-                                <button class="list-option-btn" data-service="consultation">
-                                    <div class="opt-details">
-                                        <span class="opt-title">Personal Automotive Consultation</span>
-                                        <span class="opt-subtitle">Unbiased guidance to select your ideal car</span>
-                                    </div>
-                                    <i data-lucide="check-circle-2" class="checked-icon"></i>
-                                </button>
+                                </div>
+                                
+                                <a href="#contact" class="btn btn-primary btn-block btn-select-booking" id="calc-cta-btn">Book This Inspection</a>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Estimator Output Details -->
-                    <div class="estimator-result">
-                        <div class="result-card">
-                            <h3 class="result-title">Plan Summary</h3>
-                            <div class="result-meta">
-                                <span class="selected-plan-name" id="display-plan-name">New Car Pre-Delivery Inspection</span>
-                                <span class="selected-vehicle-type" id="display-vehicle-type">Hatchback Category</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PDI Live Inspection Report Showcase Section -->
+        <section class="live-report-showcase-section" id="live-report-showcase">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-subtitle font-purple">Digital Quality Assurance</span>
+                    <h2 class="section-title">PDI Live Inspection Report Showcase</h2>
+                    <div class="header-divider divider-purple"></div>
+                    <p class="section-desc">
+                        Our inspectors generate an exhaustive, transparent digital report delivered straight to your phone within 3 hours. Explore real diagnostic evidence below.
+                    </p>
+                </div>
+
+                <div class="report-showcase-grid">
+                    <!-- Left Column: Feature Highlights -->
+                    <div class="report-feature-col">
+                        <div class="report-feature-card">
+                            <div class="feature-card-icon font-orange">
+                                <i data-lucide="check-square"></i>
                             </div>
-                            
-                            <div class="price-container">
-                                <span class="currency">₹</span>
-                                <span class="price-value" id="display-price">1,999</span>
-                                <span class="price-suffix">/ session</span>
+                            <div class="feature-card-text">
+                                <h3>300+ Point Comprehensive Scan</h3>
+                                <p>Covers engine idle vibration, fluid levels, brake pad wear, interior electronics, AC performance, and chassis alignment.</p>
                             </div>
-                            
-                            <div class="divider"></div>
-                            
-                            <div class="inclusions-section">
-                                <h4 class="inclusions-title">What's Included:</h4>
-                                <ul class="inclusions-list" id="display-inclusions">
-                                    <!-- Inclusions dynamically updated via JS -->
-                                    <li><i data-lucide="check" class="inc-icon"></i> Detailed Showroom Inspection</li>
-                                    <li><i data-lucide="check" class="inc-icon"></i> Paint damage & panel gap scans</li>
-                                    <li><i data-lucide="check" class="inc-icon"></i> Internal systems checklist</li>
-                                    <li><i data-lucide="check" class="inc-icon"></i> Delivery approval feedback</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="result-extra-info">
-                                <div class="info-row">
-                                    <span><i data-lucide="clock" class="row-icon"></i> Duration:</span>
-                                    <strong id="display-duration">Approx 1.5 Hours</strong>
-                                </div>
-                                <div class="info-row">
-                                    <span><i data-lucide="file-text" class="row-icon"></i> Report delivery:</span>
-                                    <strong id="display-delivery">Within 3 Hours</strong>
-                                </div>
-                            </div>
-                            
-                            <a href="#contact" class="btn btn-primary btn-block btn-select-booking" id="calc-cta-btn">Book This Inspection</a>
                         </div>
-            </div> <!-- End of estimator-box -->
-            </div> <!-- End of estimator-grid-wrapper -->
-            
-            <!-- Why Customers Choose CARROBAAR_Drive (Bottom Section) -->
-            <div class="estimator-trust-bottom">
+
+                        <div class="report-feature-card">
+                            <div class="feature-card-icon font-purple">
+                                <i data-lucide="layers"></i>
+                            </div>
+                            <div class="feature-card-text">
+                                <h3>Digital Paint Coating Depth Gauge</h3>
+                                <p>We measure paint thickness in microns (µm) across every metal and composite panel to catch transit repaints and hidden fillers.</p>
+                            </div>
+                        </div>
+
+                        <div class="report-feature-card">
+                            <div class="feature-card-icon font-orange">
+                                <i data-lucide="camera"></i>
+                            </div>
+                            <div class="feature-card-text">
+                                <h3>High-Resolution Defect Photo Proof</h3>
+                                <p>Every flagged issue—from panel misalignments to scratches or loose bolts—is backed by clear photographic evidence.</p>
+                            </div>
+                        </div>
+
+                        <div class="report-feature-card">
+                            <div class="feature-card-icon font-purple">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <div class="feature-card-text">
+                                <h3>3-Hour Instant Digital Delivery</h3>
+                                <p>Get your PDF report instantly via WhatsApp & Email before signing any dealership delivery or RTO registration documents.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Report Mockup Card -->
+                    <div class="report-visual-col">
+                        <div class="live-report-preview-card">
+                            <div class="report-card-top-bar">
+                                <div class="report-brand-tag">
+                                    <span class="brand-badge-pdi">CARROBAAR Drive</span>
+                                    <span class="report-type-pill">LIVE REPORT DEMO</span>
+                                </div>
+                                <span class="report-status-badge pass">VERDICT: APPROVED WITH REMARKS</span>
+                            </div>
+
+                            <div class="report-card-body">
+                                <div class="report-vehicle-header">
+                                    <div class="vehicle-info">
+                                        <h4>Maruti Suzuki WagonR CNG VXI</h4>
+                                        <span class="vehicle-vin">VIN: MA3EWDE1...03983</span>
+                                    </div>
+                                    <div class="score-circle">
+                                        <span class="score-num">88</span>
+                                        <span class="score-den">/100</span>
+                                    </div>
+                                </div>
+
+                                <div class="report-metrics-row">
+                                    <div class="metric-item">
+                                        <span class="metric-label">Paint Depth Avg</span>
+                                        <span class="metric-val font-purple">108 µm <small>(OEM Spec)</small></span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <span class="metric-label">OBD2 Diagnostics</span>
+                                        <span class="metric-val font-orange">0 Fault Codes</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <span class="metric-label">Electrical Test</span>
+                                        <span class="metric-val font-purple">PASSED (12.6V)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Photo Callout Sample -->
+                                <div class="report-defect-sample">
+                                    <div class="defect-thumb-wrapper">
+                                        <img src="assets/defect_roof_scratch.png" alt="WagonR PDI defect photo" class="defect-thumb-img">
+                                        <span class="defect-pin-badge">FLAGGED</span>
+                                    </div>
+                                    <div class="defect-desc-box">
+                                        <h5>Roof Panel Scratch</h5>
+                                        <p>Scratch observed on Roof Panel during visual inspection. Dealer requested to polish/rectify prior to delivery.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="report-card-footer">
+                                <a href="sample-pdi-report.html" class="btn btn-primary btn-block btn-open-full-report">
+                                    <span>Explore Full Interactive Sample Report</span>
+                                    <i data-lucide="arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
                 <h3 class="estimator-trust-bottom-title">
                     <i data-lucide="shield" class="estimator-trust-icon font-orange"></i>
-                    <span>Why Customers Choose CARROBAAR_Drive</span>
+                    <span>Why Customers Choose CARROBAAR PDI</span>
                 </h3>
                 <div class="estimator-trust-grid">
                     <div class="estimator-trust-card">
@@ -825,7 +1074,7 @@
                             <i data-lucide="wrench" class="trust-card-icon-luc"></i>
                         </div>
                         <h4>Expert Assessment</h4>
-                        <p>Conducted by certified specialists checking 180+ critical checklist points including OBD2 scans, fluid lines, and electronics.</p>
+                        <p>Conducted by certified specialists checking 300+ critical checklist points including OBD2 scans, fluid lines, and electronics.</p>
                     </div>
                 </div>
             </div>
@@ -864,7 +1113,7 @@
                         <div class="step-badge">2</div>
                         <div class="step-content">
                             <h3 class="step-title">On-Site Inspection</h3>
-                            <p class="step-text">Our certified inspectors travel directly to the dealer showroom or used car seller's site anywhere in Anand, Vadodara, Khambhat or Ahmedabad.</p>
+                            <p class="step-text">Our certified inspectors travel directly to the dealer showroom or used car seller's site anywhere in Gujarat.</p>
                         </div>
                     </div>
                     
@@ -873,7 +1122,7 @@
                         <div class="step-badge">3</div>
                         <div class="step-content">
                             <h3 class="step-title">Get Digital Report</h3>
-                            <p class="step-text">Receive an in-depth 180+ point digital inspection sheet complete with high-resolution photos, brake, chassis, paint measurements, and error flags.</p>
+                            <p class="step-text">Receive an in-depth 300+ point digital inspection sheet complete with high-resolution photos, brake, chassis, paint measurements, and error flags.</p>
                         </div>
                     </div>
                     
@@ -926,7 +1175,7 @@
                                 <i data-lucide="search" class="feature-icon font-orange"></i>
                             </div>
                             <div class="feature-text">
-                                <h4>180+ Points Check</h4>
+                                <h4>300+ Points Check</h4>
                                 <p>From engine health, braking systems, interior electronics, to exhaust and underbody inspections.</p>
                             </div>
                         </div>
@@ -937,7 +1186,7 @@
                             </div>
                             <div class="feature-text">
                                 <h4>Service Areas</h4>
-                                <p>Serving in Anand, Vadodara, Khambhat and Ahmedabad. Quick response times at local showrooms.</p>
+                                <p>Services Serving in Gujarat. Quick response times at local showrooms.</p>
                             </div>
                         </div>
                     </div>
@@ -957,193 +1206,43 @@
                             <li><i data-lucide="check-circle" class="scope-icon checked"></i> RTO Paperwork & History Verification</li>
                         </ul>
                         <div class="scope-footer">
-                            <span>180+ Total Verification Elements Included</span>
+                            <span>300+ Total Verification Elements Included</span>
                         </div>
                     </div>
                     <div class="why-us-image-wrapper">
-                        <img src="assets/pdi_inspection.png" alt="CARROBAAR_Drive 180+ Point PDI Inspection Diagnostic Sheet Summary" class="why-us-img">
+                        <img src="assets/caya_paint_gauge_landscape.jpg" alt="CARROBAAR_Drive inspector CAYA measuring paint depth with digital gauge" class="why-us-img" loading="lazy">
                         <div class="image-glow-ring"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Meet Your Inspector Section (My Story) -->
-        <section class="founder-section" id="founder">
-            <div class="container founder-container">
-                <!-- LEFT SIDE: Professional portrait standing naturally beside a vehicle -->
+        <!-- Meet Your Inspector Section (My Story Teaser) -->
+        <section class="founder-section-teaser" id="founder">
+            <div class="container founder-teaser-container">
                 <div class="founder-img-col">
-                    <img src="assets/founder_bhavya.jpg" alt="Bhavya Rambhia standing naturally beside a car, warm and approachable expression" class="founder-img">
+                    <img src="assets/founder_bhavya.jpg" alt="Bhavya Rambhia lead inspector standing in service bay" class="founder-img" loading="lazy">
                 </div>
-                
-                <!-- RIGHT SIDE: My Story details -->
                 <div class="founder-content">
-                    <div class="founder-header">
-                        <span class="section-subtitle font-orange">My Story</span>
-                        <h3>A Different Perspective On Car Buying</h3>
+                    <span class="section-subtitle font-orange">Meet Your Inspector</span>
+                    <h2 class="section-title text-left">A Different Perspective On Car Buying</h2>
+                    <p class="founder-desc-text">
+                        I'm <strong>Bhavya Rambhia</strong>, a Mechanical Engineer and Automotive Quality Specialist. With a dedicated background investigating vehicle quality standards and continuous improvement initiatives in the four-wheeler industry, I created <strong>CARROBAAR Drive</strong> to help buyers protect their hard-earned money and make unbiased, stress-free purchasing decisions.
+                    </p>
+                    <div class="founder-badges-row">
+                        <div class="founder-badge-item"><i data-lucide="graduation-cap" class="font-orange"></i> <span>Mechanical Engineer</span></div>
+                        <div class="founder-badge-item"><i data-lucide="award" class="font-purple"></i> <span>Quality & CX Specialist</span></div>
+                        <div class="founder-badge-item"><i data-lucide="shield-check" class="font-orange"></i> <span>100% Independent</span></div>
                     </div>
-                    
-                    <div class="founder-story-text">
-                        <p>I'm Bhavya Rambhia, a Mechanical Engineer and Automotive Quality & Customer Experience Professional working within the four-wheeler industry.</p>
-                        <p>My work involves understanding vehicle quality concerns, investigating customer-reported issues, analyzing failure patterns, and supporting continuous improvement initiatives throughout the ownership journey.</p>
-                        <p>Through these experiences, I've seen how small issues that go unnoticed during purchase can later become major frustrations for vehicle owners.</p>
-                        <p>That realization inspired me to create <strong>CARROBAAR_Drive</strong> — a platform focused on helping buyers make informed automotive decisions through independent inspections, consultations, and practical guidance.</p>
-                        <p>Today, my goal remains simple: <strong>Help people understand what they're buying before they invest their hard-earned money into it.</strong></p>
-                    </div>
-                    
-                    <!-- Credibility Cards -->
-                    <div class="founder-credibility-cards">
-                        <div class="credibility-card">
-                            <div class="cred-card-icon-box">
-                                <i data-lucide="graduation-cap" class="cred-card-icon"></i>
-                            </div>
-                            <div class="cred-card-info">
-                                <h4>Mechanical Engineer</h4>
-                                <p>Rigorous technical training in automotive design, vehicle diagnostics, and failure analysis.</p>
-                            </div>
-                        </div>
-                        <div class="credibility-card">
-                            <div class="cred-card-icon-box">
-                                <i data-lucide="award" class="cred-card-icon"></i>
-                            </div>
-                            <div class="cred-card-info">
-                                <h4>Quality & CX Specialist</h4>
-                                <p>Professional experience analyzing warranty issues, owner support logs, and factory defect patterns.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quote Block (Large Typography) -->
-                    <div class="founder-quote-block">
-                        <p>"A car is one of the biggest purchases most people make. I believe every buyer deserves access to independent guidance before making that decision."</p>
-                    </div>
+                    <a href="./my-story.html" class="btn btn-secondary btn-sm">
+                        <span>Read My Full Story & Mission</span>
+                        <i data-lucide="arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Why Independent Inspections Matter Section -->
-        <section class="why-independent-section" id="independent-inspections">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-subtitle font-orange">Conflict of Interest</span>
-                    <h2 class="section-title">Why Independent Inspections Matter</h2>
-                    <div class="header-divider divider-orange"></div>
-                    <p class="section-desc">
-                        Car buying involves three different stakeholders. Understanding their incentives helps you make the right choice.
-                    </p>
-                </div>
-                
-                <div class="goals-table-grid">
-                    <!-- Column 1: Dealership -->
-                    <div class="goal-column-card">
-                        <div class="goal-icon-box purple">
-                            <i data-lucide="store"></i>
-                        </div>
-                        <h3>The Dealership's Goal</h3>
-                        <p>To register and hand over the car as fast as possible to secure sales commissions. They often overlook storage yard transit damages, minor scratches, battery issues, or alignment defects.</p>
-                    </div>
-                    
-                    <!-- Column 2: The Buyer -->
-                    <div class="goal-column-card">
-                        <div class="goal-icon-box purple">
-                            <i data-lucide="user"></i>
-                        </div>
-                        <h3>The Buyer's Goal</h3>
-                        <p>To get a brand-new, perfect car with zero defects and high resale value. Buyers do not have specialized tools (like paint meters and OBD2 scanners) to catch hidden showroom defects.</p>
-                    </div>
-                    
-                    <!-- Column 3: CARROBAAR_Drive -->
-                    <div class="goal-column-card highlight">
-                        <div class="goal-icon-box orange">
-                            <i data-lucide="shield-check"></i>
-                        </div>
-                        <h3>Our Goal</h3>
-                        <p>We are 100% unbiased. We do not sell cars or take dealer commissions. Our only incentive is to protect you, catch defects before registration, and save you from expensive post-delivery repairs.</p>
-                    </div>
-                </div>
-                
-                <div class="independent-statement-box">
-                    <h3>"We work for you, not the dealer."</h3>
-                    <p>No commissions. No dealer bias. Just systematic, honest vehicle auditing.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Inspection Education Gallery -->
-        <section class="gallery-section" id="gallery">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-subtitle font-orange">Showcase Gallery</span>
-                    <h2 class="section-title">Inspection Education Gallery</h2>
-                    <div class="header-divider divider-orange"></div>
-                    <p class="section-desc">
-                        Our inspections are explained and visualized through our digital educator, CAYA. See how we systematically check critical components including engine bays, cabin electronics, paint thickness, and battery wear.
-                    </p>
-                </div>
-                
-                <div class="gallery-grid">
-                    <!-- Image 1: Engine Check -->
-                    <div class="gallery-card-box">
-                        <img src="assets/caya_engine.jpg" alt="CAYA inspecting car engine hood - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">Engine Scan</span>
-                            <h4>Engine Bay Verification</h4>
-                            <p>Vetting structural components, coolant seals, leaks, and vibration levels.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Image 2: Nexon Seats Check -->
-                    <div class="gallery-card-box">
-                        <img src="assets/caya_driving_seat.jpg" alt="CAYA checking car interior seat logs - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">Interior Audit</span>
-                            <h4>Nexon CNG Cabin Audit</h4>
-                            <p>Assessing upholstery stitching, electronic adjustments, and dashboard materials.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Image 3: Infotainment Check -->
-                    <div class="gallery-card-box">
-                        <img src="assets/caya_screen_check.jpg" alt="CAYA testing screen infotainment - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">Console Test</span>
-                            <h4>Infotainment & Screen Diagnostics</h4>
-                            <p>Verifying infotainment touch responses, speakers, and dashboard cluster configurations.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Image 4: Battery Multimeter Check -->
-                    <div class="gallery-card-box">
-                        <img src="assets/caya_battery_check.jpg" alt="CAYA testing car battery voltmeter - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">Battery Check</span>
-                            <h4>Electrical Loading Scan</h4>
-                            <p>Diagnosing battery wear, checking voltage loads, and verifying fuse connections.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Image 5: Paint Thickness Test -->
-                    <div class="gallery-card-box">
-                        <img src="assets/caya_paint_check.jpg" alt="CAYA measuring car paint thickness depth - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">Accident Check</span>
-                            <h4>Body Paint Thickness Verification</h4>
-                            <p>Applying paint depth meters on panels to check for hidden accident repaints.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Image 6: Technical PDI Infographic -->
-                    <div class="gallery-card-box">
-                        <img src="assets/pdi_infographic.png" alt="Technical 180+ Point PDI Check Infographic - CARROBAAR_Drive" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <span class="overlay-badge">PDI Scan</span>
-                            <h4>180+ Point PDI Diagnostics</h4>
-                            <p>Advanced diagnostic checks mapping chassis structural integrity, onboard computer error logs, and cosmetic fitments.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Inspection Education Gallery (Teaser) -->
 
         <!-- Latest Blog Articles Section -->
         <section class="blog-preview-section" id="blog">
@@ -1236,7 +1335,7 @@
                     <h2 class="section-title">What Our Clients Say</h2>
                     <div class="header-divider"></div>
                     <p class="section-desc">
-                        Discover how we helped buyers in Anand, Vadodara, Khambhat and Ahmedabad avoid expensive repairs and negotiate with confidence.
+                        Discover how we helped buyers in Gujarat avoid expensive repairs and negotiate with confidence.
                     </p>
                 </div>
                 
@@ -1333,7 +1432,7 @@
                             <i data-lucide="map-pin" class="contact-icon font-orange"></i>
                             <div>
                                 <h5>Service Area</h5>
-                                <p>Serving in Anand, Vadodara, Khambhat and Ahmedabad</p>
+                                <p>Services Serving in Gujarat</p>
                             </div>
                         </div>
                     </div>
@@ -1363,9 +1462,8 @@
                             <div class="form-group">
                                 <label for="form-service">Required Service *</label>
                                 <select id="form-service" class="form-control" required>
-                                    <option value="" disabled selected>Select service</option>
-                                    <option value="pdi">New Car PDI & Inspection</option>
-                                    <option value="used-inspection">Used Car Inspection (180+ points)</option>
+                                    <option value="pdi" selected>New Car PDI & Inspection</option>
+                                    <option value="used-inspection">Used Car Inspection (300+ points)</option>
                                     <option value="buying-assistance">Buying & Selling Assistance</option>
                                     <option value="consultation">Automotive Consultation</option>
                                 </select>
@@ -1402,6 +1500,18 @@
                             <textarea id="form-message" class="form-control" rows="3" placeholder="Explain your needs or specify dealer showroom location..."></textarea>
                         </div>
                         
+                        <!-- Dynamic Estimated Price Banner -->
+                        <div class="booking-price-banner" id="booking-price-banner">
+                            <div class="booking-price-info">
+                                <span class="booking-price-label">Estimated Inspection Fee:</span>
+                                <span class="booking-price-subtext" id="booking-price-subtext">New Car PDI • Hatchback</span>
+                            </div>
+                            <div class="booking-price-tag" id="booking-price-tag">
+                                <span class="booking-price-currency">₹</span>
+                                <span class="booking-price-amount" id="booking-price-amount">999</span>
+                            </div>
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-btn">
                             <span>Request Callback</span>
                             <i data-lucide="arrow-right" class="btn-arrow"></i>
@@ -1431,7 +1541,7 @@
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <div class="header-divider divider-purple"></div>
                     <p class="section-desc">
-                        Everything you need to know about our car inspection services serving in Anand, Vadodara, Khambhat and Ahmedabad.
+                        Everything you need to know about our car inspection services serving in Gujarat.
                     </p>
                 </div>
                 
@@ -1457,7 +1567,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                Dealerships perform a basic checklist mainly focusing on washing, cleaning, fluids check, and obvious transit damage. Their main incentive is to get the vehicle registered and delivered to secure their commission. <strong>CARROBAAR_Drive</strong> is 100% independent. We perform a highly technical 180+ point audit—using tools like paint thickness meters and OBD2 diagnostic scanners—to inspect panel alignment, transit damage repaints, computer logs, and hidden electrical faults that dealers might skip.
+                                Dealerships perform a basic checklist mainly focusing on washing, cleaning, fluids check, and obvious transit damage. Their main incentive is to get the vehicle registered and delivered to secure their commission. <strong>CARROBAAR_Drive</strong> is 100% independent. We perform a highly technical 300+ point audit—using tools like paint thickness meters and OBD2 diagnostic scanners—to inspect panel alignment, transit damage repaints, computer logs, and hidden electrical faults that dealers might skip.
                             </div>
                         </div>
                     </div>
@@ -1535,7 +1645,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                A comprehensive Used Car or New Car PDI inspection takes about 1.5 to 2.5 hours depending on vehicle type. We evaluate the mechanicals, structure, electrical components, and perform test drives. You will receive a summary call right after the test, and a detailed 180+ point digital report with pictures in your inbox within 3 hours.
+                                A comprehensive Used Car or New Car PDI inspection takes about 1.5 to 2.5 hours depending on vehicle type. We evaluate the mechanicals, structure, electrical components, and perform test drives. You will receive a summary call right after the test, and a detailed 300+ point digital report with pictures in your inbox within 3 hours.
                             </div>
                         </div>
                     </div>
@@ -1548,7 +1658,7 @@
                         </button>
                         <div class="faq-answer">
                             <div class="faq-answer-inner">
-                                No, you do not need to be present! You can book the inspection, provide the showroom address or seller contact in Anand, Vadodara, Khambhat, or Ahmedabad, and we will coordinate directly with them. Once the inspection is complete, we will call you to discuss key points and email you the full digital report.
+                                No, you do not need to be present! You can book the inspection, provide the showroom address or seller contact in Gujarat, and we will coordinate directly with them. Once the inspection is complete, we will call you to discuss key points and email you the full digital report.
                             </div>
                         </div>
                     </div>
@@ -1556,7 +1666,7 @@
                     <!-- FAQ 10 (Dealer independence) -->
                     <div class="faq-item">
                         <button class="faq-question">
-                            <span>Are you affiliated with any car dealers in Anand, Vadodara, Khambhat, or Ahmedabad?</span>
+                            <span>Are you affiliated with any car dealers in Gujarat?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
                         </button>
                         <div class="faq-answer">
@@ -1575,12 +1685,15 @@
     <footer class="main-footer">
         <div class="container footer-grid">
             <div class="footer-brand-col">
-                <a href="#" class="logo footer-logo">
-                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                <a href="#" class="logo footer-logo" aria-label="CARROBAAR Drive Home">
+                    <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                    <span class="brand-name-text">
+                        CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                    </span>
                 </a>
                 <p class="footer-tagline">Buy Better, Drive Smarter</p>
                 <p class="footer-about">
-                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Anand, Vadodara, Khambhat and Ahmedabad. Ensuring trust and peace of mind on every drive.
+                    Professional, independent vehicle pre-purchase inspection and automotive consultation services serving in Gujarat. Ensuring trust and peace of mind on every drive.
                 </p>
                 <div class="social-icons-group">
                     <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
@@ -1617,7 +1730,7 @@
                     </li>
                     <li>
                         <i data-lucide="map-pin" class="footer-icon font-orange"></i>
-                        <span>Serving in Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Services Serving in Gujarat</span>
                     </li>
                 </ul>
                 <div class="whatsapp-btn-container">
@@ -1630,7 +1743,7 @@
         </div>
         
         <div class="footer-bottom text-center">
-            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Serving in Anand, Vadodara, Khambhat and Ahmedabad.</p>
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Services Serving in Gujarat.</p>
         </div>
     </footer>
 
@@ -1663,14 +1776,15 @@
             </button>
             <div class="quick-nav-header">
                 <a href="#" class="logo">
-                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                    <img src="assets/logo.png" alt="CARROBAAR PDI Logo" class="brand-logo-img">
+                    <span class="brand-name-text">
+                        CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                    </span>
                 </a>
                 <p class="quick-nav-subtitle">Quick Navigator</p>
             </div>
             <nav class="quick-nav-links">
                 <a href="#hero" class="quick-nav-item"><i data-lucide="home"></i> Home</a>
-                <a href="./interactive-lab.html" class="quick-nav-item"><i data-lucide="scan"></i> Interactive Lab</a>
-                <a href="./inspection-gallery.html" class="quick-nav-item"><i data-lucide="image"></i> Showcase Gallery</a>
                 <a href="./sample-pdi-report.html" class="quick-nav-item"><i data-lucide="file-text"></i> Sample PDI Report</a>
                 <a href="./my-story.html" class="quick-nav-item"><i data-lucide="user"></i> Meet Bhavya (My Story)</a>
                 <a href="./blog/index.html" class="quick-nav-item"><i data-lucide="book-open"></i> Car Buyer's Blog</a>
@@ -1683,7 +1797,123 @@
         </div>
     </div>
 
+    <!-- Floating Hovering Device Switcher Ribbon (Always accessible on empty side space) -->
+    <div class="floating-beta-ribbon" id="floating-beta-ribbon">
+        <div class="floating-ribbon-glass">
+            <span class="beta-badge-pill" title="Beta Testing Viewport Switcher">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.28 1.28L3 12l5.8 1.9a2 2 0 0 1 1.28 1.28L12 21l1.9-5.8a2 2 0 0 1 1.28-1.28L21 12l-5.8-1.9a2 2 0 0 1-1.28-1.28Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                BETA
+            </span>
+            <div class="floating-viewport-switcher">
+                <button class="preview-mode-btn floating-mode-btn active" data-mode="laptop" title="Exit to Laptop Desktop View (100%)" aria-label="Laptop View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-laptop"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55A1 1 0 0 1 20.36 20H3.64a1 1 0 0 1-.92-1.45L4 16"/></svg>
+                </button>
+                <button class="preview-mode-btn floating-mode-btn" data-mode="tablet" title="Switch to Tablet View Mockup" aria-label="Tablet View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tablet"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+                </button>
+                <button class="preview-mode-btn floating-mode-btn" data-mode="mobile" title="Switch to Mobile View Mockup" aria-label="Mobile View">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Realistic Iframe-Based Device Mockup Stage Modal (Google Pixel 7 Pro & Tablet) -->
+    <div class="device-mockup-modal" id="device-mockup-modal">
+        <div class="mockup-modal-backdrop" id="mockup-modal-backdrop"></div>
+        <div class="mockup-stage-container">
+            <div class="mockup-frame-shell android-flagship" id="mockup-frame-shell">
+                <!-- Physical Chassis Side Buttons (Power + Volume) -->
+                <div class="hardware-side-button power-btn"></div>
+                <div class="hardware-side-button volume-up-btn"></div>
+                <div class="hardware-side-button volume-down-btn"></div>
+                
+                <!-- OLED Android Top Status Bar -->
+                <div class="mockup-hardware-top android-top-bar">
+                    <div class="status-bar-left">
+                        <span class="status-clock">10:00</span>
+                    </div>
+                    <div class="pixel-camera-punchhole" title="Front Punchhole Camera Sensor">
+                        <span class="pixel-camera-lens"></span>
+                    </div>
+                    <div class="status-bar-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.85a10 10 0 0 1 14 0"/><path d="M8.5 16.42a5 5 0 0 1 7 0"/></svg>
+                        <span class="network-5g">5G</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><line x1="22" x2="22" y1="11" y2="13"/></svg>
+                    </div>
+                </div>
+                <!-- Embedded Viewport OLED Screen -->
+                <div class="mockup-screen-viewport">
+                    <iframe id="device-preview-iframe" title="CARROBAAR PDI Flagship Android Viewport" src="about:blank"></iframe>
+                </div>
+                <!-- Android Gesture Navigation Bar -->
+                <div class="mockup-hardware-bottom android-bottom-bar">
+                    <div class="android-gesture-pill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Account Verification Modal for Sample Report Download -->
+    <div class="lead-modal-overlay" id="download-lead-modal" aria-hidden="true">
+        <div class="lead-modal-backdrop" id="lead-modal-backdrop"></div>
+        <div class="lead-modal-dialog google-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+            <button class="lead-modal-close" id="lead-modal-close" aria-label="Close modal">&times;</button>
+            
+            <div class="lead-modal-header text-center">
+                <div class="google-badge-pill">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                    <span>Verified Google Account Required</span>
+                </div>
+                <h3 class="lead-modal-title" id="lead-modal-title">Sign in to Download PDI Report</h3>
+                <p class="lead-modal-subtitle" id="lead-modal-subtitle">Quick 1-click verification with your Google account to get instant access to the official 300+ point sample report.</p>
+            </div>
+
+            <!-- STEP 1: Google Sign-In Container -->
+            <div class="lead-step-form active" id="lead-step-1">
+                <div class="google-signin-wrapper">
+                    <!-- Official Google GIS Button Render Target -->
+                    <div id="google-signin-btn-container" class="google-btn-flex-center"></div>
+                    
+                    <div class="google-or-divider"><span>OR QUICK VERIFY</span></div>
+                    <button type="button" class="btn-google-oneclick" id="btn-google-oneclick">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                        <span>Verify & Download via Google</span>
+                    </button>
+                </div>
+
+                <div class="lead-alert-box error" id="lead-step1-error" style="display: none;"></div>
+
+                <p class="google-privacy-text">
+                    🔒 We respect your privacy. Your name & email are strictly used for report delivery security.
+                </p>
+            </div>
+
+            <!-- STEP 2: Verification Success Screen & Verified Profile Badge -->
+            <div class="lead-step-form text-center" id="lead-step-3">
+                <div class="google-user-card" id="google-user-card" style="display: none;">
+                    <img src="" alt="Google Profile Avatar" class="google-avatar-img" id="google-avatar-img">
+                    <div class="google-user-details">
+                        <h4 class="google-user-name" id="google-user-name">Rahul Sharma</h4>
+                        <span class="google-email-pill" id="google-email-pill">rahul@gmail.com</span>
+                    </div>
+                </div>
+
+                <div class="success-checkmark-wrapper" style="margin-top: 1rem;">
+                    <div class="checkmark-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="checkmark-icon"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+                <h4 class="success-title">Google Account Verified!</h4>
+                <p class="success-desc">Thank you <strong id="success-lead-name"></strong>. Your Sample PDI Report PDF download is starting automatically...</p>
+                <a href="assets/CARROBAAR_Drive_Sample_PDI_Report.pdf" download="CARROBAAR_Drive_Sample_PDI_Report.pdf" class="btn btn-secondary btn-sm" id="manual-pdf-download-link" style="margin-top: 1rem;">
+                    <i data-lucide="download"></i> If download doesn't start, click here
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- JS Logic -->
-    <script src="app.js"></script>
+    <script src="app.js?v=smooth"></script>
 </body>
 </html>

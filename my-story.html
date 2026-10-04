@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=light-grey11">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,20 +26,58 @@
     <div class="mouse-glow" id="mouse-glow"></div>    <!-- Sticky Navigation Header -->
     <header class="main-header" id="header">
         <div class="container header-container">
-            <a href="./index.html" class="logo" id="nav-logo">
-                <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+            <a href="./index.html" class="logo" id="nav-logo" aria-label="CARROBAAR Drive Home">
+                <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
             </a>
             
             <nav class="nav-menu" id="nav-menu">
                 <a href="./index.html" class="nav-link">Home</a>
-                <a href="./interactive-lab.html" class="nav-link">Interactive Lab</a>
-                <a href="./inspection-gallery.html" class="nav-link">Showcase Gallery</a>
                 <a href="./sample-pdi-report.html" class="nav-link">Sample Report</a>
                 <a href="./my-story.html" class="nav-link active">My Story</a>
+                <a href="./vin-decoder.html" class="nav-link">VIN Decoder</a>
                 <a href="./blog/index.html" class="nav-link">Blog</a>
             </nav>
             
             <div class="header-actions">
+                <!-- Verified User Auth Container (Sign In or Logged-in Dropdown) -->
+                <div class="header-auth-container" id="header-auth-container">
+                    <!-- State 1: Logged Out - Sign In Button -->
+                    <button class="btn-header-signin" id="header-signin-btn" type="button" aria-label="Sign In">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Sign In</span>
+                    </button>
+
+                    <!-- State 2: Logged In - User Avatar & Profile Dropdown -->
+                    <div class="header-user-dropdown-wrapper" id="header-user-badge" style="display: none;">
+                        <button class="header-user-pill-btn" id="header-user-menu-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="header-user-avatar" id="header-user-avatar" referrerpolicy="no-referrer">
+                            <span class="header-user-name-short" id="header-user-name">Bhavya</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down dropdown-arrow"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+
+                        <!-- Floating Profile Dropdown -->
+                        <div class="header-user-menu-dropdown" id="header-user-menu-dropdown">
+                            <div class="user-menu-header">
+                                <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="user-menu-avatar" id="header-menu-avatar" referrerpolicy="no-referrer">
+                                <div class="user-menu-info">
+                                    <span class="user-menu-name" id="header-menu-fullname">Bhavya</span>
+                                    <span class="header-verified-pill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Member
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="user-menu-divider"></div>
+                            <button class="user-menu-item logout-btn" id="header-logout-btn" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <a href="./index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
                 
                 <!-- 3-Dash Hamburger Menu Icon Button -->
@@ -164,6 +202,83 @@
                     </div>
                 </div>
                 
+                <!-- Special Highlight: Flood & Stockyard Water Logging Risk -->
+                <div class="glass-card" style="margin-top: 2rem; padding: 1.75rem; border: 1px solid rgba(239, 68, 68, 0.3); background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%); border-radius: 14px;">
+                    <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #EF4444;">
+                            <i data-lucide="waves" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div>
+                            <span style="display: inline-block; font-size: 0.72rem; font-weight: 800; color: #EF4444; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 2px 8px; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.4rem;">
+                                Critical Inspection Audit
+                            </span>
+                            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--clr-text-white); margin-bottom: 0.5rem;">
+                                Outdoor Stockyard Rain & Flood Water Logging Risk
+                            </h4>
+                            <p style="font-size: 0.92rem; color: var(--clr-text-subdued); line-height: 1.6; margin: 0;">
+                                Cars parked in open dealer stockyards during monsoon rains frequently suffer from water logging, silt deposits inside chassis rails, seat runner rust, and submerged OBD ECU connectors. Dealerships quickly detail the exterior paint before delivery, masking severe hidden water damage. Our 300+ point audit checks behind wheel arch liners, carpet underlays, fuse box pins, and underbody crevices to ensure you never take delivery of a flood-damaged vehicle.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Used Car Common Trap Audit Cards (3 Columns) -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 1.5rem;">
+                    <!-- Card 1: Odometer Tampering -->
+                    <div class="glass-card" style="padding: 1.25rem; border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;">
+                        <div style="width: 100%; height: 140px; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.08);">
+                            <img src="assets/defect_odometer_tampering.png" alt="Odometer Rollback Inspection" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+                            <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); display: flex; align-items: center; justify-content: center; color: #C084FC; flex-shrink: 0;">
+                                <i data-lucide="gauge" style="width: 18px; height: 18px;"></i>
+                            </div>
+                            <h4 style="font-size: 1rem; font-weight: 800; color: var(--clr-text-white); margin: 0;">
+                                1. Odometer Tampering
+                            </h4>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--clr-text-subdued); line-height: 1.55; margin: 0; flex: 1;">
+                            Over 35% of pre-owned cars in India undergo meter rollback. We run deep OBD-II ECU diagnostic scans to compare stored engine operational hours vs cluster reading, catching hidden meter reversal traps.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Chassis & Structural Frame Damage -->
+                    <div class="glass-card" style="padding: 1.25rem; border: 1px solid rgba(255, 107, 0, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;">
+                        <div style="width: 100%; height: 140px; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.08);">
+                            <img src="assets/defect_chassis_structural.png" alt="Chassis Structural Damage Check" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+                            <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255, 107, 0, 0.15); border: 1px solid rgba(255, 107, 0, 0.3); display: flex; align-items: center; justify-content: center; color: #FF6B00; flex-shrink: 0;">
+                                <i data-lucide="shield-alert" style="width: 18px; height: 18px;"></i>
+                            </div>
+                            <h4 style="font-size: 1rem; font-weight: 800; color: var(--clr-text-white); margin: 0;">
+                                2. Chassis Frame & Weld Damage
+                            </h4>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--clr-text-subdued); line-height: 1.55; margin: 0; flex: 1;">
+                            Unreported accident repairs often mask repainted crumple zone welds and pulled chassis rails. We inspect underbody member alignment to protect you from buying unsafe, compromised vehicles.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Engine Mechanical Sludge & Compression -->
+                    <div class="glass-card" style="padding: 1.25rem; border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;">
+                        <div style="width: 100%; height: 140px; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.08);">
+                            <img src="assets/defect_engine_sludge.png" alt="Engine Sludge & Oil Seepage Check" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+                            <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); display: flex; align-items: center; justify-content: center; color: #EF4444; flex-shrink: 0;">
+                                <i data-lucide="wrench" style="width: 18px; height: 18px;"></i>
+                            </div>
+                            <h4 style="font-size: 1rem; font-weight: 800; color: var(--clr-text-white); margin: 0;">
+                                3. Engine Sludge & Leaks
+                            </h4>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--clr-text-subdued); line-height: 1.55; margin: 0; flex: 1;">
+                            Skipped engine oil changes leave heavy carbon sludge under the valve cover and head gasket leaks. We perform compression and oil sludging checks to prevent post-purchase engine overhauls.
+                        </p>
+                    </div>
+                </div>
+
                 <div class="independent-statement-box">
                     <h3>"We work for you, not the dealer."</h3>
                     <p>No commissions. No dealer bias. Just systematic, honest vehicle auditing.</p>
@@ -191,42 +306,7 @@
                             <i data-lucide="arrow-right"></i>
                         </div>
                     </a>
-                    
-                    <!-- Card 2: Interactive Lab -->
-                    <a href="interactive-lab.html" class="ribbon-card orange-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="scan" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-orange">Interactive Tool</span>
-                            <h3>Interactive Lab</h3>
-                            <p>Simulate paint depth checks and scan defects in real-time.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>Try Scanner</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 3: Showcase Gallery -->
-                    <a href="inspection-gallery.html" class="ribbon-card purple-glow-hover">
-                        <div class="ribbon-card-bg"></div>
-                        <div class="ribbon-icon-container">
-                            <i data-lucide="image" class="ribbon-icon"></i>
-                        </div>
-                        <div class="ribbon-content">
-                            <span class="ribbon-tag tag-purple">Visual Guide</span>
-                            <h3>Showcase Gallery</h3>
-                            <p>See how our inspectors audit engines, electronics, and chassis.</p>
-                        </div>
-                        <div class="ribbon-action">
-                            <span>View Gallery</span>
-                            <i data-lucide="arrow-right"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Card 4: Sample PDI Report -->
+                                       <!-- Card 2: Sample PDI Report -->
                     <a href="sample-pdi-report.html" class="ribbon-card orange-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -235,15 +315,15 @@
                         <div class="ribbon-content">
                             <span class="ribbon-tag tag-orange">Live Demo</span>
                             <h3>Sample PDI Report</h3>
-                            <p>Explore an interactive 180+ point checksheet for WagonR CNG.</p>
+                            <p>Explore an interactive 300+ point checksheet for WagonR CNG.</p>
                         </div>
                         <div class="ribbon-action">
                             <span>Open Report</span>
                             <i data-lucide="arrow-right"></i>
                         </div>
                     </a>
-
-                    <!-- Card 5: Car Buyer's Blog -->
+                    
+                    <!-- Card 3: Car Buyer's Blog -->
                     <a href="blog/index.html" class="ribbon-card purple-glow-hover">
                         <div class="ribbon-card-bg"></div>
                         <div class="ribbon-icon-container">
@@ -269,8 +349,11 @@
     <footer class="main-footer">
         <div class="container footer-grid">
             <div class="footer-brand-col">
-                <a href="./index.html" class="logo">
-                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                <a href="./index.html" class="logo" aria-label="CARROBAAR Drive Home">
+                    <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                    <span class="brand-name-text">
+                        CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                    </span>
                 </a>
                 <p class="footer-pitch">
                     Unbiased, commission-free car inspections helping you buy better and drive smarter in Gujarat.
@@ -309,7 +392,7 @@
                     </li>
                     <li>
                         <i data-lucide="map-pin" class="footer-icon font-orange"></i>
-                        <span>Serving in Anand, Vadodara, Khambhat and Ahmedabad</span>
+                        <span>Services Serving in Gujarat</span>
                     </li>
                 </ul>
                 <div class="whatsapp-btn-container">
@@ -322,7 +405,7 @@
         </div>
         
         <div class="footer-bottom text-center">
-            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Serving in Anand, Vadodara, Khambhat and Ahmedabad.</p>
+            <p>&copy; 2026 CARROBAAR_Drive. All Rights Reserved. Designed for CARROBAAR_Drive. Services Serving in Gujarat.</p>
         </div>
     </footer>
 
@@ -354,8 +437,11 @@
                 <i data-lucide="x"></i>
             </button>
             <div class="quick-nav-header">
-                <a href="./index.html" class="logo">
-                    <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
+                <a href="./index.html" class="logo" aria-label="CARROBAAR Drive Home">
+                    <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                    <span class="brand-name-text">
+                        CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                    </span>
                 </a>
                 <p class="quick-nav-subtitle">Quick Navigator</p>
             </div>
@@ -366,8 +452,6 @@
                 
                 <div class="nav-group-title">Explore More (New Tab)</div>
                 <a href="./index.html" target="_blank" class="quick-nav-item"><i data-lucide="home"></i> Home Page <i data-lucide="external-link" class="ext-icon"></i></a>
-                <a href="./interactive-lab.html" target="_blank" class="quick-nav-item"><i data-lucide="scan"></i> Interactive Lab <i data-lucide="external-link" class="ext-icon"></i></a>
-                <a href="./inspection-gallery.html" target="_blank" class="quick-nav-item"><i data-lucide="image"></i> Showcase Gallery <i data-lucide="external-link" class="ext-icon"></i></a>
                 <a href="./blog/index.html" target="_blank" class="quick-nav-item"><i data-lucide="book-open"></i> Car Buyer's Blog <i data-lucide="external-link" class="ext-icon"></i></a>
                 <a href="./sample-pdi-report.html" target="_blank" class="quick-nav-item"><i data-lucide="file-text"></i> WagonR Sample Report <i data-lucide="external-link" class="ext-icon"></i></a>
                 
@@ -377,6 +461,6 @@
     </div>
 
     <!-- JS Logic -->
-    <script src="app.js"></script>
+    <script src="app.js?v=smooth"></script>
 </body>
 </html>
