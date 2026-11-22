@@ -8822,12 +8822,21 @@ html, body {
     color: #FFFFFF;
 }
 
-.pill-value.font-purple {
-    color: #C084FC;
+.emi-pill-item .pill-value,
+.pill-value.pill-total {
+    color: #FFFFFF !important;
 }
 
-.pill-value.font-orange {
-    color: #FB923C;
+.emi-pill-item .pill-value.font-purple,
+.emi-pill-item .pill-value.pill-principal,
+.pill-value.pill-principal {
+    color: #D8B4FE !important; /* High-contrast bright lavender readable on dark navy */
+}
+
+.emi-pill-item .pill-value.font-orange,
+.emi-pill-item .pill-value.pill-interest,
+.pill-value.pill-interest {
+    color: #FB923C !important; /* High-contrast bright warm orange readable on dark navy */
 }
 
 /* Prepayment Celebration & Impact Card */

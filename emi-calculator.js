@@ -513,7 +513,7 @@
 
         // 1. Update Primary EMI Displays
         if (dom.displayEmi) {
-            dom.displayEmi.textContent = formatINR(result.regularEMI);
+            dom.displayEmi.textContent = result.regularEMI.toLocaleString('en-IN');
         }
         if (dom.displayPrincipal) {
             dom.displayPrincipal.textContent = formatINR(result.principal);
