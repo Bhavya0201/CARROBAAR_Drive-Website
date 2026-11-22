@@ -72,6 +72,24 @@ app.get('/used-car-inspection-gujarat', (req, res) => {
     res.sendFile(path.join(__dirname, 'used-car-inspection-gujarat.html'));
 });
 
+// Additional Gujarat City Landing Pages
+app.get('/car-pdi-surat', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-surat.html'));
+});
+app.get('/car-pdi-gandhinagar', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-gandhinagar.html'));
+});
+app.get('/car-pdi-rajkot', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-rajkot.html'));
+});
+app.get('/car-pdi-halol', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-halol.html'));
+});
+app.get('/car-pdi-godhra', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-godhra.html'));
+});
+
+
 // Brand-Specific VIN Decoder Subpages
 app.get('/vin-decoder/maruti-suzuki', (req, res) => {
     res.sendFile(path.join(__dirname, 'vin-decoder', 'maruti-suzuki.html'));
