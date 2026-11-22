@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Car Loan EMI Calculator & Prepayment Planner | CARROBAAR Drive</title>
+    <meta name="description" content="Calculate your car loan EMI with real-time sliders and direct typing. Compare prepayment options, extra annual EMIs, and see exact interest saved and early payoff date.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Identity Services (Google Sign-In SDK) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="emi-calc-page">
+
+    <!-- Sticky Navigation Header -->
+    <header class="main-header" id="header">
+        <div class="container header-container">
+            <a href="/" class="logo" id="nav-logo" aria-label="CARROBAAR Drive Home">
+                <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/sample-pdi-report" class="nav-link">Sample Report</a>
+                <a href="/my-story" class="nav-link">My Story</a>
+                <a href="/vin-decoder" class="nav-link">VIN Decoder</a>
+                <a href="/emi-calculator" class="nav-link active">EMI Calculator</a>
+                <a href="/blog" class="nav-link">Blog</a>
+            </nav>
+            
+            <div class="header-actions">
+                <!-- Verified User Auth Container -->
+                <div class="header-auth-container" id="header-auth-container">
+                    <!-- State 1: Logged Out -->
+                    <button class="btn-header-signin" id="header-signin-btn" type="button" aria-label="Sign In">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span>Sign In</span>
+                    </button>
+
+                    <!-- State 2: Logged In -->
+                    <div class="header-user-dropdown-wrapper" id="header-user-badge" style="display: none;">
+                        <button class="header-user-pill-btn" id="header-user-menu-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                            <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="header-user-avatar" id="header-user-avatar" referrerpolicy="no-referrer">
+                            <span class="header-user-name-short" id="header-user-name">User</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down dropdown-arrow"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+
+                        <div class="header-user-menu-dropdown" id="header-user-menu-dropdown">
+                            <div class="user-menu-header">
+                                <img src="assets/founder_bhavya.jpg" alt="User Avatar" class="user-menu-avatar" id="header-menu-avatar" referrerpolicy="no-referrer">
+                                <div class="user-menu-info">
+                                    <span class="user-menu-name" id="header-menu-fullname">User</span>
+                                    <span class="header-verified-pill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Member
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="user-menu-divider"></div>
+                            <button class="user-menu-item logout-btn" id="header-logout-btn" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-icons-group">
+                    <a href="https://www.instagram.com/carrobaar_drive?igsh=MTNhazUyYmdhMGswcQ==" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://youtube.com/@carrobaardrive?si=v72OKC6c3u6mHLCJ" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                </div>
+                
+                <a href="./index.html#contact" class="btn btn-primary btn-nav-cta">Book Inspection</a>
+                
+                <!-- 3-Dash Hamburger Menu -->
+                <button class="header-nav-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Menu">
+                    <span class="three-dash-line"></span>
+                    <span class="three-dash-line"></span>
+                    <span class="three-dash-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="emi-hero-section">
+            <div class="container" style="max-width: 1240px;">
+                <div class="badge-tag" style="margin: 0 auto 1rem; display: inline-flex;">
+                    <i data-lucide="calculator" class="badge-icon"></i>
+                    <span>CARROBAAR Drive Free Financial Tool</span>
+                </div>
+                
+                <h1 class="hero-title" style="font-size: 2.35rem; margin-bottom: 0.6rem;">
+                    Smart Car Loan EMI & <span class="gradient-text">Prepayment Planner</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Calculate monthly EMI with precision sliders & direct typing. Test smart prepayment strategies — extra monthly payments, 1 extra EMI yearly, or lump-sum — to see exactly how many months earlier you become debt-free and how many ₹ Lakhs you save in interest.
+                </p>
+
+                <!-- WORKSPACE 2-COLUMN GRID -->
+                <div class="emi-workspace-grid">
+                    
+                    <!-- LEFT COLUMN: CONTROLS & INPUTS -->
+                    <div class="emi-tool-card">
+                        
+                        <!-- Mode Selector Tabs -->
+                        <div class="emi-mode-tabs" role="tablist">
+                            <button type="button" class="emi-tab-btn" id="tab-mode-standard" role="tab" aria-selected="false">
+                                <i data-lucide="calculator"></i>
+                                <span>Standard EMI</span>
+                            </button>
+                            <button type="button" class="emi-tab-btn active" id="tab-mode-prepayment" role="tab" aria-selected="true">
+                                <i data-lucide="zap"></i>
+                                <span>⚡ Prepayment & Savings Optimizer</span>
+                                <span class="tab-pill-badge">Save ₹ Lakhs</span>
+                            </button>
+                        </div>
+
+                        <!-- INPUT GROUP 1: Vehicle Price -->
+                        <div class="emi-control-group">
+                            <div class="emi-label-row">
+                                <label for="vehicle-price-input" class="emi-label">
+                                    <span>Vehicle Price (On-Road / Ex-Showroom)</span>
+                                </label>
+                                <div class="emi-type-box">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" id="vehicle-price-input" class="emi-numeric-input" min="100000" max="15000000" step="10000" inputmode="numeric">
+                                    <span class="val-badge" id="vehicle-price-badge">₹ 15.00 Lakh</span>
+                                </div>
+                            </div>
+                            <div class="emi-slider-wrapper">
+                                <input type="range" id="vehicle-price-slider" class="emi-slider slider-purple" min="100000" max="10000000" step="25000" value="1500000">
+                                <div class="slider-ticks">
+                                    <span>₹ 1L</span>
+                                    <span>₹ 25L</span>
+                                    <span>₹ 50L</span>
+                                    <span>₹ 75L</span>
+                                    <span>₹ 1 Cr</span>
+                                </div>
+                            </div>
+                            <!-- Quick Price Chips -->
+                            <div class="quick-chips-row">
+                                <span class="chips-label">Popular:</span>
+                                <button type="button" class="quick-chip chip-price" data-price="800000">₹8 Lakh (Hatchback)</button>
+                                <button type="button" class="quick-chip chip-price active" data-price="1500000">₹15 Lakh (Mid SUV)</button>
+                                <button type="button" class="quick-chip chip-price" data-price="2500000">₹25 Lakh (Executive)</button>
+                                <button type="button" class="quick-chip chip-price" data-price="4000000">₹40 Lakh (Luxury)</button>
+                            </div>
+                        </div>
+
+                        <!-- INPUT GROUP 2: Down Payment -->
+                        <div class="emi-control-group">
+                            <div class="emi-label-row">
+                                <label for="down-payment-input" class="emi-label">
+                                    <span>Down Payment</span>
+                                    <span class="label-hint">(Minimum 20% recommended)</span>
+                                </label>
+                                <div class="emi-dual-type-box">
+                                    <div class="emi-type-box">
+                                        <span class="currency-symbol">₹</span>
+                                        <input type="number" id="down-payment-input" class="emi-numeric-input" min="0" max="10000000" step="10000" inputmode="numeric">
+                                    </div>
+                                    <div class="emi-type-box type-pct">
+                                        <input type="number" id="down-payment-pct-input" class="emi-numeric-input input-pct" min="0" max="90" step="1" inputmode="numeric">
+                                        <span class="pct-symbol">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="emi-slider-wrapper">
+                                <input type="range" id="down-payment-pct-slider" class="emi-slider slider-orange" min="0" max="80" step="1" value="20">
+                                <div class="slider-ticks">
+                                    <span>0%</span>
+                                    <span>20% (Rule)</span>
+                                    <span>40%</span>
+                                    <span>60%</span>
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INPUT GROUP 3: Net Loan Amount (Calculated / Direct) -->
+                        <div class="emi-control-group loan-amount-group">
+                            <div class="emi-label-row">
+                                <label for="loan-amount-input" class="emi-label">
+                                    <span>Net Loan Amount (Principal)</span>
+                                </label>
+                                <div class="emi-type-box highlight-purple">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" id="loan-amount-input" class="emi-numeric-input" min="10000" max="10000000" step="10000" inputmode="numeric">
+                                    <span class="val-badge" id="loan-amount-badge">₹ 12.00 Lakh</span>
+                                </div>
+                            </div>
+                            <div class="emi-slider-wrapper">
+                                <input type="range" id="loan-amount-slider" class="emi-slider slider-purple" min="100000" max="8000000" step="25000" value="1200000">
+                            </div>
+                        </div>
+
+                        <!-- INPUT GROUP 4: Interest Rate (% p.a.) -->
+                        <div class="emi-control-group">
+                            <div class="emi-label-row">
+                                <label for="interest-rate-input" class="emi-label">
+                                    <span>Annual Interest Rate (% p.a.)</span>
+                                </label>
+                                <div class="emi-type-box">
+                                    <input type="number" id="interest-rate-input" class="emi-numeric-input" min="4.0" max="22.0" step="0.05" inputmode="decimal">
+                                    <span class="pct-symbol">%</span>
+                                </div>
+                            </div>
+                            <div class="emi-slider-wrapper">
+                                <input type="range" id="interest-rate-slider" class="emi-slider slider-orange" min="6.0" max="18.0" step="0.05" value="8.75">
+                                <div class="slider-ticks">
+                                    <span>6%</span>
+                                    <span>8.75% (SBI)</span>
+                                    <span>12%</span>
+                                    <span>15%</span>
+                                    <span>18%</span>
+                                </div>
+                            </div>
+                            <!-- Bank Rate Preset Chips -->
+                            <div class="quick-chips-row">
+                                <span class="chips-label">Bank Benchmarks:</span>
+                                <button type="button" class="quick-chip chip-bank active" data-rate="8.75">SBI: 8.75%</button>
+                                <button type="button" class="quick-chip chip-bank" data-rate="8.70">HDFC: 8.70%</button>
+                                <button type="button" class="quick-chip chip-bank" data-rate="8.65">ICICI: 8.65%</button>
+                                <button type="button" class="quick-chip chip-bank" data-rate="11.50">Used Car: 11.5%</button>
+                                <button type="button" class="quick-chip chip-bank" data-rate="8.25">EV Special: 8.25%</button>
+                            </div>
+                        </div>
+
+                        <!-- INPUT GROUP 5: Loan Tenure -->
+                        <div class="emi-control-group">
+                            <div class="emi-label-row">
+                                <label for="tenure-years-input" class="emi-label">
+                                    <span>Loan Tenure</span>
+                                </label>
+                                <div class="emi-type-box">
+                                    <input type="number" id="tenure-years-input" class="emi-numeric-input" min="1" max="10" step="1" inputmode="numeric">
+                                    <span class="pct-symbol">Years</span>
+                                    <span class="val-badge" id="tenure-months-badge">60 Mos</span>
+                                </div>
+                            </div>
+                            <div class="emi-slider-wrapper">
+                                <input type="range" id="tenure-years-slider" class="emi-slider slider-purple" min="1" max="8" step="1" value="5">
+                                <div class="slider-ticks">
+                                    <span>1 Year</span>
+                                    <span>3 Years</span>
+                                    <span>5 Years</span>
+                                    <span>7 Years</span>
+                                    <span>8 Years</span>
+                                </div>
+                            </div>
+                            <!-- Quick Tenure Chips -->
+                            <div class="quick-chips-row">
+                                <span class="chips-label">Quick Pick:</span>
+                                <button type="button" class="quick-chip chip-tenure" data-years="3">3 Years</button>
+                                <button type="button" class="quick-chip chip-tenure" data-years="4">4 Years (20/4/10 Rule)</button>
+                                <button type="button" class="quick-chip chip-tenure active" data-years="5">5 Years (Standard)</button>
+                                <button type="button" class="quick-chip chip-tenure" data-years="7">7 Years (Max)</button>
+                            </div>
+                        </div>
+
+                        <!-- PREPAYMENT OPTIMIZER PANEL (Collapsible or Active) -->
+                        <div class="prepayment-controls-panel" id="prepayment-controls-panel">
+                            <div class="prepayment-panel-header">
+                                <div class="panel-header-title">
+                                    <div class="panel-icon-wrap">
+                                        <i data-lucide="sparkles"></i>
+                                    </div>
+                                    <div>
+                                        <h4>Smart Prepayment Accelerators</h4>
+                                        <p>Combine any of these 3 techniques to eliminate interest and finish your loan years ahead.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PREPAYMENT OPTION 1: Regular Extra Monthly Payment -->
+                            <div class="prepay-option-card">
+                                <div class="prepay-option-header">
+                                    <div class="prepay-title-group">
+                                        <i data-lucide="plus-circle" class="prepay-icon font-orange"></i>
+                                        <div>
+                                            <span class="prepay-title">1. Extra Monthly Prepayment</span>
+                                            <span class="prepay-desc">Pay a little extra along with your regular monthly EMI.</span>
+                                        </div>
+                                    </div>
+                                    <div class="emi-type-box type-sm">
+                                        <span class="currency-symbol">₹</span>
+                                        <input type="number" id="extra-monthly-input" class="emi-numeric-input" min="0" max="50000" step="500" value="2500" inputmode="numeric">
+                                        <span class="pct-symbol">/mo</span>
+                                    </div>
+                                </div>
+                                <div class="emi-slider-wrapper">
+                                    <input type="range" id="extra-monthly-slider" class="emi-slider slider-orange" min="0" max="25000" step="500" value="2500">
+                                    <div class="slider-ticks">
+                                        <span>₹ 0</span>
+                                        <span>₹ 5,000</span>
+                                        <span>₹ 10,000</span>
+                                        <span>₹ 15,000</span>
+                                        <span>₹ 25,000</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PREPAYMENT OPTION 2: 1 Extra EMI Every Year (Diwali/Bonus) -->
+                            <div class="prepay-option-card">
+                                <div class="prepay-option-header align-center">
+                                    <div class="prepay-title-group">
+                                        <i data-lucide="gift" class="prepay-icon font-purple"></i>
+                                        <div>
+                                            <span class="prepay-title">2. Pay 1 Extra EMI Every Year</span>
+                                            <span class="prepay-desc">Use your annual appraisal / Diwali bonus to pay 1 extra EMI every 12th month.</span>
+                                        </div>
+                                    </div>
+                                    <label class="switch-toggle" for="yearly-emi-toggle" aria-label="Toggle 1 Extra EMI per year">
+                                        <input type="checkbox" id="yearly-emi-toggle" checked>
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- PREPAYMENT OPTION 3: One-Time Bulk Prepayment -->
+                            <div class="prepay-option-card">
+                                <div class="prepay-option-header">
+                                    <div class="prepay-title-group">
+                                        <i data-lucide="wallet" class="prepay-icon font-orange"></i>
+                                        <div>
+                                            <span class="prepay-title">3. One-Time Lump Sum Prepayment</span>
+                                            <span class="prepay-desc">Deposit a bulk amount at any chosen point during your loan.</span>
+                                        </div>
+                                    </div>
+                                    <div class="emi-type-box type-sm">
+                                        <span class="currency-symbol">₹</span>
+                                        <input type="number" id="bulk-amount-input" class="emi-numeric-input" min="0" max="1000000" step="10000" value="100000" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="emi-slider-wrapper">
+                                    <input type="range" id="bulk-amount-slider" class="emi-slider slider-orange" min="0" max="500000" step="10000" value="100000">
+                                </div>
+                                <div class="bulk-timing-row">
+                                    <label for="bulk-month-select" class="bulk-timing-label">
+                                        <i data-lucide="calendar"></i>
+                                        <span>When will you make this bulk payment?</span>
+                                    </label>
+                                    <select id="bulk-month-select" class="bulk-timing-select">
+                                        <!-- Dynamically populated based on tenure -->
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: RESULTS, COMPARISON & DONUT CHART -->
+                    <div class="emi-results-column" id="emi-results-column">
+                        
+                        <!-- Primary Monthly EMI Card -->
+                        <div class="emi-primary-card">
+                            <span class="emi-card-tag">Monthly Commitment</span>
+                            <div class="emi-main-figure-group">
+                                <span class="emi-currency-prefix">₹</span>
+                                <span class="emi-main-figure" id="display-monthly-emi">24,732</span>
+                                <span class="emi-per-month">/ month</span>
+                            </div>
+                            <p class="emi-subtext">Calculated on Reducing Balance Interest Rate</p>
+
+                            <!-- 3-Pill Breakdown -->
+                            <div class="emi-pills-grid">
+                                <div class="emi-pill-item">
+                                    <span class="pill-label">Principal Loan</span>
+                                    <strong class="pill-value font-purple" id="display-principal">₹ 12,00,000</strong>
+                                </div>
+                                <div class="emi-pill-item">
+                                    <span class="pill-label">Standard Interest</span>
+                                    <strong class="pill-value font-orange" id="display-interest">₹ 2,83,920</strong>
+                                </div>
+                                <div class="emi-pill-item">
+                                    <span class="pill-label">Total Payable</span>
+                                    <strong class="pill-value" id="display-total-payable">₹ 14,83,920</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ⚡ PREPAYMENT SAVINGS CELEBRATION CARD -->
+                        <div class="prepayment-results-card" id="prepayment-results-card">
+                            <div class="savings-glow-badge">
+                                <i data-lucide="trending-down"></i>
+                                <span>Prepayment Impact</span>
+                            </div>
+                            
+                            <div class="savings-headline-grid">
+                                <div class="savings-stat-block">
+                                    <span class="stat-label">Total Interest Saved</span>
+                                    <div class="stat-value-group">
+                                        <span class="stat-main-number text-saved" id="display-interest-saved">₹ 1,12,450</span>
+                                    </div>
+                                    <span class="stat-subtext" id="display-savings-percentage">39.6% of interest saved</span>
+                                </div>
+                                <div class="savings-stat-block">
+                                    <span class="stat-label">Debt-Free Early By</span>
+                                    <div class="stat-value-group">
+                                        <span class="stat-main-number text-purple" id="display-tenure-saved">1 Yr 6 Mos Earlier</span>
+                                    </div>
+                                    <span class="stat-subtext">Debt-Free by: <strong id="display-debt-free-date">Oct 2029</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="comparison-bar-wrapper">
+                                <div class="comp-row">
+                                    <span class="comp-label">Original Loan Term:</span>
+                                    <span class="comp-val" id="display-tenure-original">5 Years (60 Mos)</span>
+                                </div>
+                                <div class="comp-row">
+                                    <span class="comp-label">New Accelerated Term:</span>
+                                    <span class="comp-val font-bold text-saved" id="display-new-tenure">42 Months (3.5 Yrs)</span>
+                                </div>
+                                <div class="comp-row">
+                                    <span class="comp-label">New Total Outflow:</span>
+                                    <span class="comp-val font-bold" id="display-new-total-payable">₹ 13,71,470</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVE SVG DONUT CHART -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4 class="chart-title">Payment Breakdown</h4>
+                                <span class="chart-subtitle">Principal vs Interest</span>
+                            </div>
+                            
+                            <div class="donut-chart-container">
+                                <div class="donut-svg-wrapper">
+                                    <svg class="donut-svg" id="emi-donut-svg" viewBox="0 0 160 160" width="160" height="160">
+                                        <!-- Background Circle Track -->
+                                        <circle class="donut-track" cx="80" cy="80" r="64" fill="transparent" stroke="#E2E8F0" stroke-width="22" />
+                                        
+                                        <!-- Principal Segment (Purple) -->
+                                        <circle class="donut-segment segment-principal" id="donut-segment-principal" cx="80" cy="80" r="64" fill="transparent" stroke="#7E22CE" stroke-width="22" stroke-dasharray="250 402" stroke-dashoffset="0" transform="rotate(-90 80 80)" />
+                                        
+                                        <!-- Net Interest Segment (Orange) -->
+                                        <circle class="donut-segment segment-interest" id="donut-segment-interest" cx="80" cy="80" r="64" fill="transparent" stroke="#E65C00" stroke-width="22" stroke-dasharray="100 402" stroke-dashoffset="-250" transform="rotate(-90 80 80)" />
+                                        
+                                        <!-- Interest Saved Segment (Emerald Green) -->
+                                        <circle class="donut-segment segment-saved" id="donut-segment-saved" cx="80" cy="80" r="64" fill="transparent" stroke="#10B981" stroke-width="22" stroke-dasharray="52 402" stroke-dashoffset="-350" transform="rotate(-90 80 80)" style="display: none;" />
+                                    </svg>
+                                    
+                                    <!-- Donut Center Readout -->
+                                    <div class="donut-center-info">
+                                        <span class="center-label" id="donut-center-label">Monthly EMI</span>
+                                        <span class="center-value" id="donut-center-value">₹ 24.7k</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chart Legend -->
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-dot dot-principal"></span>
+                                        <span>Principal Loan</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-dot dot-interest"></span>
+                                        <span>Interest Amount</span>
+                                    </div>
+                                    <div class="legend-item" id="chart-legend-saved" style="display: none;">
+                                        <span class="legend-dot dot-saved"></span>
+                                        <span class="text-saved font-bold">Interest Saved</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Trigger CTA & Inspection Handoff -->
+                        <div class="results-action-buttons">
+                            <button type="button" class="btn btn-secondary btn-block" id="btn-toggle-schedule">
+                                <i data-lucide="chevron-down"></i>
+                                <span>View Full Amortization Schedule</span>
+                            </button>
+                            
+                            <a href="./index.html#contact" class="btn btn-primary btn-block btn-pdi-handoff">
+                                <i data-lucide="shield-check"></i>
+                                <span>Verify Car Before Loan Disbursement (PDI)</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FULL AMORTIZATION SCHEDULE SECTION (Collapsible) -->
+                <div class="schedule-table-container" id="schedule-table-container" style="display: none;">
+                    <div class="schedule-header">
+                        <div>
+                            <h3 class="schedule-title">Amortization Repayment Schedule</h3>
+                            <p class="schedule-subtitle">Complete year-by-year and month-by-month tracking of principal repayment, interest, and closing balances.</p>
+                        </div>
+                        <div class="schedule-actions-row">
+                            <div class="schedule-view-switcher">
+                                <button type="button" class="btn-schedule-view active" data-view="yearly">Yearly Summary</button>
+                                <button type="button" class="btn-schedule-view" data-view="monthly">Monthly Breakdown</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline" id="btn-download-csv">
+                                <i data-lucide="download"></i>
+                                <span>Export CSV</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline" id="btn-print-summary">
+                                <i data-lucide="printer"></i>
+                                <span>Print</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-wrapper">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Period</th>
+                                    <th>Beginning Balance</th>
+                                    <th>Regular EMI</th>
+                                    <th>Extra Prepayment</th>
+                                    <th>Principal Repaid</th>
+                                    <th>Interest Paid</th>
+                                    <th>Ending Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-table-body">
+                                <!-- Dynamically generated by emi-calculator.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AUTHORITATIVE EDUCATIONAL GUIDE SECTION -->
+                <div class="emi-educational-section">
+                    <div class="section-header text-center">
+                        <div class="badge-tag" style="margin: 0 auto 0.75rem;">
+                            <i data-lucide="book-open" class="badge-icon"></i>
+                            <span>Car Finance Mastery</span>
+                        </div>
+                        <h2 class="section-title">The Smart Car Buyer's Guide to Financing & Loans</h2>
+                        <div class="header-divider divider-orange"></div>
+                        <p class="section-desc" style="max-width: 720px; margin: 0 auto;">
+                            Auto dealerships often conceal huge interest margins through deceptive rate structures. Here is the exact insider wisdom to ensure you never overpay for your dream car.
+                        </p>
+                    </div>
+
+                    <div class="edu-grid">
+                        
+                        <!-- CARD 1: Reducing vs Flat Rate Trap -->
+                        <div class="edu-card highlight-border">
+                            <div class="edu-card-icon font-orange">
+                                <i data-lucide="alert-triangle"></i>
+                            </div>
+                            <h3 class="edu-card-title">The "Flat Rate" Dealer Trap</h3>
+                            <p class="edu-card-desc">
+                                Dealership finance desks frequently quote a tempting <strong>"5% or 5.5% Flat Rate"</strong>. Do not be deceived! In a flat-rate loan, interest is calculated on the original principal for the entire tenure, even when you have already repaid most of it.
+                            </p>
+                            <div class="edu-callout-box">
+                                <strong>Reality Check:</strong> A <strong>5.5% Flat Rate</strong> loan over 5 years is equivalent to a <strong>10.2% Reducing Balance Rate</strong>. Always insist that the lender quote only in <em>Reducing Balance Interest (Annual Percentage Rate)</em>.
+                            </div>
+                        </div>
+
+                        <!-- CARD 2: The 20/4/10 Rule -->
+                        <div class="edu-card">
+                            <div class="edu-card-icon font-purple">
+                                <i data-lucide="compass"></i>
+                            </div>
+                            <h3 class="edu-card-title">The Golden 20/4/10 Rule</h3>
+                            <p class="edu-card-desc">
+                                Automotive financial advisors globally recommend this golden formula to avoid becoming "car poor":
+                            </p>
+                            <ul class="edu-list">
+                                <li><strong>20% Down Payment:</strong> Protects you from negative equity (owing more than the car is worth after immediate showroom depreciation).</li>
+                                <li><strong>Max 4-Year Tenure:</strong> Never stretch car loans to 7–8 years; cars are depreciating assets.</li>
+                                <li><strong>10% of Income Cap:</strong> Total monthly automotive outflow (EMI + fuel + insurance) should not exceed 10% of your gross monthly pay.</li>
+                            </ul>
+                        </div>
+
+                        <!-- CARD 3: RBI Prepayment Rules -->
+                        <div class="edu-card">
+                            <div class="edu-card-icon font-orange">
+                                <i data-lucide="scale"></i>
+                            </div>
+                            <h3 class="edu-card-title">RBI Foreclosure & Prepayment Rules</h3>
+                            <p class="edu-card-desc">
+                                As per Reserve Bank of India (RBI) directives, banks and NBFCs are strictly <strong>prohibited from levying foreclosure charges or prepayment penalties</strong> on floating rate loans sanctioned to individual borrowers.
+                            </p>
+                            <p class="edu-card-desc" style="margin-top: 0.5rem;">
+                                Note: If you opt for a <em>Fixed-Rate</em> car loan, lenders can charge 2% to 5% foreclosure fees. Always check the sanction letter clauses before signing.
+                            </p>
+                        </div>
+
+                        <!-- CARD 4: Prepayment Strategy & Opportunity Cost -->
+                        <div class="edu-card">
+                            <div class="edu-card-icon font-purple">
+                                <i data-lucide="piggy-bank"></i>
+                            </div>
+                            <h3 class="edu-card-title">Prepaying vs. Investing</h3>
+                            <p class="edu-card-desc">
+                                A car loan at 8.75% requires an 8.75% post-tax return just to break even. Prepaying your car loan delivers a <strong>guaranteed, 100% risk-free, tax-free return</strong> equal to your loan interest rate.
+                            </p>
+                            <p class="edu-card-desc" style="margin-top: 0.5rem;">
+                                In addition, closing your auto loan boosts your <strong>CIBIL score</strong> and reduces your Fixed Obligation to Income Ratio (FOIR), making future home loans significantly cheaper.
+                            </p>
+                        </div>
+
+                        <!-- CARD 5: Pre-Delivery Inspection (PDI) Connection -->
+                        <div class="edu-card span-full highlight-purple-card">
+                            <div class="edu-card-flex">
+                                <div class="edu-card-icon-big">
+                                    <i data-lucide="shield-alert"></i>
+                                </div>
+                                <div>
+                                    <h3 class="edu-card-title" style="color: #1E1B4B; font-size: 1.35rem;">
+                                        Critical Warning: Inspect Before Loan Disbursement!
+                                    </h3>
+                                    <p class="edu-card-desc" style="font-size: 0.95rem; margin-top: 0.35rem;">
+                                        Once a bank disburses loan funds directly to the dealership's account and the RTO registration is initiated, <strong>you cannot cancel the purchase or return the car</strong>. If the vehicle has transit damage, repainted panels, or mechanical defects hidden in the dealer stockyard, you are stuck paying monthly EMIs for a defective asset.
+                                    </p>
+                                    <div class="inspection-reminder-banner">
+                                        <div class="reminder-text">
+                                            <strong>Rule of Thumb:</strong> Authorize your bank's disbursement DO (Delivery Order) <em>ONLY AFTER</em> a comprehensive CARROBAAR Drive 300+ Point Pre-Delivery Inspection clears your vehicle's VIN and physical condition.
+                                        </div>
+                                        <a href="./index.html#contact" class="btn btn-primary" style="white-space: nowrap;">
+                                            Book 300+ Point PDI Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- BOTTOM CALLOUT BANNER -->
+                <div class="vin-callout-banner" style="margin-top: 3.5rem; background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); border-radius: 20px; padding: 2.5rem; text-align: center; color: #FFFFFF; box-shadow: 0 15px 35px rgba(30, 27, 75, 0.25);">
+                    <h3 style="font-family: var(--ff-heading); font-size: 1.65rem; font-weight: 800; margin-bottom: 0.6rem; color: #FFFFFF !important; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        Found Your Dream Car & Sorted Your Loan?
+                    </h3>
+                    <p style="max-width: 650px; margin: 0 auto 1.5rem; color: #E0E7FF !important; font-size: 0.98rem; line-height: 1.6;">
+                        Before signing loan disbursement papers or transferring down payment to the dealership, ensure your vehicle is genuinely flawless with CARROBAAR Drive's independent 300+ point inspection in Gujarat.
+                    </p>
+                    
+                    <div class="cta-button-group">
+                        <a href="./index.html#contact" class="btn btn-primary btn-nav-cta" style="font-size: 0.9rem !important; padding: 0.75rem 2rem !important; height: 46px !important;">
+                            <i data-lucide="check-square" style="width: 18px; height: 18px;"></i>
+                            <span>Book Independent PDI Now</span>
+                        </a>
+
+                        <a href="./sample-pdi-report" class="btn-cta-secondary">
+                            <i data-lucide="file-text" style="width: 18px; height: 18px;"></i>
+                            <span>View Sample 300+ Pt Report</span>
+                        </a>
+
+                        <a href="./vin-decoder" class="btn-cta-secondary">
+                            <i data-lucide="hash" style="width: 18px; height: 18px;"></i>
+                            <span>Check VIN Manufacturing Date</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MOBILE STICKY BOTTOM SUMMARY BAR -->
+    <div class="emi-mobile-sticky-bar" id="emi-mobile-sticky-bar">
+        <div class="sticky-bar-content">
+            <div class="sticky-info-group">
+                <span class="sticky-label">Estimated Monthly EMI</span>
+                <strong class="sticky-value" id="mobile-sticky-emi">₹ 24,732/mo</strong>
+                <span id="mobile-sticky-savings"></span>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-mobile-view-results">
+                <span>View Results</span>
+                <i data-lucide="arrow-up" style="width: 14px; height: 14px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer" style="background: #0F172A; color: #94A3B8; padding: 3rem 0 2rem; margin-top: 4rem;">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; border-bottom: 1px solid #1E293B; padding-bottom: 2rem;">
+            <a href="/" class="logo" style="text-decoration: none;" aria-label="CARROBAAR Drive Home">
+                <img src="assets/logo.png" alt="CARROBAAR Drive Logo" class="brand-logo-img">
+                <span class="brand-name-text" style="color: #FFFFFF;">
+                    CARROBAAR <span class="brand-badge-pdi">Drive</span>
+                </span>
+            </a>
+            <p style="font-size: 0.88rem; margin: 0;">
+                Independent Car Inspection & Consultation Services across Gujarat.
+            </p>
+            <div>
+                <a href="/" style="color: #94A3B8; text-decoration: none; margin-right: 1.25rem;">Home</a>
+                <a href="/sample-pdi-report" style="color: #94A3B8; text-decoration: none; margin-right: 1.25rem;">Sample Report</a>
+                <a href="/vin-decoder" style="color: #94A3B8; text-decoration: none; margin-right: 1.25rem;">VIN Decoder</a>
+                <a href="/emi-calculator" style="color: #FFFFFF; font-weight: 700; text-decoration: none; margin-right: 1.25rem;">EMI Calculator</a>
+                <a href="/blog" style="color: #94A3B8; text-decoration: none;">Blog</a>
+            </div>
+        </div>
+        <div class="container" style="text-align: center; font-size: 0.8rem; margin-top: 1.5rem;">
+            &copy; 2026 CARROBAAR Drive. Buy Better, Drive Smarter. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- App & EMI Engine Scripts -->
+    <script src="app.js"></script>
+    <script src="emi-calculator.js"></script>
+</body>
+</html>

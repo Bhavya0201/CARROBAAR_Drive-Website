@@ -45,6 +45,9 @@ app.get('/my-story', (req, res) => {
 app.get('/vin-decoder', (req, res) => {
     res.sendFile(path.join(__dirname, 'vin-decoder.html'));
 });
+app.get('/emi-calculator', (req, res) => {
+    res.sendFile(path.join(__dirname, 'emi-calculator.html'));
+});
 app.get('/interactive-lab', (req, res) => {
     res.sendFile(path.join(__dirname, 'interactive-lab.html'));
 });
@@ -53,6 +56,17 @@ app.get('/vin-decoding-explained', (req, res) => {
 });
 app.get('/blog', (req, res) => {
     res.sendFile(path.join(__dirname, 'blog', 'index.html'));
+});
+app.get('/blog/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'blog', 'index.html'));
+});
+app.get('/blog/:slug', (req, res, next) => {
+    const slug = req.params.slug;
+    const filePath = path.join(__dirname, 'blog', `${slug}.html`);
+    if (fs.existsSync(filePath)) {
+        return res.sendFile(filePath);
+    }
+    next();
 });
 
 // Serve static frontend assets from the root directory
@@ -663,6 +677,104 @@ app.get('/api/leads/export', (req, res) => {
     res.setHeader('Content-Type', 'text/csv');
     res.setHeader('Content-Disposition', 'attachment; filename="carrobaar_verified_leads.csv"');
     res.status(200).send(csv);
+});
+
+/**
+ * POST /api/tools/emi-calculator
+ * Server-side EMI & Prepayment Simulation Engine
+ */
+app.post('/api/tools/emi-calculator', (req, res) => {
+    try {
+        const {
+            principal = 1200000,
+            annualRate = 8.75,
+            tenureMonths = 60,
+            extraMonthly = 0,
+            extraYearlyEMI = false,
+            bulkAmount = 0,
+            bulkMonth = 0
+        } = req.body;
+
+        const p = parseFloat(principal);
+        const r = parseFloat(annualRate);
+        const n = parseInt(tenureMonths, 10);
+        const exMo = parseFloat(extraMonthly) || 0;
+        const exYr = Boolean(extraYearlyEMI);
+        const bAmt = parseFloat(bulkAmount) || 0;
+        const bMo = parseInt(bulkMonth, 10) || 0;
+
+        if (isNaN(p) || isNaN(r) || isNaN(n) || p <= 0 || n <= 0) {
+            return res.status(400).json({ success: false, error: 'Invalid parameters provided.' });
+        }
+
+        const monthlyRate = r / (12 * 100);
+        const factor = Math.pow(1 + monthlyRate, n);
+        const regularEMI = Math.round((p * monthlyRate * factor) / (factor - 1));
+        const standardTotalAmount = regularEMI * n;
+        const standardTotalInterest = standardTotalAmount - p;
+
+        let balance = p;
+        let totalInterestPaid = 0;
+        let totalPrincipalPaid = 0;
+        let totalExtraPaid = 0;
+        let m = 0;
+
+        while (balance > 1 && m < 360) {
+            m++;
+            const monthInYear = ((m - 1) % 12) + 1;
+            const interest = balance * monthlyRate;
+
+            let extra = 0;
+            if (exMo > 0) extra += exMo;
+            if (exYr && monthInYear === 12) extra += regularEMI;
+            if (bAmt > 0 && m === bMo) extra += bAmt;
+
+            let payment = regularEMI + extra;
+            let principalPaid = 0;
+            let isFinal = false;
+
+            if (balance + interest <= payment) {
+                payment = balance + interest;
+                principalPaid = balance;
+                balance = 0;
+                isFinal = true;
+            } else {
+                principalPaid = payment - interest;
+                balance -= principalPaid;
+            }
+
+            totalInterestPaid += interest;
+            totalPrincipalPaid += principalPaid;
+            totalExtraPaid += extra;
+
+            if (isFinal) break;
+        }
+
+        const newTenureMonths = m;
+        const interestSaved = Math.max(0, standardTotalInterest - totalInterestPaid);
+        const monthsSaved = Math.max(0, n - newTenureMonths);
+
+        return res.status(200).json({
+            success: true,
+            data: {
+                principal: p,
+                annualRate: r,
+                tenureMonths: n,
+                regularEMI,
+                standardTotalInterest: Math.round(standardTotalInterest),
+                standardTotalAmount: Math.round(standardTotalAmount),
+                newTenureMonths,
+                monthsSaved,
+                totalInterestPaid: Math.round(totalInterestPaid),
+                totalPrincipalPaid: Math.round(totalPrincipalPaid),
+                totalExtraPaid: Math.round(totalExtraPaid),
+                totalPaidWithPrepayment: Math.round(totalPrincipalPaid + totalInterestPaid),
+                interestSaved: Math.round(interestSaved)
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({ success: false, error: err.message });
+    }
 });
 
 // Catch-all route to serve the main HTML index page

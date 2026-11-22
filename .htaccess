@@ -1,6 +1,10 @@
 # Hostinger Clean URLs & SEO Canonical Rewrites
 RewriteEngine On
 
+# Ensure HTTPS & Canonical non-www (avoids Google OAuth origin_mismatch)
+RewriteCond %{HTTP_HOST} ^www\.carrobaardrive\.com$ [NC]
+RewriteRule ^(.*)$ https://carrobaardrive.com/$1 [L,R=301]
+
 # 1. Redirect /index.html to root domain (/)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
 RewriteRule ^index\.html$ / [R=301,L]
@@ -14,3 +18,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^([^/]+)$ $1.html [L]
+
+# 4. Internally resolve /blog/slug to /blog/slug.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/blog/$1.html -f
+RewriteRule ^blog/([^/]+)$ blog/$1.html [L]

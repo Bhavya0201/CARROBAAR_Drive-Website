@@ -15,8 +15,8 @@
     <link rel="icon" type="image/png" href="../favicon.png">
     
     <!-- Link Main CSS and Blog specific CSS -->
-    <link rel="stylesheet" href="../styles.css?v=light-grey12">
-    <link rel="stylesheet" href="blog.css?v=light-theme3">
+    <link rel="stylesheet" href="/styles.css?v=mobile-fix1">
+    <link rel="stylesheet" href="/blog/blog.css?v=light-theme4">
     
     <!-- Lucide Icons (CDN) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -37,12 +37,12 @@
             </a>
             
             <nav class="nav-menu" id="nav-menu">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="../index.html#showroom-reality" class="nav-link">Showroom Reality</a>
-                <a href="../index.html#estimator" class="nav-link">Calculator</a>
-                <a href="../index.html#services" class="nav-link">Services</a>
-                <a href="../index.html#founder" class="nav-link">About Me</a>
-                <a href="#" class="nav-link active">Blog</a>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/sample-pdi-report" class="nav-link">Sample Report</a>
+                <a href="/my-story" class="nav-link">My Story</a>
+                <a href="/vin-decoder" class="nav-link">VIN Decoder</a>
+                <a href="/emi-calculator" class="nav-link">EMI Calculator</a>
+                <a href="/blog" class="nav-link active">Blog</a>
             </nav>
             
             <div class="header-actions">
@@ -104,7 +104,7 @@
                 <div class="filter-stats" id="filter-stats">
                     Showing <span id="visible-count">10</span> articles
                 </div>
-                <div class="no-results" id="no-results">
+                <div class="no-results" id="no-results" style="display: none;">
                     <i data-lucide="alert-circle" class="no-results-icon"></i>
                     <h3>No articles found</h3>
                     <p>We couldn't find any articles matching your search query. Try adjusting your filter tags or searching other keywords.</p>
@@ -499,19 +499,21 @@
 
             function filterArticles() {
                 let matchCount = 0;
+                const queryWords = searchQuery.split(/\s+/).filter(w => w.length > 0);
                 
                 blogCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    const cardKeywords = card.getAttribute('data-keywords').toLowerCase();
-                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
-                    const cardDesc = card.querySelector('p').textContent.toLowerCase();
+                    const cardCategory = card.getAttribute('data-category') || '';
+                    const cardKeywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                    const titleEl = card.querySelector('h3');
+                    const descEl = card.querySelector('p');
+                    const cardTitle = titleEl ? titleEl.textContent.toLowerCase() : '';
+                    const cardDesc = descEl ? descEl.textContent.toLowerCase() : '';
+                    const combined = (cardTitle + ' ' + cardDesc + ' ' + cardKeywords + ' ' + cardCategory).toLowerCase();
                     
                     const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
                     
-                    const matchesSearch = searchQuery === '' || 
-                                          cardTitle.includes(searchQuery) || 
-                                          cardDesc.includes(searchQuery) || 
-                                          cardKeywords.includes(searchQuery);
+                    // Token-based matching: each search word must appear anywhere in title, desc, category, or keywords
+                    const matchesSearch = queryWords.length === 0 || queryWords.every(word => combined.includes(word));
                     
                     if (matchesCategory && matchesSearch) {
                         card.style.display = 'flex';
@@ -521,42 +523,67 @@
                     }
                 });
 
-                visibleCountEl.textContent = matchCount;
+                if (visibleCountEl) visibleCountEl.textContent = matchCount;
                 
                 if (matchCount === 0) {
-                    noResultsEl.style.display = 'block';
-                    blogGrid.style.display = 'none';
+                    if (noResultsEl) noResultsEl.style.display = 'block';
+                    if (blogGrid) blogGrid.style.display = 'none';
                 } else {
-                    noResultsEl.style.display = 'none';
-                    blogGrid.style.display = 'grid';
+                    if (noResultsEl) noResultsEl.style.display = 'none';
+                    if (blogGrid) blogGrid.style.display = 'grid';
                 }
             }
 
+            // Check URL search parameters on load (?q= or ?category=)
+            const urlParams = new URLSearchParams(window.location.search);
+            const qParam = urlParams.get('q');
+            const catParam = urlParams.get('category');
+            if (qParam && searchInput) {
+                searchInput.value = qParam;
+                searchQuery = qParam.toLowerCase().trim();
+            }
+            if (catParam) {
+                filterBtns.forEach(btn => {
+                    if (btn.getAttribute('data-category') === catParam) {
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        activeCategory = catParam;
+                    }
+                });
+            }
+
+            // Execute immediately on load to ensure proper initial state
+            filterArticles();
+
             // Search input listener
-            searchInput.addEventListener('input', (e) => {
-                searchQuery = e.target.value.toLowerCase().trim();
-                filterArticles();
-            });
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value.toLowerCase().trim();
+                    filterArticles();
+                });
+            }
 
             // Category filter click listener
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    activeCategory = btn.getAttribute('data-category');
+                    activeCategory = btn.getAttribute('data-category') || 'all';
                     filterArticles();
                 });
             });
 
             // Reset filters listener
-            resetBtn.addEventListener('click', () => {
-                searchInput.value = '';
-                searchQuery = '';
-                filterBtns.forEach(b => b.classList.remove('active'));
-                filterBtns[0].classList.add('active'); // Set to 'All'
-                activeCategory = 'all';
-                filterArticles();
-            });
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (searchInput) searchInput.value = '';
+                    searchQuery = '';
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    if (filterBtns[0]) filterBtns[0].classList.add('active');
+                    activeCategory = 'all';
+                    filterArticles();
+                });
+            }
             
             // Site-wide Mouse Glow
             const mouseGlow = document.getElementById('mouse-glow');
@@ -572,6 +599,6 @@
             }
         });
     </script>
-<script src="blog.js"></script>
+<script src="/blog/blog.js"></script>
 </body>
 </html>

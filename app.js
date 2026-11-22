@@ -1177,54 +1177,59 @@ function initApp() {
                 };
 
                 ensureGoogleSdkLoaded(() => {
-                    if (typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
-                        try {
-                            const tokenClient = google.accounts.oauth2.initTokenClient({
-                                client_id: "338996362181-r943fv7neouam7m3sae36uff79e8gd8s.apps.googleusercontent.com",
-                                scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
-                                callback: async (tokenResponse) => {
-                                    if (tokenResponse && tokenResponse.access_token) {
-                                        try {
-                                            const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-                                                headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
-                                            });
-                                            const gUser = await res.json();
-                                            if (gUser && (gUser.email || gUser.sub)) {
-                                                verifyGoogleLeadOnBackend({ gUser });
-                                                restoreBtn();
-                                                return;
+                    const executeOAuth = () => {
+                        if (typeof google !== 'undefined' && google.accounts && google.accounts.oauth2) {
+                            try {
+                                const tokenClient = google.accounts.oauth2.initTokenClient({
+                                    client_id: "338996362181-r943fv7neouam7m3sae36uff79e8gd8s.apps.googleusercontent.com",
+                                    scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
+                                    callback: async (tokenResponse) => {
+                                        if (tokenResponse && tokenResponse.access_token) {
+                                            try {
+                                                const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+                                                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+                                                });
+                                                const gUser = await res.json();
+                                                if (gUser && (gUser.email || gUser.sub)) {
+                                                    verifyGoogleLeadOnBackend({ gUser });
+                                                    restoreBtn();
+                                                    return;
+                                                }
+                                            } catch (err) {
+                                                console.error("Error fetching Google profile:", err);
                                             }
-                                        } catch (err) {
-                                            console.error("Error fetching Google profile:", err);
                                         }
+                                        restoreBtn();
+                                        showError(step1Error, "Google login was cancelled or blocked. You can sign in instantly using the form below.");
+                                    },
+                                    error_callback: (err) => {
+                                        console.error("Google Token Client error:", err);
+                                        restoreBtn();
+                                        showError(step1Error, "Google authentication popup blocked or origin restricted. Please sign in using the form below.");
+                                        const nameInp = document.getElementById("auth-input-name");
+                                        if (nameInp) nameInp.focus();
                                     }
+                                });
+                                tokenClient.requestAccessToken();
+                            } catch (err) {
+                                console.error("OAuth init error:", err);
+                                restoreBtn();
+                                showError(step1Error, "Google authentication error. Please use Direct Sign In below.");
+                            }
+                        } else if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+                            google.accounts.id.prompt((notification) => {
+                                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
                                     restoreBtn();
-                                    showError(step1Error, "Google login popup was closed or cancelled.");
-                                },
-                                error_callback: (err) => {
-                                    console.error("Google Token Client error:", err);
-                                    restoreBtn();
-                                    showError(step1Error, "Could not open Google popup. Please check popup permissions or use Direct Sign In below.");
+                                    showError(step1Error, "Please use Direct Sign In below.");
                                 }
                             });
-                            tokenClient.requestAccessToken();
-                        } catch (err) {
-                            console.error("OAuth init error:", err);
+                        } else {
                             restoreBtn();
-                            showError(step1Error, "Google authentication error. Please try Direct Sign In below.");
+                            showError(step1Error, "Google Identity SDK is loading. Please try again or use Direct Sign In below.");
                         }
-                    } else if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                        // Fallback to Google ID OneTap prompt if available
-                        google.accounts.id.prompt((notification) => {
-                            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                                restoreBtn();
-                                showError(step1Error, "Please click the Google button or use Direct Sign In below.");
-                            }
-                        });
-                    } else {
-                        restoreBtn();
-                        showError(step1Error, "Google Identity SDK is loading. Please try again in a moment or use Direct Sign In below.");
-                    }
+                    };
+
+                    executeOAuth();
                 });
             });
         }
@@ -1555,10 +1560,13 @@ function initApp() {
                     const container = document.getElementById("google-signin-btn-container");
                     if (container) {
                         container.innerHTML = '';
+                        const dialogEl = document.querySelector(".google-modal-dialog");
+                        const maxWidth = dialogEl ? (dialogEl.clientWidth - 48) : 320;
+                        const btnWidth = Math.min(320, Math.max(220, maxWidth));
                         google.accounts.id.renderButton(container, {
                             theme: "filled_blue",
                             size: "large",
-                            width: 320,
+                            width: btnWidth,
                             text: "continue_with",
                             shape: "rectangular"
                         });
