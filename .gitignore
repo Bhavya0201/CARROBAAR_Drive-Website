@@ -3,3 +3,11 @@ node_modules/
 ~$*.xlsx
 .DS_Store
 Thumbs.db
+test_frames/
+test_pipe.mp4
+render_full_reel_mp4.py
+render_reel.html
+final_reel_audio.m4a
+music_sfx_track.wav
+voiceover_hindi.mp3
+
