@@ -491,13 +491,15 @@
     // Master Recalculation & UI Refresh
     function recalculate() {
         // Enforce boundary sanity
-        if (state.vehiclePrice < 100000) state.vehiclePrice = 100000;
+        if (state.vehiclePrice < 50000) state.vehiclePrice = 50000;
         if (state.downPayment >= state.vehiclePrice) {
             state.downPayment = Math.round(state.vehiclePrice * 0.90);
             state.downPaymentPct = 90;
         }
 
+        // Net Loan Amount is ALWAYS strictly Vehicle Price - Down Payment
         state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
+        state.downPaymentPct = parseFloat(((state.downPayment / state.vehiclePrice) * 100).toFixed(1));
         state.tenureMonths = state.tenureYears * 12;
 
         // Perform calculation
@@ -602,41 +604,88 @@
 
         // Cache last result for export
         state.lastSimulationResult = result;
+
+        // Keep all input controls synchronized with computed state
+        syncInputs();
     }
 
     // Synchronize Input Fields with State & Controls
     function syncInputs() {
+        const activeEl = document.activeElement;
+
         // Vehicle Price
-        if (dom.vehiclePriceSlider) dom.vehiclePriceSlider.value = state.vehiclePrice;
-        if (dom.vehiclePriceInput) dom.vehiclePriceInput.value = state.vehiclePrice;
-        if (dom.vehiclePriceBadge) dom.vehiclePriceBadge.textContent = formatINR(state.vehiclePrice, true);
+        if (dom.vehiclePriceSlider && activeEl !== dom.vehiclePriceSlider) {
+            dom.vehiclePriceSlider.value = state.vehiclePrice;
+        }
+        if (dom.vehiclePriceInput && activeEl !== dom.vehiclePriceInput) {
+            dom.vehiclePriceInput.value = state.vehiclePrice;
+        }
+        if (dom.vehiclePriceBadge) {
+            dom.vehiclePriceBadge.textContent = formatINR(state.vehiclePrice, true);
+        }
 
         // Down Payment
-        if (dom.downPaymentSlider) dom.downPaymentSlider.value = state.downPayment;
-        if (dom.downPaymentInput) dom.downPaymentInput.value = state.downPayment;
-        if (dom.downPaymentPctSlider) dom.downPaymentPctSlider.value = state.downPaymentPct;
-        if (dom.downPaymentPctInput) dom.downPaymentPctInput.value = state.downPaymentPct;
+        if (dom.downPaymentSlider && activeEl !== dom.downPaymentSlider) {
+            dom.downPaymentSlider.max = state.vehiclePrice;
+            dom.downPaymentSlider.value = state.downPayment;
+        }
+        if (dom.downPaymentInput && activeEl !== dom.downPaymentInput) {
+            dom.downPaymentInput.value = state.downPayment;
+        }
+        if (dom.downPaymentPctSlider && activeEl !== dom.downPaymentPctSlider) {
+            dom.downPaymentPctSlider.value = state.downPaymentPct;
+        }
+        if (dom.downPaymentPctInput && activeEl !== dom.downPaymentPctInput) {
+            dom.downPaymentPctInput.value = state.downPaymentPct;
+        }
 
-        // Loan Amount
-        if (dom.loanAmountSlider) dom.loanAmountSlider.value = state.loanAmount;
-        if (dom.loanAmountInput) dom.loanAmountInput.value = state.loanAmount;
-        if (dom.loanAmountBadge) dom.loanAmountBadge.textContent = formatINR(state.loanAmount, true);
+        // Loan Amount (Always strictly synchronized)
+        if (dom.loanAmountSlider && activeEl !== dom.loanAmountSlider) {
+            dom.loanAmountSlider.max = state.vehiclePrice;
+            dom.loanAmountSlider.value = state.loanAmount;
+        }
+        if (dom.loanAmountInput && activeEl !== dom.loanAmountInput) {
+            dom.loanAmountInput.value = state.loanAmount;
+        }
+        if (dom.loanAmountBadge) {
+            dom.loanAmountBadge.textContent = formatINR(state.loanAmount, true);
+        }
 
         // Interest Rate
-        if (dom.interestRateSlider) dom.interestRateSlider.value = state.interestRate;
-        if (dom.interestRateInput) dom.interestRateInput.value = state.interestRate;
+        if (dom.interestRateSlider && activeEl !== dom.interestRateSlider) {
+            dom.interestRateSlider.value = state.interestRate;
+        }
+        if (dom.interestRateInput && activeEl !== dom.interestRateInput) {
+            dom.interestRateInput.value = state.interestRate;
+        }
 
         // Tenure
-        if (dom.tenureYearsSlider) dom.tenureYearsSlider.value = state.tenureYears;
-        if (dom.tenureYearsInput) dom.tenureYearsInput.value = state.tenureYears;
-        if (dom.tenureMonthsBadge) dom.tenureMonthsBadge.textContent = `${state.tenureYears * 12} Mos`;
+        if (dom.tenureYearsSlider && activeEl !== dom.tenureYearsSlider) {
+            dom.tenureYearsSlider.value = state.tenureYears;
+        }
+        if (dom.tenureYearsInput && activeEl !== dom.tenureYearsInput) {
+            dom.tenureYearsInput.value = state.tenureYears;
+        }
+        if (dom.tenureMonthsBadge) {
+            dom.tenureMonthsBadge.textContent = `${state.tenureYears * 12} Mos`;
+        }
 
         // Prepayment Controls
-        if (dom.extraMonthlySlider) dom.extraMonthlySlider.value = state.extraMonthly;
-        if (dom.extraMonthlyInput) dom.extraMonthlyInput.value = state.extraMonthly;
-        if (dom.yearlyEmiToggle) dom.yearlyEmiToggle.checked = state.extraYearlyEMI;
-        if (dom.bulkAmountSlider) dom.bulkAmountSlider.value = state.bulkPrepayment;
-        if (dom.bulkAmountInput) dom.bulkAmountInput.value = state.bulkPrepayment;
+        if (dom.extraMonthlySlider && activeEl !== dom.extraMonthlySlider) {
+            dom.extraMonthlySlider.value = state.extraMonthly;
+        }
+        if (dom.extraMonthlyInput && activeEl !== dom.extraMonthlyInput) {
+            dom.extraMonthlyInput.value = state.extraMonthly;
+        }
+        if (dom.yearlyEmiToggle) {
+            dom.yearlyEmiToggle.checked = state.extraYearlyEMI;
+        }
+        if (dom.bulkAmountSlider && activeEl !== dom.bulkAmountSlider) {
+            dom.bulkAmountSlider.value = state.bulkPrepayment;
+        }
+        if (dom.bulkAmountInput && activeEl !== dom.bulkAmountInput) {
+            dom.bulkAmountInput.value = state.bulkPrepayment;
+        }
     }
 
     // Attach Event Listeners
@@ -647,7 +696,7 @@
                 state.vehiclePrice = parseInt(e.target.value, 10);
                 // Maintain down payment percentage
                 state.downPayment = Math.round(state.vehiclePrice * (state.downPaymentPct / 100));
-                syncInputs();
+                state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                 recalculate();
             });
         }
@@ -657,7 +706,7 @@
                 if (!isNaN(val) && val >= 50000) {
                     state.vehiclePrice = val;
                     state.downPayment = Math.round(state.vehiclePrice * (state.downPaymentPct / 100));
-                    syncInputs();
+                    state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                     recalculate();
                 }
             });
@@ -667,8 +716,8 @@
         if (dom.downPaymentSlider) {
             dom.downPaymentSlider.addEventListener('input', (e) => {
                 state.downPayment = parseInt(e.target.value, 10);
-                state.downPaymentPct = Math.round((state.downPayment / state.vehiclePrice) * 100);
-                syncInputs();
+                state.downPaymentPct = parseFloat(((state.downPayment / state.vehiclePrice) * 100).toFixed(1));
+                state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                 recalculate();
             });
         }
@@ -676,9 +725,9 @@
             dom.downPaymentInput.addEventListener('input', (e) => {
                 const val = parseInt(e.target.value, 10);
                 if (!isNaN(val) && val >= 0) {
-                    state.downPayment = val;
-                    state.downPaymentPct = Math.min(95, Math.round((state.downPayment / state.vehiclePrice) * 100));
-                    syncInputs();
+                    state.downPayment = Math.min(val, Math.round(state.vehiclePrice * 0.95));
+                    state.downPaymentPct = parseFloat(((state.downPayment / state.vehiclePrice) * 100).toFixed(1));
+                    state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                     recalculate();
                 }
             });
@@ -689,17 +738,17 @@
             dom.downPaymentPctSlider.addEventListener('input', (e) => {
                 state.downPaymentPct = parseFloat(e.target.value);
                 state.downPayment = Math.round(state.vehiclePrice * (state.downPaymentPct / 100));
-                syncInputs();
+                state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                 recalculate();
             });
         }
         if (dom.downPaymentPctInput) {
             dom.downPaymentPctInput.addEventListener('input', (e) => {
                 const val = parseFloat(e.target.value);
-                if (!isNaN(val) && val >= 0 && val <= 90) {
+                if (!isNaN(val) && val >= 0 && val <= 95) {
                     state.downPaymentPct = val;
                     state.downPayment = Math.round(state.vehiclePrice * (state.downPaymentPct / 100));
-                    syncInputs();
+                    state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                     recalculate();
                 }
             });
@@ -710,8 +759,7 @@
             dom.loanAmountSlider.addEventListener('input', (e) => {
                 state.loanAmount = parseInt(e.target.value, 10);
                 state.downPayment = Math.max(0, state.vehiclePrice - state.loanAmount);
-                state.downPaymentPct = Math.round((state.downPayment / state.vehiclePrice) * 100);
-                syncInputs();
+                state.downPaymentPct = parseFloat(((state.downPayment / state.vehiclePrice) * 100).toFixed(1));
                 recalculate();
             });
         }
@@ -719,10 +767,9 @@
             dom.loanAmountInput.addEventListener('input', (e) => {
                 const val = parseInt(e.target.value, 10);
                 if (!isNaN(val) && val >= 10000) {
-                    state.loanAmount = val;
+                    state.loanAmount = Math.min(val, state.vehiclePrice - 1000);
                     state.downPayment = Math.max(0, state.vehiclePrice - state.loanAmount);
-                    state.downPaymentPct = Math.round((state.downPayment / state.vehiclePrice) * 100);
-                    syncInputs();
+                    state.downPaymentPct = parseFloat(((state.downPayment / state.vehiclePrice) * 100).toFixed(1));
                     recalculate();
                 }
             });
@@ -732,7 +779,6 @@
         if (dom.interestRateSlider) {
             dom.interestRateSlider.addEventListener('input', (e) => {
                 state.interestRate = parseFloat(e.target.value);
-                syncInputs();
                 recalculate();
             });
         }
@@ -741,7 +787,6 @@
                 const val = parseFloat(e.target.value);
                 if (!isNaN(val) && val >= 4 && val <= 25) {
                     state.interestRate = val;
-                    syncInputs();
                     recalculate();
                 }
             });
@@ -753,7 +798,6 @@
                 state.tenureYears = parseInt(e.target.value, 10);
                 state.tenureMonths = state.tenureYears * 12;
                 populateBulkMonthDropdown();
-                syncInputs();
                 recalculate();
             });
         }
@@ -764,7 +808,6 @@
                     state.tenureYears = val;
                     state.tenureMonths = state.tenureYears * 12;
                     populateBulkMonthDropdown();
-                    syncInputs();
                     recalculate();
                 }
             });
@@ -778,7 +821,7 @@
                 const price = parseInt(chip.getAttribute('data-price'), 10);
                 state.vehiclePrice = price;
                 state.downPayment = Math.round(state.vehiclePrice * (state.downPaymentPct / 100));
-                syncInputs();
+                state.loanAmount = Math.max(10000, state.vehiclePrice - state.downPayment);
                 recalculate();
             });
         });
