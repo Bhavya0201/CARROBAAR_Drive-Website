@@ -11,6 +11,16 @@ const PORT = process.env.PORT || 3000;
 
 // Enable CORS and JSON parsing middleware
 app.use(cors());
+
+// 301 Redirect non-www to canonical www domain
+app.use((req, res, next) => {
+    const host = req.headers.host;
+    if (host && host.toLowerCase() === 'carrobaardrive.com') {
+        return res.redirect(301, `https://www.carrobaardrive.com${req.url}`);
+    }
+    next();
+});
+
 app.use(express.json());
 
 // Ensure HTML responses never cache in browser so changes reflect instantly on refresh
@@ -36,6 +46,46 @@ app.use((req, res, next) => {
 });
 
 // Explicit Clean URL Page Routes
+
+// Clean URL routes for Sample Report (redirect legacy /sample-pdi-report)
+app.get('/sample-pdi-report', (req, res) => {
+    res.redirect(301, '/sample-report');
+});
+app.get('/sample-report', (req, res) => {
+    res.sendFile(path.join(__dirname, 'sample-pdi-report.html'));
+});
+
+// Gujarat City Landing Pages
+app.get('/car-pdi-anand', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-anand.html'));
+});
+app.get('/car-pdi-vadodara', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-vadodara.html'));
+});
+app.get('/car-pdi-ahmedabad', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-ahmedabad.html'));
+});
+app.get('/car-pdi-nadiad', (req, res) => {
+    res.sendFile(path.join(__dirname, 'car-pdi-nadiad.html'));
+});
+app.get('/used-car-inspection-gujarat', (req, res) => {
+    res.sendFile(path.join(__dirname, 'used-car-inspection-gujarat.html'));
+});
+
+// Brand-Specific VIN Decoder Subpages
+app.get('/vin-decoder/maruti-suzuki', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoder', 'maruti-suzuki.html'));
+});
+app.get('/vin-decoder/tata-motors', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoder', 'tata-motors.html'));
+});
+app.get('/vin-decoder/hyundai-kia', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoder', 'hyundai-kia.html'));
+});
+app.get('/vin-decoder/mg-mahindra', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vin-decoder', 'mg-mahindra.html'));
+});
+
 app.get('/sample-pdi-report', (req, res) => {
     res.sendFile(path.join(__dirname, 'sample-pdi-report.html'));
 });
@@ -244,9 +294,9 @@ app.post('/api/bookings', validateBooking, async (req, res) => {
     const serviceName = serviceDisplayNames[data.requiredService] || data.requiredService;
 
     // Compose notification templates
-    const customerMsg = `Hello ${data.fullName}, thank you for choosing CARROBAAR_Drive! We have received your request for a ${serviceName} for your ${data.carModel} on ${data.preferredDate}. Our team will contact you shortly to confirm.`;
+    const customerMsg = `Hello ${data.fullName}, thank you for choosing CARROBAAR Drive! We have received your request for a ${serviceName} for your ${data.carModel} on ${data.preferredDate}. Our team will contact you shortly to confirm.`;
     
-    const adminMsg = `🚨 NEW CARROBAAR_Drive BOOKING!\n\n` +
+    const adminMsg = `🚨 NEW CARROBAAR Drive BOOKING!\n\n` +
                      `👤 Client: ${data.fullName}\n` +
                      `📞 Phone: +91${data.phoneNumber}\n` +
                      `🛠️ Service: ${serviceName}\n` +
@@ -391,7 +441,7 @@ app.post('/api/otp/send', async (req, res) => {
  * Real SMS Gateway Dispatcher (Fast2SMS, 2Factor, Twilio)
  */
 async function sendSmsViaGateway(cleanPhone, otpCode) {
-    const otpMsg = `Your CARROBAAR_Drive sample PDI report verification code is: ${otpCode}. Valid for 5 minutes.`;
+    const otpMsg = `Your CARROBAAR Drive sample PDI report verification code is: ${otpCode}. Valid for 5 minutes.`;
 
     // 1. Fast2SMS (India)
     if (process.env.FAST2SMS_API_KEY) {
@@ -799,5 +849,5 @@ app.get('*', (req, res) => {
 
 // Start the Express Server
 app.listen(PORT, () => {
-    console.log(`\n🚀 CARROBAAR_Drive backend online at: http://localhost:${PORT}`);
+    console.log(`\n🚀 CARROBAAR Drive backend online at: http://localhost:${PORT}`);
 });

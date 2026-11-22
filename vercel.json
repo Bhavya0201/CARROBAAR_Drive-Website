@@ -1,0 +1,43 @@
+{
+  "redirects": [
+    {
+      "source": "/sample-pdi-report",
+      "destination": "/sample-report",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "carrobaardrive.com"
+        }
+      ],
+      "destination": "https://www.carrobaardrive.com/:path*",
+      "permanent": true
+    }
+  ],
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/sample-report",
+      "destination": "/sample-pdi-report.html"
+    },
+    {
+      "source": "/vin-decoder",
+      "destination": "/vin-decoder/index.html"
+    },
+    {
+      "source": "/vin-decoder/:brand",
+      "destination": "/vin-decoder/:brand.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug.html"
+    }
+  ]
+}

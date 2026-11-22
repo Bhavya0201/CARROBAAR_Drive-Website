@@ -2381,8 +2381,8 @@ select.form-control {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.2fr 0.8fr 0.9fr 1fr;
+    gap: 3rem;
     margin-bottom: 4rem;
 }
 

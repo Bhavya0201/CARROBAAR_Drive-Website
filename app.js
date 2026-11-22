@@ -439,7 +439,7 @@ function initApp() {
 
                 // Construct WhatsApp Text Message
                 const whatsappText = 
-`*CARROBAAR_Drive - New Booking Inquiry*
+`*CARROBAAR Drive - New Booking Inquiry*
 ----------------------------------------
 👤 *Name:* ${nameInput.value.trim()}
 📞 *Phone:* ${phoneInput.value.trim()}
@@ -495,6 +495,12 @@ function initApp() {
                 .catch(err => console.error("Email API Error:", err));
 
                 // Set Success Details in popup modal
+                const successHeading = document.getElementById("success-heading");
+                const successMessageBody = document.getElementById("success-message-body");
+                if (successHeading) successHeading.textContent = "Booking Request Sent!";
+                if (successMessageBody) {
+                    successMessageBody.innerHTML = `Thank you, <strong id="success-user-name">${nameInput.value.trim()}</strong>. We have received your request for <span id="success-service-name">${selectedServiceText}</span> on <span id="success-date">${formattedDate}</span>. Our representative will contact you at <strong id="success-user-phone">${phoneInput.value}</strong> shortly.`;
+                }
                 if (successUserName) successUserName.textContent = nameInput.value.trim();
                 if (successServiceName) successServiceName.textContent = selectedServiceText;
                 if (successDate) successDate.textContent = formattedDate;
@@ -1480,16 +1486,13 @@ function initApp() {
             action === "download-report" ||
             trigger.classList.contains("btn-download-report") ||
             trigger.classList.contains("btn-download") ||
-            trigger.classList.contains("btn-open-full-report") ||
             trigger.id === "download-report-btn" ||
             href.includes("inspx pro_pdi report.pdf") ||
             href.includes("carrobaar_drive_sample_pdi_report.pdf") ||
-            href.includes("sample-pdi-report.html") ||
+            href.includes("/download-sample-report") ||
             text.includes("get sample pdf") ||
             text.includes("download pdf report") ||
             text.includes("download sample report") ||
-            text.includes("sample report") ||
-            text.includes("interactive report") ||
             text.includes("download pdf");
 
         if (isDownloadTrigger) {

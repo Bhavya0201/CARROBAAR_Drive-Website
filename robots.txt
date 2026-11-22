@@ -1,12 +1,12 @@
-# Robots.txt for CARROBAAR Drive (https://carrobaardrive.com)
+# Robots.txt for CARROBAAR Drive (https://www.carrobaardrive.com)
 User-agent: *
 Allow: /
 
-# Disallow internal assets or private config if any
+# Disallow internal assets or private directories
 Disallow: /scratch/
 Disallow: /test_frames/
 Disallow: /*.json$
 Disallow: /node_modules/
 
 # Sitemaps
-Sitemap: https://carrobaardrive.com/sitemap.xml
+Sitemap: https://www.carrobaardrive.com/sitemap.xml
