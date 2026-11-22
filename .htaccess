@@ -9,9 +9,17 @@ RewriteRule ^(.*)$ https://carrobaardrive.com/$1 [L,R=301]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
 RewriteRule ^index\.html$ / [R=301,L]
 
-# 2. Redirect any /page.html URL to clean extensionless /page URL
+# 2. Redirect any /page.html URL to clean extensionless /page URL (except blog articles handled below)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+)\.html\ HTTP/
+RewriteCond %{REQUEST_URI} !^/blog/
 RewriteRule ^([^/]+)\.html$ /$1 [R=301,L]
+
+# Redirect /blog/page.html to clean /blog/page
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /blog/([^/]+)\.html\ HTTP/
+RewriteRule ^blog/([^/]+)\.html$ /blog/$1 [R=301,L]
+
+# Fallback: If an article is requested at the root domain, redirect to /blog/:slug
+RewriteRule ^(10-real-problems-found-in-pdi|15-things-to-check-new-car-pdi|car-resale-value-factors|check-used-car-accident-history|dealer-trust-independent-pdi|ev-vs-petrol-vs-diesel-hybrid|hidden-costs-of-car-ownership|new-car-vs-used-car-financials|pdi-necessary-before-delivery|used-car-buying-checklist-mistakes)(\.html)?/?$ /blog/$1 [R=301,L]
 
 # 3. Internally resolve /page to /page.html
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -19,8 +27,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^([^/]+)$ $1.html [L]
 
-# 4. Internally resolve /blog/slug to /blog/slug.html
+# 4. Internally resolve /blog or /blog/ to blog/index.html
+RewriteRule ^blog/?$ blog/index.html [L]
+
+# 5. Internally resolve /blog/slug to blog/slug.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/blog/$1.html -f
-RewriteRule ^blog/([^/]+)$ blog/$1.html [L]
+RewriteRule ^blog/([^/.]+)/?$ blog/$1.html [L]

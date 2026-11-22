@@ -62,9 +62,24 @@ app.get('/blog/', (req, res) => {
 });
 app.get('/blog/:slug', (req, res, next) => {
     const slug = req.params.slug;
-    const filePath = path.join(__dirname, 'blog', `${slug}.html`);
+    const cleanSlug = slug.endsWith('.html') ? slug.slice(0, -5) : slug;
+    const filePath = path.join(__dirname, 'blog', `${cleanSlug}.html`);
     if (fs.existsSync(filePath)) {
+        if (slug.endsWith('.html')) {
+            return res.redirect(301, `/blog/${cleanSlug}`);
+        }
         return res.sendFile(filePath);
+    }
+    next();
+});
+
+// Clean Fallback: If a blog article is requested directly without /blog/, redirect to /blog/:slug
+app.get('/:slug', (req, res, next) => {
+    const slug = req.params.slug;
+    const cleanSlug = slug.endsWith('.html') ? slug.slice(0, -5) : slug;
+    const blogFilePath = path.join(__dirname, 'blog', `${cleanSlug}.html`);
+    if (fs.existsSync(blogFilePath)) {
+        return res.redirect(301, `/blog/${cleanSlug}`);
     }
     next();
 });

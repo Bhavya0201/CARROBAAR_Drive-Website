@@ -15,24 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i data-lucide="x"></i>
                 </button>
                 <div class="quick-nav-header">
-                    <a href="../index.html" class="logo">
+                    <a href="/" class="logo">
                         <span class="logo-text-purple">CARROBAAR</span><span class="logo-text-orange">_Drive</span>
                     </a>
                     <p class="quick-nav-subtitle">Quick Navigator</p>
                 </div>
                 <nav class="quick-nav-links">
-                    <a href="../index.html#hero" class="quick-nav-item"><i data-lucide="home"></i> Home</a>
-                    <a href="../index.html#showroom-reality" class="quick-nav-item"><i data-lucide="alert-triangle"></i> Showroom Reality</a>
-                    <a href="../sample-pdi-report.html" class="quick-nav-item"><i data-lucide="file-text"></i> Sample PDI Report</a>
-                    <a href="../index.html#estimator" class="quick-nav-item"><i data-lucide="calculator"></i> Pricing Calculator</a>
-                    <a href="../index.html#process" class="quick-nav-item"><i data-lucide="check-square"></i> Our Process</a>
-                    <a href="../index.html#founder" class="quick-nav-item"><i data-lucide="user"></i> About Me</a>
-                    <a href="index.html" class="quick-nav-item"><i data-lucide="book-open"></i> Blog Library</a>
-                    <a href="../index.html#faq" class="quick-nav-item"><i data-lucide="help-circle"></i> FAQs</a>
-                    <a href="../index.html#contact" class="quick-nav-item btn-quick-nav-cta"><i data-lucide="calendar"></i> Book Inspection</a>
+                    <a href="/" class="quick-nav-item"><i data-lucide="home"></i> Home</a>
+                    <a href="/sample-pdi-report" class="quick-nav-item"><i data-lucide="file-text"></i> Sample PDI Report</a>
+                    <a href="/my-story" class="quick-nav-item"><i data-lucide="user"></i> My Story</a>
+                    <a href="/vin-decoder" class="quick-nav-item"><i data-lucide="search"></i> VIN Decoder</a>
+                    <a href="/emi-calculator" class="quick-nav-item"><i data-lucide="calculator"></i> Car Loan EMI Calculator</a>
+                    <a href="/#showroom-reality" class="quick-nav-item"><i data-lucide="alert-triangle"></i> Showroom Reality</a>
+                    <a href="/#estimator" class="quick-nav-item"><i data-lucide="dollar-sign"></i> Pricing Calculator</a>
+                    <a href="/#process" class="quick-nav-item"><i data-lucide="check-square"></i> Our Process</a>
+                    <a href="/#founder" class="quick-nav-item"><i data-lucide="award"></i> About Bhavya</a>
+                    <a href="/blog" class="quick-nav-item"><i data-lucide="book-open"></i> Blog Library</a>
+                    <a href="/#faq" class="quick-nav-item"><i data-lucide="help-circle"></i> FAQs</a>
+                    <a href="/#contact" class="quick-nav-item btn-quick-nav-cta"><i data-lucide="calendar"></i> Book Inspection</a>
                 </nav>
                 <div class="quick-nav-footer">
-                    <a href="index.html" class="btn btn-secondary btn-sm btn-back-library"><i data-lucide="arrow-left"></i> Back to Blog Hub</a>
+                    <a href="/blog" class="btn btn-secondary btn-sm btn-back-library"><i data-lucide="arrow-left"></i> Back to Blog Hub</a>
                 </div>
             </div>
         </div>
